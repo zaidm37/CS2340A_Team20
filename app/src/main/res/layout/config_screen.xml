@@ -11,13 +11,12 @@
         android:id="@+id/radioGroup"
         android:layout_width="244dp"
         android:layout_height="203dp"
-        android:layout_marginStart="61dp"
-        android:layout_marginEnd="61dp"
-        android:layout_marginBottom="280dp"
-        app:layout_constraintBottom_toTopOf="@+id/continueButton"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Name">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.295">
 
         <RadioButton
             android:id="@+id/radioButton"
@@ -49,35 +48,85 @@
 
     <EditText
         android:id="@+id/Name"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="23dp"
+        android:layout_width="379dp"
+        android:layout_height="91dp"
         android:background="@color/cardview_shadow_start_color"
         android:ems="10"
-        android:hint="Enter your name: "
+        android:hint="Enter your name here"
         android:inputType="text"
-        android:text="Name"
-        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
+        android:text=""
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.043" />
 
     <Button
         android:id="@+id/continueButton"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="61dp"
-        android:layout_marginEnd="61dp"
-        android:layout_marginBottom="69dp"
+        android:layout_width="290dp"
+        android:layout_height="52dp"
         android:background="@color/white"
         android:text="Continue"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.848" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/sprite1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.125"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.705" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/sprite2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.705" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/sprite3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.881"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.705" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Your Character Below:"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.577" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
