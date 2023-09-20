@@ -80,29 +80,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
-    <RadioGroup
-        android:layout_width="446dp"
-        android:layout_height="248dp"
-        tools:layout_editor_absoluteX="742dp"
-        tools:layout_editor_absoluteY="372dp" >
-
-        <RadioButton
-            android:id="@+id/radioButton4"
-            android:layout_width="match_parent"
-            android:layout_height="72dp"
-            android:text="RadioButton" />
-
-        <RadioButton
-            android:id="@+id/radioButton5"
-            android:layout_width="match_parent"
-            android:layout_height="78dp"
-            android:text="RadioButton" />
-
-        <RadioButton
-            android:id="@+id/radioButton6"
-            android:layout_width="match_parent"
-            android:layout_height="94dp"
-            android:text="RadioButton" />
-    </RadioGroup>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
