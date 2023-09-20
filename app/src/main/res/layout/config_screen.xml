@@ -9,13 +9,13 @@
 
     <RadioGroup
         android:id="@+id/radioGroup"
-        android:layout_width="244dp"
-        android:layout_height="203dp"
-        android:layout_marginStart="61dp"
-        android:layout_marginEnd="61dp"
-        android:layout_marginBottom="280dp"
+        android:layout_width="338dp"
+        android:layout_height="232dp"
+        android:layout_marginStart="170dp"
+        android:layout_marginEnd="300dp"
+        android:layout_marginBottom="194dp"
         app:layout_constraintBottom_toTopOf="@+id/continueButton"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/radioGroup2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Name">
 
@@ -54,7 +54,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="52dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="23dp"
+        android:layout_marginBottom="109dp"
         android:background="@color/cardview_shadow_start_color"
         android:ems="10"
         android:hint="Enter your name: "
@@ -71,7 +71,7 @@
         android:layout_height="0dp"
         android:layout_marginStart="61dp"
         android:layout_marginEnd="61dp"
-        android:layout_marginBottom="69dp"
+        android:layout_marginBottom="68dp"
         android:background="@color/white"
         android:text="Continue"
         android:textSize="20sp"
@@ -81,10 +81,14 @@
         app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
     <RadioGroup
-        android:layout_width="446dp"
+        android:id="@+id/radioGroup2"
+        android:layout_width="0dp"
         android:layout_height="248dp"
-        tools:layout_editor_absoluteX="742dp"
-        tools:layout_editor_absoluteY="372dp" >
+        android:layout_marginTop="87dp"
+        android:layout_marginEnd="120dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/radioGroup"
+        app:layout_constraintTop_toBottomOf="@+id/Name">
 
         <RadioButton
             android:id="@+id/radioButton4"
@@ -93,16 +97,18 @@
             android:text="RadioButton" />
 
         <RadioButton
-            android:id="@+id/radioButton5"
-            android:layout_width="match_parent"
-            android:layout_height="78dp"
-            android:text="RadioButton" />
-
-        <RadioButton
             android:id="@+id/radioButton6"
             android:layout_width="match_parent"
             android:layout_height="94dp"
+            android:text="RadioButton"
+            tools:layout_editor_absoluteX="30dp" />
+
+        <RadioButton
+            android:id="@+id/radioButton5"
+            android:layout_width="542dp"
+            android:layout_height="89dp"
             android:text="RadioButton" />
+
     </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
