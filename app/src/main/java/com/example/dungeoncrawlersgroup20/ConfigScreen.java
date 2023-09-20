@@ -82,6 +82,12 @@ public class ConfigScreen extends AppCompatActivity {
             public void onClick(View view) {
                 if ((Name.getText().toString().trim().length() > 0) && (imagechecker != 0) && (radiochecker != 0)) {
                     Intent intent = new Intent(ConfigScreen.this, GameScreen.class);
+                    String username = Name.getText().toString();
+                    Bundle playerinfo = new Bundle();
+                    playerinfo.putString("user", username);
+                    playerinfo.putInt("diff", radiochecker);
+                    playerinfo.putInt("sprite", imagechecker);
+                    intent.putExtras(playerinfo);
                     startActivity(intent);
                 } else {
                     Toast.makeText(ConfigScreen.this, "You need to select an image, difficulty, and/or enter a name before continuing", Toast.LENGTH_SHORT).show();
