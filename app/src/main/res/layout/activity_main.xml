@@ -30,4 +30,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="1232dp"
+        android:layout_height="126dp"
+        android:fontFamily="@font/arbutus"
+        android:text="DUNGEON CRAWLERS"
+        android:textColor="#593893"
+        android:textSize="90sp"
+        tools:layout_editor_absoluteX="24dp"
+        tools:layout_editor_absoluteY="94dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
