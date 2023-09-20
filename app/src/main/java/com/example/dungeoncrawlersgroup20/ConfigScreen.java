@@ -1,5 +1,6 @@
 package com.example.dungeoncrawlersgroup20;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -80,7 +81,8 @@ public class ConfigScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if ((Name.getText().toString().trim().length() > 0) && (imagechecker != 0) && (radiochecker != 0)) {
-                    int dummy = 0;
+                    Intent intent = new Intent(ConfigScreen.this, GameScreen.class);
+                    startActivity(intent);
                 } else {
                     Toast.makeText(ConfigScreen.this, "You need to select an image, difficulty, and/or enter a name before continuing", Toast.LENGTH_SHORT).show();
                 }
