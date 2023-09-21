@@ -10,11 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class GameScreen extends AppCompatActivity {
-    TextView UserName;
-    TextView Difficulty;
-    ImageView Character;
-    TextView HP;
-    Button Next;
+    private TextView userName;
+    private TextView difficulty;
+    private ImageView characterSprite;
+    private TextView hP;
+    private Button next;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,22 +35,22 @@ public class GameScreen extends AppCompatActivity {
             diff = "Hard";
         } // sets hp depending on difficulty, 1 = easy = more health, etc
         int character = bundle.getInt("sprite"); //gets which sprite number in drawable was selected
-        UserName = (TextView) findViewById(R.id.name);
-        UserName.setText(name);
-        Difficulty = (TextView) findViewById(R.id.difficulty);
-        Difficulty.setText(diff);
-        HP = (TextView) findViewById(R.id.health);
-        HP.setText(String.valueOf(hp));
-        Character = (ImageView) findViewById(R.id.character);
+        userName = (TextView) findViewById(R.id.name);
+        userName.setText(name);
+        difficulty = (TextView) findViewById(R.id.difficulty);
+        difficulty.setText(diff);
+        hP = (TextView) findViewById(R.id.health);
+        hP.setText(String.valueOf(hp));
+        characterSprite = (ImageView) findViewById(R.id.character);
         if (character == 1) {
-            Character.setImageResource(R.drawable.sprite1);
+            characterSprite.setImageResource(R.drawable.sprite1);
         } else if (character == 2) {
-            Character.setImageResource(R.drawable.sprite2);
+            characterSprite.setImageResource(R.drawable.sprite2);
         } else if (character == 3) {
-            Character.setImageResource(R.drawable.sprite3);
+            characterSprite.setImageResource(R.drawable.sprite3);
         }
-        Next = (Button) findViewById(R.id.buttonNext);
-        Next.setOnClickListener(new View.OnClickListener() {
+        next = (Button) findViewById(R.id.buttonNext);
+        next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent inte = new Intent(GameScreen.this, EndScreen.class);
