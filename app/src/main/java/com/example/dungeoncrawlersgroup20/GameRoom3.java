@@ -28,7 +28,7 @@ public class GameRoom3 extends AppCompatActivity {
                 startActivity(inte);
             }
         });
-
+        /*
         Bundle bundle = getIntent().getExtras();
 
         scoreMessage = (TextView) findViewById(R.id.score);
@@ -37,10 +37,13 @@ public class GameRoom3 extends AppCompatActivity {
         String text = bundle.getString("score");
         scoreMessage.setText(text);
 
-        //while (Integer.parseInt(scoreDisplay.getText().toString()) > 0) {
-            //decrementScore();
-        //}
+        while (Integer.parseInt(scoreDisplay.getText().toString()) > 0) {
+            decrementScore();
+        }
+
+         */
     }
+    /*
     public void decrementScore() {
         String currScore = scoreDisplay.getText().toString();
         final int[] i = {Integer.parseInt(currScore)};
@@ -53,4 +56,6 @@ public class GameRoom3 extends AppCompatActivity {
         }, 0, 1000);
         String result = new Integer(i[0]).toString();
     }
+    
+     */
 }
