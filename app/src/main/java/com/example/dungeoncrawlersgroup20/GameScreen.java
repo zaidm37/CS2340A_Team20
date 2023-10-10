@@ -9,13 +9,19 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class GameScreen extends AppCompatActivity {
     private TextView userName;
     private TextView difficulty;
     private ImageView characterSprite;
     private TextView hP;
     private Button next;
-    private TextView score;
+    private TextView scoreMessage;
+    private Timer scoreTime;
+    private TextView scoreDisplay;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +56,14 @@ public class GameScreen extends AppCompatActivity {
         } else if (character == 3) {
             characterSprite.setImageResource(R.drawable.sprite3);
         }
+
+        scoreMessage = (TextView) findViewById(R.id.score);
+        scoreDisplay = (TextView) findViewById(R.id.score1_1);
+
+        String text = bundle.getString("score");
+        scoreMessage.setText(text);
+
+
         next = (Button) findViewById(R.id.buttonNext);
         next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,5 +72,18 @@ public class GameScreen extends AppCompatActivity {
                 startActivity(inte);
             }
         });
+    }
+    public void decrementScore() {
+        String currScore = scoreDisplay.getText().toString();
+        int i = Integer.parseInt(currScore);
+        scoreTime = new Timer();
+        scoreTime.schedule(new TimerTask() {
+            @Override
+                public void run() {
+                    i -= 50;
+                }
+            }, 0, 1000);
+        String result = new Integer(i).toString();
+
     }
 }

@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        android:textColor="#4CAF50"
+        android:textColor="#0A0B0A"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        android:textColor="#4CAF50"
+        android:textColor="#0B0B0B"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        android:textColor="#4CAF50"
+        android:textColor="#101010"
         android:textColorHighlight="#4CAF50"
         android:textSize="34sp"
         android:textStyle="bold"
@@ -70,7 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="HP:"
-        android:textColor="#4CAF50"
+        android:textColor="#131313"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -78,6 +78,28 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.178" />
+
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="99dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Score: "
+        android:textColor="#070707"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/score1_1"
+        android:layout_width="102dp"
+        android:layout_height="65dp"
+        android:text="1000"
+        android:textColor="#101010"
+        android:textSize="42sp"
+        tools:layout_editor_absoluteX="317dp"
+        tools:layout_editor_absoluteY="84dp" />
 
 
     <Button
