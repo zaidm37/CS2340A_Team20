@@ -63,6 +63,9 @@ public class GameScreen extends AppCompatActivity {
         String text = bundle.getString("score");
         scoreMessage.setText(text);
 
+        while (Integer.parseInt(scoreDisplay.getText().toString()) > 0) {
+            decrementScore();
+        }
 
         next = (Button) findViewById(R.id.buttonNext);
         next.setOnClickListener(new View.OnClickListener() {
@@ -75,15 +78,14 @@ public class GameScreen extends AppCompatActivity {
     }
     public void decrementScore() {
         String currScore = scoreDisplay.getText().toString();
-        int i = Integer.parseInt(currScore);
+        final int[] i = {Integer.parseInt(currScore)};
         scoreTime = new Timer();
         scoreTime.schedule(new TimerTask() {
             @Override
                 public void run() {
-                    i -= 50;
+                    i[0] -= 50;
                 }
             }, 0, 1000);
-        String result = new Integer(i).toString();
-
+        String result = new Integer(i[0]).toString();
     }
 }
