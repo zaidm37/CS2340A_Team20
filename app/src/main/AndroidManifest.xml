@@ -13,6 +13,18 @@
         android:theme="@style/Theme.DungeonCrawlersGroup20"
         tools:targetApi="31">
         <activity
+            android:name=".GameRoom3"
+            android:exported="false" />
+        <activity
+            android:name=".GameRoom2"
+            android:exported="false" />
+        <activity
+            android:name=".GameRoom1"
+            android:exported="false" />
+        <activity
+            android:name=".Room1"
+            android:exported="false" />
+        <activity
             android:name=".GameScreen"
             android:exported="false" />
         <activity

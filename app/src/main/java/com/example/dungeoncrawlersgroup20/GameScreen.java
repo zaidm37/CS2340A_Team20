@@ -15,6 +15,7 @@ public class GameScreen extends AppCompatActivity {
     private ImageView characterSprite;
     private TextView hP;
     private Button next;
+    private TextView score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +54,7 @@ public class GameScreen extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent inte = new Intent(GameScreen.this, EndScreen.class);
+                Intent inte = new Intent(GameScreen.this, GameRoom2.class);
                 startActivity(inte);
             }
         });
