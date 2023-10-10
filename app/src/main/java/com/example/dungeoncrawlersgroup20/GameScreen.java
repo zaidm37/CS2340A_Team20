@@ -63,6 +63,9 @@ public class GameScreen extends AppCompatActivity {
         String text = bundle.getString("score");
         scoreMessage.setText(text);
 
+        while (Integer.parseInt(scoreDisplay.getText().toString()) > 0) {
+            decrementScore();
+        }
 
         next = (Button) findViewById(R.id.buttonNext);
         next.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +87,5 @@ public class GameScreen extends AppCompatActivity {
                 }
             }, 0, 1000);
         String result = new Integer(i[0]).toString();
-
     }
 }

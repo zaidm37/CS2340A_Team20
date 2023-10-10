@@ -26,11 +26,14 @@
         android:id="@+id/difficulty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="37dp"
+        android:layout_marginEnd="142dp"
         android:text="TextView"
         android:textColor="#0B0B0B"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/score1_1"
         app:layout_constraintHorizontal_bias="0.125"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -82,24 +85,30 @@
     <TextView
         android:id="@+id/score"
         android:layout_width="99dp"
-        android:layout_height="56dp"
+        android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="12dp"
         android:text="Score: "
         android:textColor="#070707"
         android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/score1_1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/score1_1"
-        android:layout_width="102dp"
-        android:layout_height="65dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginBottom="715dp"
         android:text="1000"
         android:textColor="#101010"
         android:textSize="42sp"
-        tools:layout_editor_absoluteX="317dp"
-        tools:layout_editor_absoluteY="84dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/difficulty"
+        app:layout_constraintTop_toBottomOf="@+id/score" />
 
 
     <Button
