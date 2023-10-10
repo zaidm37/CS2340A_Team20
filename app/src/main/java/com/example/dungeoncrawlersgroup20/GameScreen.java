@@ -74,6 +74,11 @@ public class GameScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent inte = new Intent(GameScreen.this, GameRoom2.class);
+                Bundle playerinfo = new Bundle();
+                playerinfo.putString("user", name);
+                playerinfo.putInt("diff", hp);
+                playerinfo.putInt("sprite", character);
+                inte.putExtras(playerinfo);
                 startActivity(inte);
             }
         });
