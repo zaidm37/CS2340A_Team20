@@ -1,6 +1,7 @@
-package com.example.dungeoncrawlersgroup20;
+package com.example.dungeoncrawlersgroup20.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+//import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,11 +10,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.dungeoncrawlersgroup20.R;
+
 public class GameScreen extends AppCompatActivity {
     private TextView userName;
     private TextView difficulty;
     private ImageView characterSprite;
     private TextView hP;
+    //private PlayerViewModel playerViewModel;
     private Button next;
 
     @Override

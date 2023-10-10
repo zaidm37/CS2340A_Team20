@@ -1,8 +1,10 @@
-package com.example.dungeoncrawlersgroup20;
+package com.example.dungeoncrawlersgroup20.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.dungeoncrawlersgroup20.R;
 
 public class EndScreen extends AppCompatActivity {
 

@@ -13,16 +13,16 @@
         android:theme="@style/Theme.DungeonCrawlersGroup20"
         tools:targetApi="31">
         <activity
-            android:name=".GameScreen"
+            android:name=".View.GameScreen"
             android:exported="false" />
         <activity
-            android:name=".EndScreen"
+            android:name=".View.EndScreen"
             android:exported="false" />
         <activity
-            android:name=".ConfigScreen"
+            android:name=".View.ConfigScreen"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".View.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
