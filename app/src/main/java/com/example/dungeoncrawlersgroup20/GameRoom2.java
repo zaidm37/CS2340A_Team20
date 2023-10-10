@@ -39,9 +39,9 @@ public class GameRoom2 extends AppCompatActivity {
         String text = bundle.getString("score");
         scoreMessage.setText(text);
 
-        while (Integer.parseInt(scoreDisplay.getText().toString()) > 0) {
-            decrementScore();
-        }
+        //while (Integer.parseInt(scoreDisplay.getText().toString()) > 0) {
+            //decrementScore();
+        //}
     }
 
     public void decrementScore() {
