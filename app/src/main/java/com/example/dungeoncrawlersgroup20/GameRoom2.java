@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -14,6 +15,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class GameRoom2 extends AppCompatActivity {
+    private TextView userName;
+    private TextView difficulty;
+    private ImageView characterSprite;
+    private TextView hP;
     private Button next;
     private TextView scoreDisplay;
     private TextView scoreMessage;
