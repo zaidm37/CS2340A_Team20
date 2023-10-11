@@ -18,9 +18,9 @@ public class GameScreen extends AppCompatActivity {
     private ImageView characterSprite;
     private TextView hP;
     private Button next;
-    private TextView scoreMessage;
     private Timer scoreTime;
-    private TextView scoreDisplay;
+    private TextView tv_score;
+    private int score = 1000;
 
 
     @Override
@@ -77,6 +77,17 @@ public class GameScreen extends AppCompatActivity {
                 startActivity(inte);
             }
         });
+
+        tv_score = (TextView) findViewById(R.id.tv_score);
+        scoreTime = new Timer();
+        scoreTime.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                score -= 50;
+                tv_score.setText("Score: " + score);
+
+            }
+        }, 0, 1000);
     }
     /*
     public void decrementScore() {
