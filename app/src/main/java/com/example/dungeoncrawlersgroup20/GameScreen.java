@@ -31,14 +31,15 @@ public class GameScreen extends AppCompatActivity {
         String name = bundle.getString("user"); //gets the previous name from config screen
         int hp = bundle.getInt("diff"); //gets difficulty
         String diff = "";
+        int trueHp = 0;
         if (hp == 1) {
-            hp = 300;
+            trueHp = 300;
             diff = "Easy";
         } else if (hp == 2) {
-            hp = 200;
+            trueHp = 200;
             diff = "Medium";
         } else if (hp == 3) {
-            hp = 100;
+            trueHp = 100;
             diff = "Hard";
         } // sets hp depending on difficulty, 1 = easy = more health, etc
         int character = bundle.getInt("sprite"); //gets which sprite number in drawable was selected
@@ -47,7 +48,7 @@ public class GameScreen extends AppCompatActivity {
         difficulty = (TextView) findViewById(R.id.difficulty);
         difficulty.setText(diff);
         hP = (TextView) findViewById(R.id.health);
-        hP.setText(String.valueOf(hp));
+        hP.setText(String.valueOf(trueHp));
         characterSprite = (ImageView) findViewById(R.id.character);
         if (character == 1) {
             characterSprite.setImageResource(R.drawable.sprite1);
@@ -56,13 +57,30 @@ public class GameScreen extends AppCompatActivity {
         } else if (character == 3) {
             characterSprite.setImageResource(R.drawable.sprite3);
         }
+        tv_score = (TextView) findViewById(R.id.tv_score);
+        scoreTime = new Timer();
+        scoreTime.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (score > 0) {
+                    score -= 50;
+                }
+                tv_score.setText("Score: " + score);
 
+            }
+        }, 0, 5000);
 
         next = (Button) findViewById(R.id.buttonNext);
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent inte = new Intent(GameScreen.this, GameRoom2.class);
+                Bundle playerinfo = new Bundle();
+                playerinfo.putString("user", name);
+                playerinfo.putInt("diff", hp);
+                playerinfo.putInt("score", score);
+                playerinfo.putInt("sprite", character);
+                inte.putExtras(playerinfo);
                 startActivity(inte);
             }
         });
