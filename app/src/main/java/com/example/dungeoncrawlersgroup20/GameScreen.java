@@ -56,18 +56,7 @@ public class GameScreen extends AppCompatActivity {
         } else if (character == 3) {
             characterSprite.setImageResource(R.drawable.sprite3);
         }
-        /*
-        scoreMessage = (TextView) findViewById(R.id.score);
-        scoreDisplay = (TextView) findViewById(R.id.score1_1);
 
-        String text = bundle.getString("score");
-        scoreMessage.setText(text);
-
-        while (Integer.parseInt(scoreDisplay.getText().toString()) > 0) {
-            decrementScore();
-        }
-
-         */
 
         next = (Button) findViewById(R.id.buttonNext);
         next.setOnClickListener(new View.OnClickListener() {
@@ -87,21 +76,7 @@ public class GameScreen extends AppCompatActivity {
                 tv_score.setText("Score: " + score);
 
             }
-        }, 0, 1000);
-    }
-    /*
-    public void decrementScore() {
-        String currScore = scoreDisplay.getText().toString();
-        final int[] i = {Integer.parseInt(currScore)};
-        scoreTime = new Timer();
-        scoreTime.schedule(new TimerTask() {
-            @Override
-                public void run() {
-                    i[0] -= 50;
-                }
-            }, 0, 1000);
-        String result = new Integer(i[0]).toString();
+        }, 0, 5000);
     }
 
-     */
 }
