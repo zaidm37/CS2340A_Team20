@@ -52,7 +52,35 @@ public class EndScreen extends AppCompatActivity {
             editor.putInt("best4", best4);
             editor.apply();
         }
+        if (finalScore > best3) {
+            int tmp = best3;
+            best3 = finalScore;
+            best4 = tmp;
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putInt("best4", best4);
+            editor.putInt("best3", best3);
+            editor.apply();
+        }
 
+        if (finalScore > best2) {
+            int tmp = best2;
+            best2 = finalScore;
+            best3 = tmp;
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putInt("best3", best3);
+            editor.putInt("best2", best2);
+            editor.apply();
+        }
+
+        if (finalScore > best1) {
+            int tmp = best1;
+            best1 = finalScore;
+            best2 = tmp;
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putInt("best2", best2);
+            editor.putInt("best1", best1);
+            editor.apply();
+        }
         tv_score.setText("Final score: " + finalScore + "\n" +
                 "1: " + best1 + "\n" +
                 "2: " + best2 + "\n" +
