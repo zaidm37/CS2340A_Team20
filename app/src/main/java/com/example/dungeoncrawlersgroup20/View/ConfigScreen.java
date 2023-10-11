@@ -1,4 +1,4 @@
-package com.example.dungeoncrawlersgroup20;
+package com.example.dungeoncrawlersgroup20.View;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,11 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.example.dungeoncrawlersgroup20.R;
+import com.example.dungeoncrawlersgroup20.ViewModel.ConfigViewModel;
 
 public class ConfigScreen extends AppCompatActivity {
     private EditText name;
@@ -17,11 +22,10 @@ public class ConfigScreen extends AppCompatActivity {
     private ImageButton sprite1;
     private ImageButton sprite2;
     private ImageButton sprite3;
-    private int imagechecker = 0;
     private RadioButton easy;
     private RadioButton medium;
     private RadioButton hard;
-    private int radiochecker = 0;
+    private ConfigViewModel configViewModel;
 
 
 
@@ -29,26 +33,32 @@ public class ConfigScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.config_screen);
+        configViewModel = new ViewModelProvider(this).get(ConfigViewModel.class);
+        configViewModel.setPlayerSprite(null);
+        configViewModel.setPLayerDifficulty("");
         name = (EditText) findViewById(R.id.Name);
         easy = (RadioButton) findViewById(R.id.radioButton);
         easy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                radiochecker = 1;
+                configViewModel.setPLayerDifficulty("Easy");
+                configViewModel.setPlayerHealth(300);
             }
         });
         medium = (RadioButton) findViewById(R.id.radioButton2);
         medium.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                radiochecker = 2;
+                configViewModel.setPLayerDifficulty("Medium");
+                configViewModel.setPlayerHealth(200);
             }
         });
         hard = (RadioButton) findViewById(R.id.radioButton3);
         hard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                radiochecker = 3;
+                configViewModel.setPLayerDifficulty("Hard");
+                configViewModel.setPlayerHealth(100);
             }
         });
         sprite1 = (ImageButton) findViewById(R.id.imageButton);
@@ -57,7 +67,8 @@ public class ConfigScreen extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(ConfigScreen.this,
                         "You Selected the First Character", Toast.LENGTH_SHORT).show();
-                imagechecker = 1;
+                configViewModel.setPlayerSprite(ContextCompat.getDrawable(
+                        ConfigScreen.this, R.drawable.sprite1));
             }
         });
         sprite2 = (ImageButton) findViewById(R.id.imageButton2);
@@ -66,7 +77,8 @@ public class ConfigScreen extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(ConfigScreen.this,
                         "You Selected the Second Character", Toast.LENGTH_SHORT).show();
-                imagechecker = 2;
+                configViewModel.setPlayerSprite(ContextCompat.getDrawable(
+                        ConfigScreen.this, R.drawable.sprite2));
             }
         });
         sprite3 = (ImageButton) findViewById(R.id.imageButton3);
@@ -75,21 +87,19 @@ public class ConfigScreen extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(ConfigScreen.this,
                         "You Selected the Third Character", Toast.LENGTH_SHORT).show();
-                imagechecker = 3;
+                configViewModel.setPlayerSprite(ContextCompat.getDrawable(
+                        ConfigScreen.this, R.drawable.sprite3));
             }
         });
         continueButton = (Button) findViewById(R.id.continueButton);
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if ((name.getText().toString().trim().length() > 0)
-                        && (imagechecker != 0) && (radiochecker != 0)) {
+                configViewModel.setPlayerName(name.getText().toString());
+                if (configViewModel.isValidInput()) {
                     Intent i = new Intent(ConfigScreen.this, GameScreen.class);
-                    String username = name.getText().toString();
                     Bundle playerinfo = new Bundle();
-                    playerinfo.putString("user", username);
-                    playerinfo.putInt("diff", radiochecker);
-                    playerinfo.putInt("sprite", imagechecker);
+                    playerinfo.putString("diff", configViewModel.getPlayerDifficulty());
                     i.putExtras(playerinfo);
                     startActivity(i);
                 } else {
