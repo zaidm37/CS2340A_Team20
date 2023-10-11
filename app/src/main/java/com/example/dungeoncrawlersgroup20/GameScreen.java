@@ -74,7 +74,6 @@ public class GameScreen extends AppCompatActivity {
             public void run() {
                 score -= 50;
                 tv_score.setText("Score: " + score);
-
             }
         }, 0, 5000);
     }
