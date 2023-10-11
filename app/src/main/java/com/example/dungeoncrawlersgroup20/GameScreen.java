@@ -84,6 +84,16 @@ public class GameScreen extends AppCompatActivity {
                 startActivity(inte);
             }
         });
+
+        tv_score = (TextView) findViewById(R.id.tv_score);
+        scoreTime = new Timer();
+        scoreTime.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                score -= 50;
+                tv_score.setText("Score: " + score);
+            }
+        }, 0, 5000);
     }
 
 }
