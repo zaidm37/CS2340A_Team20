@@ -15,6 +15,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class GameRoom2 extends AppCompatActivity {
+    private TextView userName;
+    private TextView difficulty;
+    private ImageView characterSprite;
+    private TextView hP;
     private Button next;
     private TextView userName;
     private TextView difficulty;
