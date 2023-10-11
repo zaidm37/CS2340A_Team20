@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class EndScreen extends AppCompatActivity {
@@ -19,7 +19,7 @@ public class EndScreen extends AppCompatActivity {
     private String userName;
     private String date;
     private Calendar calender;
-    private String time;
+    private SimpleDateFormat dateFormat;
     private int best1, best2, best3, best4, best5;
     private String finalString, string1, string2, string3, string4, string5;
 
@@ -30,8 +30,8 @@ public class EndScreen extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         userName = bundle.getString("user");
         calender = Calendar.getInstance();
-        date = DateFormat.getDateInstance(DateFormat.FULL).format(calender);
-        time = DateFormat.getTimeInstance().format(calender);
+        dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        date = dateFormat.format(calender.getTime());
         restart = (Button) findViewById(R.id.restart);
         restart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,8 +44,8 @@ public class EndScreen extends AppCompatActivity {
         tv_score = (TextView) findViewById(R.id.tv_score);
         SharedPreferences preferences = getSharedPreferences("PREFS", 0);
         finalScore = preferences.getInt("finalScore", bundle.getInt("score"));
-        finalString = preferences.getString("finalString", finalScore
-                + " " + userName + " " + date + " " + time);
+        finalString = preferences.getString("finalString",
+                userName + " " + date);
         best1 = preferences.getInt("best1", 0);
         best2 = preferences.getInt("best2", 0);
         best3 = preferences.getInt("best3", 0);
@@ -76,7 +76,7 @@ public class EndScreen extends AppCompatActivity {
             editor.putInt("best5", best5);
             editor.putInt("best4", best4);
             editor.putString("string5", string5);
-            editor.putString("string4",string4);
+            editor.putString("string4", string4);
             editor.apply();
         }
         if (finalScore > best3) {
@@ -90,7 +90,7 @@ public class EndScreen extends AppCompatActivity {
             editor.putInt("best4", best4);
             editor.putInt("best3", best3);
             editor.putString("string4", string4);
-            editor.putString("string3",string3);
+            editor.putString("string3", string3);
             editor.apply();
         }
 
@@ -105,7 +105,7 @@ public class EndScreen extends AppCompatActivity {
             editor.putInt("best3", best3);
             editor.putInt("best2", best2);
             editor.putString("string3", string3);
-            editor.putString("string2",string2);
+            editor.putString("string2", string2);
             editor.apply();
         }
 
@@ -120,17 +120,16 @@ public class EndScreen extends AppCompatActivity {
             editor.putInt("best2", best2);
             editor.putInt("best1", best1);
             editor.putString("string2", string2);
-            editor.putString("string1",string1);
+            editor.putString("string1", string1);
             editor.apply();
         }
-        tv_score.setText("Final score: " + finalString + " " + finalScore + "\n"
-                + "1: " + string1 + " " + best1 +"\n"
-                + "2: " + string2 + " " + best2 + "\n"
-                + "3: " + string3 + " " + best3 + "\n"
-                + "4: " + string4 + " " + best4 + "\n"
-                + "5: " + string5 + " " + best5 + "\n"
+        tv_score.setText("Final score: " + finalScore + " " + finalString + "\n"
+                + "1: " + best1 + " " + string1 + "\n"
+                + "2: " + best2 + " " + string2 + "\n"
+                + "3: " + best3 + " " + string3 + "\n"
+                + "4: " + best4 + " " + string4 + "\n"
+                + "5: " + best5 + " " + string5 + "\n"
         );
 
     }
 }
-
