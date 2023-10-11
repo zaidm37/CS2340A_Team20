@@ -18,9 +18,9 @@ public class GameScreen extends AppCompatActivity {
     private ImageView characterSprite;
     private TextView hP;
     private Button next;
-    private TextView scoreMessage;
     private Timer scoreTime;
-    private TextView scoreDisplay;
+    private TextView tv_score;
+    private int score = 1000;
 
 
     @Override
@@ -31,14 +31,15 @@ public class GameScreen extends AppCompatActivity {
         String name = bundle.getString("user"); //gets the previous name from config screen
         int hp = bundle.getInt("diff"); //gets difficulty
         String diff = "";
+        int trueHp = 0;
         if (hp == 1) {
-            hp = 300;
+            trueHp = 300;
             diff = "Easy";
         } else if (hp == 2) {
-            hp = 200;
+            trueHp = 200;
             diff = "Medium";
         } else if (hp == 3) {
-            hp = 100;
+            trueHp = 100;
             diff = "Hard";
         } // sets hp depending on difficulty, 1 = easy = more health, etc
         int character = bundle.getInt("sprite"); //gets which sprite number in drawable was selected
@@ -47,7 +48,7 @@ public class GameScreen extends AppCompatActivity {
         difficulty = (TextView) findViewById(R.id.difficulty);
         difficulty.setText(diff);
         hP = (TextView) findViewById(R.id.health);
-        hP.setText(String.valueOf(hp));
+        hP.setText(String.valueOf(trueHp));
         characterSprite = (ImageView) findViewById(R.id.character);
         if (character == 1) {
             characterSprite.setImageResource(R.drawable.sprite1);
@@ -56,18 +57,16 @@ public class GameScreen extends AppCompatActivity {
         } else if (character == 3) {
             characterSprite.setImageResource(R.drawable.sprite3);
         }
-        /*
-        scoreMessage = (TextView) findViewById(R.id.score);
-        scoreDisplay = (TextView) findViewById(R.id.score1_1);
+        tv_score = (TextView) findViewById(R.id.tv_score);
+        scoreTime = new Timer();
+        scoreTime.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                score -= 50;
+                tv_score.setText("Score: " + score);
 
-        String text = bundle.getString("score");
-        scoreMessage.setText(text);
-
-        while (Integer.parseInt(scoreDisplay.getText().toString()) > 0) {
-            decrementScore();
-        }
-
-         */
+            }
+        }, 0, 5000);
 
         next = (Button) findViewById(R.id.buttonNext);
         next.setOnClickListener(new View.OnClickListener() {
@@ -77,25 +76,12 @@ public class GameScreen extends AppCompatActivity {
                 Bundle playerinfo = new Bundle();
                 playerinfo.putString("user", name);
                 playerinfo.putInt("diff", hp);
+                playerinfo.putInt("score", score);
                 playerinfo.putInt("sprite", character);
                 inte.putExtras(playerinfo);
                 startActivity(inte);
             }
         });
     }
-    /*
-    public void decrementScore() {
-        String currScore = scoreDisplay.getText().toString();
-        final int[] i = {Integer.parseInt(currScore)};
-        scoreTime = new Timer();
-        scoreTime.schedule(new TimerTask() {
-            @Override
-                public void run() {
-                    i[0] -= 50;
-                }
-            }, 0, 1000);
-        String result = new Integer(i[0]).toString();
-    }
 
-     */
 }
