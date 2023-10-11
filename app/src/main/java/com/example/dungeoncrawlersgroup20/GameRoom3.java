@@ -62,7 +62,9 @@ public class GameRoom3 extends AppCompatActivity {
         scoreTime.schedule(new TimerTask() {
             @Override
             public void run() {
-                score -= 50;
+                if (score > 0) {
+                    score -= 50;
+                }
                 tv_score.setText("Score: " + score);
 
             }
