@@ -14,10 +14,13 @@ public class GameViewModel extends ViewModel {
     private Player player;
     private Difficulty difficulty;
     private Score scoreTrack;
+    private Movement walk;
     public GameViewModel() {
         player = Player.getPlayer();
         difficulty = new Difficulty();
         scoreTrack = new Score();
+        walk = new Walk();
+        player.setMovement(walk);
     }
     public String getPlayerName() {
         return player.getName();
@@ -55,23 +58,15 @@ public class GameViewModel extends ViewModel {
         }
     }
     public void up() {
-        Movement walk = new Walk();
-        player.setMovement(walk);
         player.playerMoveUp();
     }
     public void down() {
-        Movement walk = new Walk();
-        player.setMovement(walk);
         player.playerMoveDown();
     }
     public void left() {
-        Movement walk = new Walk();
-        player.setMovement(walk);
         player.playerMoveLeft();
     }
     public void right() {
-        Movement walk = new Walk();
-        player.setMovement(walk);
         player.playerMoveRight();
     }
 }
