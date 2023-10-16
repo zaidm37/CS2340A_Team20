@@ -5,8 +5,10 @@ import android.graphics.drawable.Drawable;
 import androidx.lifecycle.ViewModel;
 
 import com.example.dungeoncrawlersgroup20.Model.Difficulty;
+import com.example.dungeoncrawlersgroup20.Model.Movement;
 import com.example.dungeoncrawlersgroup20.Model.Player;
 import com.example.dungeoncrawlersgroup20.Model.Score;
+import com.example.dungeoncrawlersgroup20.Model.Walk;
 
 public class GameViewModel extends ViewModel {
     private Player player;
@@ -51,5 +53,25 @@ public class GameViewModel extends ViewModel {
         if (scoreTrack.getScore() > 0) {
             scoreTrack.setScore(scoreTrack.getScore() - 50);
         }
+    }
+    public void up() {
+        Movement walk = new Walk();
+        player.setMovement(walk);
+        player.playerMoveUp();
+    }
+    public void down() {
+        Movement walk = new Walk();
+        player.setMovement(walk);
+        player.playerMoveDown();
+    }
+    public void left() {
+        Movement walk = new Walk();
+        player.setMovement(walk);
+        player.playerMoveLeft();
+    }
+    public void right() {
+        Movement walk = new Walk();
+        player.setMovement(walk);
+        player.playerMoveRight();
     }
 }

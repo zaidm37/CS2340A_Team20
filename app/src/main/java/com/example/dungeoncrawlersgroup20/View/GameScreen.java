@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -67,6 +68,24 @@ public class GameScreen extends AppCompatActivity {
             }
         });
 
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_DPAD_LEFT:
+                gameViewModel.left();
+                break;
+            case KeyEvent.KEYCODE_DPAD_RIGHT:
+                gameViewModel.right();
+                break;
+            case KeyEvent.KEYCODE_DPAD_UP:
+                gameViewModel.up();
+                break;
+            case KeyEvent.KEYCODE_DPAD_DOWN:
+                gameViewModel.down();
+                break;
+        }
+        return true;
     }
 
 }
