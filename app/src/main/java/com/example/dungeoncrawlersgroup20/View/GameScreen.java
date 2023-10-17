@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -22,10 +23,10 @@ public class GameScreen extends AppCompatActivity {
     private ImageView characterSprite;
     private TextView hP;
     private Button next;
+    private Button move;
     private Timer scoreTime;
     private TextView tvScore;
     private GameViewModel gameViewModel;
-    //private int score = 1000;
 
 
     @Override
@@ -66,7 +67,32 @@ public class GameScreen extends AppCompatActivity {
                 startActivity(inte);
             }
         });
+        move = (Button) findViewById(R.id.buttonMove);
+        move.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gameViewModel.changeMovement();
+            }
+        });
 
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_DPAD_LEFT:
+                characterSprite.setX(gameViewModel.left(characterSprite.getX()));
+                break;
+            case KeyEvent.KEYCODE_DPAD_RIGHT:
+                characterSprite.setX(gameViewModel.right(characterSprite.getX(), getResources().getDisplayMetrics().widthPixels));
+                break;
+            case KeyEvent.KEYCODE_DPAD_UP:
+                characterSprite.setY(gameViewModel.up(characterSprite.getY()));
+                break;
+            case KeyEvent.KEYCODE_DPAD_DOWN:
+                characterSprite.setY(gameViewModel.down(characterSprite.getY(), getResources().getDisplayMetrics().heightPixels));
+                break;
+        }
+        return true;
     }
 
 }

@@ -3,6 +3,7 @@ package com.example.dungeoncrawlersgroup20.Model;
 import android.graphics.drawable.Drawable;
 
 public class Player {
+    private Movement movement;
     private String name;
     private int health;
     private Drawable sprite;
@@ -11,6 +12,7 @@ public class Player {
         this.name = name;
         this.health = health;
         this.sprite = sprite;
+        this.movement = movement;
     }
     public static Player getPlayer() {
         if (player == null) {
@@ -31,6 +33,21 @@ public class Player {
     }
     public Drawable getSprite() {
         return sprite;
+    }
+    public void setMovement(Movement movement) {
+        this.movement = movement;
+    }
+    public float playerMoveUp(float y) {
+        return movement.moveUp(y);
+    }
+    public float playerMoveDown(float y, int border) {
+        return movement.moveDown(y, border);
+    }
+    public float playerMoveLeft(float x) {
+        return movement.moveLeft(x);
+    }
+    public float playerMoveRight(float x, int border) {
+        return movement.moveRight(x, border);
     }
     public void setName(String name) {
         this.name = name;
