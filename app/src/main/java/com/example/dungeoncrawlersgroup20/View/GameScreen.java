@@ -23,6 +23,7 @@ public class GameScreen extends AppCompatActivity {
     private ImageView characterSprite;
     private TextView hP;
     private Button next;
+    private Button move;
     private Timer scoreTime;
     private TextView tvScore;
     private GameViewModel gameViewModel;
@@ -64,6 +65,13 @@ public class GameScreen extends AppCompatActivity {
                 playerinfo.putInt("score", gameViewModel.getPlayerScore());
                 inte.putExtras(playerinfo);
                 startActivity(inte);
+            }
+        });
+        move = (Button) findViewById(R.id.buttonMove);
+        move.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gameViewModel.changeMovement();
             }
         });
 
