@@ -74,13 +74,13 @@ public class GameViewModel extends ViewModel {
     public float up(float y) {
         return player.playerMoveUp(y);
     }
-    public float down(float y) {
-        return player.playerMoveDown(y);
+    public float down(float y, int border) {
+        return player.playerMoveDown(y, border);
     }
     public float left(float x) {
         return player.playerMoveLeft(x);
     }
-    public float right(float x) {
-        return player.playerMoveRight(x);
+    public float right(float x, int border) {
+        return player.playerMoveRight(x, border);
     }
 }

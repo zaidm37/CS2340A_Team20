@@ -83,13 +83,13 @@ public class GameScreen extends AppCompatActivity {
                 characterSprite.setX(gameViewModel.left(characterSprite.getX()));
                 break;
             case KeyEvent.KEYCODE_DPAD_RIGHT:
-                characterSprite.setX(gameViewModel.right(characterSprite.getX()));
+                characterSprite.setX(gameViewModel.right(characterSprite.getX(), getResources().getDisplayMetrics().widthPixels));
                 break;
             case KeyEvent.KEYCODE_DPAD_UP:
                 characterSprite.setY(gameViewModel.up(characterSprite.getY()));
                 break;
             case KeyEvent.KEYCODE_DPAD_DOWN:
-                characterSprite.setY(gameViewModel.down(characterSprite.getY()));
+                characterSprite.setY(gameViewModel.down(characterSprite.getY(), getResources().getDisplayMetrics().heightPixels));
                 break;
         }
         return true;
