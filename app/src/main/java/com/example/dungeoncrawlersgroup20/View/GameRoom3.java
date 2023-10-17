@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -63,5 +64,23 @@ public class GameRoom3 extends AppCompatActivity {
                 startActivity(inte);
             }
         });
+    }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_DPAD_LEFT:
+                characterSprite.setX(gameViewModel.left(characterSprite.getX()));
+                break;
+            case KeyEvent.KEYCODE_DPAD_RIGHT:
+                characterSprite.setX(gameViewModel.right(characterSprite.getX()));
+                break;
+            case KeyEvent.KEYCODE_DPAD_UP:
+                characterSprite.setY(gameViewModel.up(characterSprite.getY()));
+                break;
+            case KeyEvent.KEYCODE_DPAD_DOWN:
+                characterSprite.setY(gameViewModel.down(characterSprite.getY()));
+                break;
+        }
+        return true;
     }
 }
