@@ -26,7 +26,7 @@ public class GameRoom2 extends AppCompatActivity {
     private Timer scoreTime;
     private TextView tvScore;
     private GameViewModel gameViewModel;
-    //private int score;
+    private Button move;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +62,13 @@ public class GameRoom2 extends AppCompatActivity {
                 playerinfo.putInt("score", gameViewModel.getPlayerScore());
                 inte.putExtras(playerinfo);
                 startActivity(inte);
+            }
+        });
+        move = (Button) findViewById(R.id.buttonMove);
+        move.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gameViewModel.changeMovement();
             }
         });
     }
