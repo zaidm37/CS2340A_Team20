@@ -26,7 +26,6 @@ public class GameScreen extends AppCompatActivity {
     private Timer scoreTime;
     private TextView tvScore;
     private GameViewModel gameViewModel;
-    //private int score = 1000;
 
 
     @Override
@@ -73,16 +72,16 @@ public class GameScreen extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         switch (keyCode) {
             case KeyEvent.KEYCODE_DPAD_LEFT:
-                gameViewModel.left();
+                characterSprite.setX(gameViewModel.left(characterSprite.getX()));
                 break;
             case KeyEvent.KEYCODE_DPAD_RIGHT:
-                gameViewModel.right();
+                characterSprite.setX(gameViewModel.right(characterSprite.getX()));
                 break;
             case KeyEvent.KEYCODE_DPAD_UP:
-                gameViewModel.up();
+                characterSprite.setY(gameViewModel.up(characterSprite.getY()));
                 break;
             case KeyEvent.KEYCODE_DPAD_DOWN:
-                gameViewModel.down();
+                characterSprite.setY(gameViewModel.down(characterSprite.getY()));
                 break;
         }
         return true;

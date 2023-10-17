@@ -1,16 +1,16 @@
 package com.example.dungeoncrawlersgroup20.Model;
 
 public class Walk implements Movement {
-    public void moveDown() {
-        return;
+    public float moveDown(float y) {
+        return y + 10;
     }
-    public void moveUp() {
-        return;
+    public float moveUp(float y) {
+        return y - 10;
     }
-    public void moveLeft() {
-        return;
+    public float moveLeft(float x) {
+        return x - 10;
     }
-    public void moveRight() {
-        return;
+    public float moveRight(float x) {
+        return x + 10;
     }
 }

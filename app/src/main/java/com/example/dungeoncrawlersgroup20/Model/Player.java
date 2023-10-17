@@ -37,17 +37,17 @@ public class Player {
     public void setMovement(Movement movement) {
         this.movement = movement;
     }
-    public void playerMoveUp() {
-        movement.moveUp();
+    public float playerMoveUp(float y) {
+        return movement.moveUp(y);
     }
-    public void playerMoveDown() {
-        movement.moveDown();
+    public float playerMoveDown(float y) {
+        return movement.moveDown(y);
     }
-    public void playerMoveLeft() {
-        movement.moveLeft();
+    public float playerMoveLeft(float x) {
+        return movement.moveLeft(x);
     }
-    public void playerMoveRight() {
-        movement.moveRight();
+    public float playerMoveRight(float x) {
+        return movement.moveRight(x);
     }
     public void setName(String name) {
         this.name = name;

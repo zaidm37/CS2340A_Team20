@@ -57,16 +57,16 @@ public class GameViewModel extends ViewModel {
             scoreTrack.setScore(scoreTrack.getScore() - 50);
         }
     }
-    public void up() {
-        player.playerMoveUp();
+    public float up(float y) {
+        return player.playerMoveUp(y);
     }
-    public void down() {
-        player.playerMoveDown();
+    public float down(float y) {
+        return player.playerMoveDown(y);
     }
-    public void left() {
-        player.playerMoveLeft();
+    public float left(float x) {
+        return player.playerMoveLeft(x);
     }
-    public void right() {
-        player.playerMoveRight();
+    public float right(float x) {
+        return player.playerMoveRight(x);
     }
 }
