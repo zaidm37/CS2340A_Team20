@@ -40,14 +40,14 @@ public class Player {
     public float playerMoveUp(float y) {
         return movement.moveUp(y);
     }
-    public float playerMoveDown(float y) {
-        return movement.moveDown(y);
+    public float playerMoveDown(float y, int border) {
+        return movement.moveDown(y, border);
     }
     public float playerMoveLeft(float x) {
         return movement.moveLeft(x);
     }
-    public float playerMoveRight(float x) {
-        return movement.moveRight(x);
+    public float playerMoveRight(float x, int border) {
+        return movement.moveRight(x, border);
     }
     public void setName(String name) {
         this.name = name;
