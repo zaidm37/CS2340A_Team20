@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.example.dungeoncrawlersgroup20.ViewModel.GameViewModel;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import android.util.Log;
 
 public class GameScreen extends AppCompatActivity {
     private TextView userName;
@@ -28,6 +30,8 @@ public class GameScreen extends AppCompatActivity {
     private TextView tvScore;
     private GameViewModel gameViewModel;
 
+    private int screenHeight;
+    private int screenWidth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,22 +81,36 @@ public class GameScreen extends AppCompatActivity {
 
     }
     @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            Rect visibleFrame = new Rect();
+            getWindow().getDecorView().getWindowVisibleDisplayFrame(visibleFrame);
+            screenHeight = visibleFrame.height();
+            screenWidth = visibleFrame.width();
+        }
+    }
+    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+        int spriteWidth = characterSprite.getWidth();
+        int spriteHeight = characterSprite.getHeight();
         switch (keyCode) {
             case KeyEvent.KEYCODE_DPAD_LEFT:
                 characterSprite.setX(gameViewModel.left(characterSprite.getX()));
                 break;
             case KeyEvent.KEYCODE_DPAD_RIGHT:
-                characterSprite.setX(gameViewModel.right(characterSprite.getX(), getResources().getDisplayMetrics().widthPixels));
+                characterSprite.setX(gameViewModel.right(characterSprite.getX(), screenWidth, spriteWidth));
                 break;
             case KeyEvent.KEYCODE_DPAD_UP:
-                characterSprite.setY(gameViewModel.up(characterSprite.getY()));
+                float newUpY = gameViewModel.up(characterSprite.getY(), screenHeight / 2);
+                if (newUpY >= 0) {
+                    characterSprite.setY(newUpY);
+                }
                 break;
             case KeyEvent.KEYCODE_DPAD_DOWN:
-                characterSprite.setY(gameViewModel.down(characterSprite.getY(), getResources().getDisplayMetrics().heightPixels));
+                characterSprite.setY(gameViewModel.down(characterSprite.getY(), screenHeight, spriteHeight));
                 break;
         }
         return true;
     }
-
 }

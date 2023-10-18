@@ -1,9 +1,8 @@
 package com.example.dungeoncrawlersgroup20.Model;
 
 public interface Movement {
-    //do something
-    abstract float moveUp(float y);
-    abstract float moveDown(float y, int border);
-    abstract float moveLeft(float x);
-    abstract float moveRight(float x, int border);
+    float moveUp(float y, int upperThird);
+    float moveDown(float y, int border, int spriteHeight);
+    float moveLeft(float x);
+    float moveRight(float x, int border, int spriteWidth);
 }

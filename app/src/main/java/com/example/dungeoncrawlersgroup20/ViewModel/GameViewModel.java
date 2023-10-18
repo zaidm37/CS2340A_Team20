@@ -65,22 +65,21 @@ public class GameViewModel extends ViewModel {
     public void changeMovement() {
         if (moveCheck) {
             player.setMovement(run);
-            moveCheck = false;
         } else {
             player.setMovement(walk);
-            moveCheck = true;
         }
+        moveCheck = !moveCheck;
     }
-    public float up(float y) {
-        return player.playerMoveUp(y);
+    public float up(float y, int screenHeight) {
+        return player.playerMoveUp(y, screenHeight);
     }
-    public float down(float y, int border) {
-        return player.playerMoveDown(y, border);
+    public float down(float y, int border, int spriteHeight) {
+        return player.playerMoveDown(y, border, spriteHeight);
     }
     public float left(float x) {
         return player.playerMoveLeft(x);
     }
-    public float right(float x, int border) {
-        return player.playerMoveRight(x, border);
+    public float right(float x, int border, int spriteWidth) {
+        return player.playerMoveRight(x, border, spriteWidth);
     }
 }
