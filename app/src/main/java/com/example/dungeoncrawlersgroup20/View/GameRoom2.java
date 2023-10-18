@@ -75,6 +75,18 @@ public class GameRoom2 extends AppCompatActivity {
             }
         });
     }
+
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            Rect visibleFrame = new Rect();
+            getWindow().getDecorView().getWindowVisibleDisplayFrame(visibleFrame);
+            screenHeight = visibleFrame.height();
+            screenWidth = visibleFrame.width();
+        }
+    }
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);

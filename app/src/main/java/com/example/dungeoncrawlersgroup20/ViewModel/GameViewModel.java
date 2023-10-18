@@ -78,11 +78,10 @@ public class GameViewModel extends ViewModel implements Observer {
     public void changeMovement() {
         if (moveCheck) {
             player.setMovement(run);
-            moveCheck = false;
         } else {
             player.setMovement(walk);
-            moveCheck = true;
         }
+        moveCheck = !moveCheck;
     }
     public float up(float y, int textHeight) {
         return player.playerMoveUp(y, textHeight);

@@ -17,6 +17,7 @@ import com.example.dungeoncrawlersgroup20.ViewModel.GameViewModel;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import android.util.Log;
 
 public class GameScreen extends AppCompatActivity {
     private TextView userName;
@@ -31,6 +32,8 @@ public class GameScreen extends AppCompatActivity {
     private int screenHeight;
     private int screenWidth;
 
+    private int screenHeight;
+    private int screenWidth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
