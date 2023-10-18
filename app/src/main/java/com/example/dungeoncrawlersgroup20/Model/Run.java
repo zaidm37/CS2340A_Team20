@@ -1,28 +1,20 @@
 package com.example.dungeoncrawlersgroup20.Model;
 
 public class Run implements Movement {
-    public float moveDown(float y, int border) {
-        if (y + 40 >= border) {
-            return (float) border;
-        }
-        return y + 40;
+    public float moveDown(float y, int border, int spriteHeight) {
+        float newY = y + 40;
+        return Math.min(newY, border - spriteHeight);
     }
-    public float moveUp(float y) {
-        if (y - 40 <= 0) {
-            return 0;
-        }
-        return y - 40;
+    public float moveUp(float y, int textHeight) {
+        float newY = y - 40;
+        return Math.max(newY, textHeight);
     }
     public float moveLeft(float x) {
-        if (x - 40 <= 0) {
-            return 0;
-        }
-        return x - 40;
+        float newX = x - 40;
+        return Math.max(newX, 0);
     }
-    public float moveRight(float x, int border) {
-        if (x + 40 >= border) {
-            return (float) border;
-        }
-        return x + 40;
+    public float moveRight(float x, int border, int spriteWidth) {
+        float newX = x + 40;
+        return Math.min(newX, border - spriteWidth);
     }
 }

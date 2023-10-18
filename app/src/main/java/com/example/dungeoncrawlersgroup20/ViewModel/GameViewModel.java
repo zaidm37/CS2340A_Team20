@@ -6,18 +6,21 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.dungeoncrawlersgroup20.Model.Difficulty;
 import com.example.dungeoncrawlersgroup20.Model.Movement;
+import com.example.dungeoncrawlersgroup20.Model.Observable;
+import com.example.dungeoncrawlersgroup20.Model.Observer;
 import com.example.dungeoncrawlersgroup20.Model.Player;
 import com.example.dungeoncrawlersgroup20.Model.Run;
 import com.example.dungeoncrawlersgroup20.Model.Score;
 import com.example.dungeoncrawlersgroup20.Model.Walk;
 
-public class GameViewModel extends ViewModel {
+public class GameViewModel extends ViewModel implements Observer {
     private Player player;
     private Difficulty difficulty;
     private Score scoreTrack;
     private Movement walk;
     private Movement run;
     private boolean moveCheck;
+    private Observable observable;
     public GameViewModel() {
         player = Player.getPlayer();
         difficulty = new Difficulty();
@@ -26,6 +29,16 @@ public class GameViewModel extends ViewModel {
         run = new Run();
         moveCheck = true;
         player.setMovement(walk);
+        this.observable = observable;
+        this.observable.addObserver(this);
+    }
+    @Override
+    public void update(Movement movement) {
+        if (movement.equals(walk)) {
+            moveCheck = true;
+        } else if (movement.equals(run)) {
+            moveCheck = false;
+        }
     }
     public String getPlayerName() {
         return player.getName();
@@ -71,16 +84,16 @@ public class GameViewModel extends ViewModel {
             moveCheck = true;
         }
     }
-    public float up(float y) {
-        return player.playerMoveUp(y);
+    public float up(float y, int textHeight) {
+        return player.playerMoveUp(y, textHeight);
     }
-    public float down(float y, int border) {
-        return player.playerMoveDown(y, border);
+    public float down(float y, int border, int spriteHeight) {
+        return player.playerMoveDown(y, border, spriteHeight);
     }
     public float left(float x) {
         return player.playerMoveLeft(x);
     }
-    public float right(float x, int border) {
-        return player.playerMoveRight(x, border);
+    public float right(float x, int border, int spriteWidth) {
+        return player.playerMoveRight(x, border, spriteWidth);
     }
 }
