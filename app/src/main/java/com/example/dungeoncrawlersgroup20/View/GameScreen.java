@@ -32,9 +32,6 @@ public class GameScreen extends AppCompatActivity {
     private int screenHeight;
     private int screenWidth;
 
-    private int screenHeight;
-    private int screenWidth;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

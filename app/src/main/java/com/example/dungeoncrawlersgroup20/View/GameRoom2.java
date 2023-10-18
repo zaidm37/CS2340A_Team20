@@ -88,16 +88,6 @@ public class GameRoom2 extends AppCompatActivity {
         }
     }
     @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) {
-            Rect visibleFrame = new Rect();
-            getWindow().getDecorView().getWindowVisibleDisplayFrame(visibleFrame);
-            screenHeight = visibleFrame.height();
-            screenWidth = visibleFrame.width();
-        }
-    }
-    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         int spriteWidth = characterSprite.getWidth();
         int spriteHeight = characterSprite.getHeight();
