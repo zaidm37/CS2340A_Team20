@@ -5,12 +5,9 @@ public class Walk implements Movement {
         float newY = y + 10;
         return Math.min(newY, border - spriteHeight);
     }
-    public float moveUp(float y, int upperThird) {
+    public float moveUp(float y, int textHeight) {
         float newY = y - 10;
-        if (newY <= upperThird + 80) { //change 80 to like 100 if you think needs more padding
-            return upperThird + 80; //change this too
-        }
-        return newY;
+        return Math.max(newY, textHeight);
     }
     public float moveLeft(float x) {
         float newX = x - 10;

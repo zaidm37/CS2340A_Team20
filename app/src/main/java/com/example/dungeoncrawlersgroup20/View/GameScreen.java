@@ -29,6 +29,8 @@ public class GameScreen extends AppCompatActivity {
     private Timer scoreTime;
     private TextView tvScore;
     private GameViewModel gameViewModel;
+    private int screenHeight;
+    private int screenWidth;
 
     private int screenHeight;
     private int screenWidth;
@@ -99,16 +101,21 @@ public class GameScreen extends AppCompatActivity {
                 characterSprite.setX(gameViewModel.left(characterSprite.getX()));
                 break;
             case KeyEvent.KEYCODE_DPAD_RIGHT:
-                characterSprite.setX(gameViewModel.right(characterSprite.getX(), screenWidth, spriteWidth));
+                characterSprite.setX(
+                        gameViewModel.right(characterSprite.getX(), screenWidth, spriteWidth));
                 break;
             case KeyEvent.KEYCODE_DPAD_UP:
-                float newUpY = gameViewModel.up(characterSprite.getY(), screenHeight / 2);
+                float newUpY = gameViewModel.up(
+                        characterSprite.getY(), (screenHeight / 6) + 100);
                 if (newUpY >= 0) {
                     characterSprite.setY(newUpY);
                 }
                 break;
             case KeyEvent.KEYCODE_DPAD_DOWN:
-                characterSprite.setY(gameViewModel.down(characterSprite.getY(), screenHeight, spriteHeight));
+                characterSprite.setY(gameViewModel.down(
+                        characterSprite.getY(), screenHeight, spriteHeight));
+                break;
+            default:
                 break;
         }
         return true;
