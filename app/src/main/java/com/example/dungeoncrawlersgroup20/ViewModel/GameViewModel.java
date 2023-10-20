@@ -20,7 +20,7 @@ public class GameViewModel extends ViewModel implements Observer {
     private Movement walk;
     private Movement run;
     private boolean moveCheck;
-    private Observable observable;
+//    private Observable observable;
     public GameViewModel() {
         player = Player.getPlayer();
         difficulty = new Difficulty();
@@ -29,16 +29,16 @@ public class GameViewModel extends ViewModel implements Observer {
         run = new Run();
         moveCheck = true;
         player.setMovement(walk);
-        this.observable = observable;
-        this.observable.addObserver(this);
+//        this.observable = observable;
+//        this.observable.addObserver(this);
     }
     @Override
     public void update(Movement movement) {
-        if (movement.equals(walk)) {
-            moveCheck = true;
-        } else if (movement.equals(run)) {
-            moveCheck = false;
-        }
+//        if (movement.equals(walk)) {
+//            moveCheck = true;
+//        } else if (movement.equals(run)) {
+//            moveCheck = false;
+//        }
     }
     public String getPlayerName() {
         return player.getName();
@@ -86,13 +86,13 @@ public class GameViewModel extends ViewModel implements Observer {
     public float up(float y, int textHeight) {
         return player.playerMoveUp(y, textHeight);
     }
-    public float down(float y, int border, int spriteHeight) {
-        return player.playerMoveDown(y, border, spriteHeight);
+    public float down(float y, int border, int spriteHeight, int doorHeight) {
+        return player.playerMoveDown(y, border, spriteHeight, doorHeight);
     }
     public float left(float x) {
         return player.playerMoveLeft(x);
     }
-    public float right(float x, int border, int spriteWidth) {
-        return player.playerMoveRight(x, border, spriteWidth);
+    public float right(float x, int border, int spriteWidth, int doorWidth) {
+        return player.playerMoveRight(x, border, spriteWidth, doorWidth);
     }
 }
