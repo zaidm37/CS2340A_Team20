@@ -59,14 +59,14 @@ public class Player implements Observable {
     public float playerMoveUp(float y, int textHeight) {
         return movement.moveUp(y, textHeight);
     }
-    public float playerMoveDown(float y, int screenHeight, int spriteHeight, int doorHeight) {
-        return movement.moveDown(y, screenHeight - spriteHeight, spriteHeight, doorHeight);
+    public float playerMoveDown(float y, int screenHeight, int spriteHeight) {
+        return movement.moveDown(y, screenHeight - spriteHeight, spriteHeight);
     }
     public float playerMoveLeft(float x) {
         return movement.moveLeft(x);
     }
-    public float playerMoveRight(float x, int border, int spriteWidth, int doorWidth) {
-        return movement.moveRight(x, border, spriteWidth, doorWidth);
+    public float playerMoveRight(float x, int border, int spriteWidth) {
+        return movement.moveRight(x, border, spriteWidth);
     }
     public void setName(String name) {
         this.name = name;
