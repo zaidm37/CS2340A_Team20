@@ -9,14 +9,14 @@ public class Player implements Observable {
     private String name;
     private int health;
     private Drawable sprite;
-    private List<Observer> gameView;
+//    private List<Observer> gameView;
     private static volatile Player player;
     private Player() {
         this.name = name;
         this.health = health;
         this.sprite = sprite;
         this.movement = movement;
-        this.gameView = gameView;
+//        this.gameView = gameView;
     }
     public static Player getPlayer() {
         if (player == null) {
@@ -30,17 +30,17 @@ public class Player implements Observable {
     }
     @Override
     public void addObserver(Observer observer) {
-        gameView.add(observer);
+//        gameView.add(observer);
     }
     @Override
     public void removeObserver(Observer observer) {
-        gameView.add(observer);
+//        gameView.add(observer);
     }
     @Override
     public void notifyObservers() {
-        for (Observer gameViewer : gameView) {
-            gameViewer.update(this.movement);
-        }
+//        for (Observer gameViewer : gameView) {
+//            gameViewer.update(this.movement);
+//        }
     }
     public String getName() {
         return name;
@@ -54,19 +54,19 @@ public class Player implements Observable {
     }
     public void setMovement(Movement movement) {
         this.movement = movement;
-        notifyObservers();
+//        notifyObservers();
     }
     public float playerMoveUp(float y, int textHeight) {
         return movement.moveUp(y, textHeight);
     }
-    public float playerMoveDown(float y, int screenHeight, int spriteHeight) {
-        return movement.moveDown(y, screenHeight - spriteHeight, spriteHeight);
+    public float playerMoveDown(float y, int screenHeight, int spriteHeight, int doorHeight) {
+        return movement.moveDown(y, screenHeight - spriteHeight, spriteHeight, doorHeight);
     }
     public float playerMoveLeft(float x) {
         return movement.moveLeft(x);
     }
-    public float playerMoveRight(float x, int border, int spriteWidth) {
-        return movement.moveRight(x, border, spriteWidth);
+    public float playerMoveRight(float x, int border, int spriteWidth, int doorWidth) {
+        return movement.moveRight(x, border, spriteWidth, doorWidth);
     }
     public void setName(String name) {
         this.name = name;

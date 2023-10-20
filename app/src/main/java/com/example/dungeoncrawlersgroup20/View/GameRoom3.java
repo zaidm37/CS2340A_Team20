@@ -19,7 +19,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class GameRoom3 extends AppCompatActivity {
-    private Button next;
+//    private Button next;
     private TextView userName;
     private TextView difficulty;
     private ImageView characterSprite;
@@ -28,6 +28,7 @@ public class GameRoom3 extends AppCompatActivity {
     private TextView tvScore;
     private GameViewModel gameViewModel;
     private Button move;
+    private ImageView door;
     private int screenHeight;
     private int screenWidth;
     @Override
@@ -35,6 +36,7 @@ public class GameRoom3 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_room3);
         Bundle bundle = getIntent().getExtras();
+        door = (ImageView) findViewById(R.id.door);
         gameViewModel = new ViewModelProvider(this).get(GameViewModel.class);
         userName = (TextView) findViewById(R.id.name);
         userName.setText(gameViewModel.getPlayerName());
@@ -55,18 +57,17 @@ public class GameRoom3 extends AppCompatActivity {
 
             }
         }, 0, 5000);
-        next = (Button) findViewById(R.id.room3next);
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent inte = new Intent(GameRoom3.this, EndScreen.class);
-                Bundle playerinfo = new Bundle();
-                playerinfo.putInt("score", gameViewModel.getPlayerScore());
-                //playerinfo.putString("user", name);
-                inte.putExtras(playerinfo);
-                startActivity(inte);
-            }
-        });
+//        next = (Button) findViewById(R.id.room3next);
+//        next.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent inte = new Intent(GameRoom3.this, EndScreen.class);
+//                Bundle playerinfo = new Bundle();
+//                playerinfo.putInt("score", gameViewModel.getPlayerScore());
+//                inte.putExtras(playerinfo);
+//                startActivity(inte);
+//            }
+//        });
         move = (Button) findViewById(R.id.buttonMove);
         move.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,13 +90,23 @@ public class GameRoom3 extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         int spriteWidth = characterSprite.getWidth();
         int spriteHeight = characterSprite.getHeight();
+        int doorWidth = door.getWidth();
+        int doorHeight = door.getHeight();
         switch (keyCode) {
             case KeyEvent.KEYCODE_DPAD_LEFT:
                 characterSprite.setX(gameViewModel.left(characterSprite.getX()));
                 break;
             case KeyEvent.KEYCODE_DPAD_RIGHT:
                 characterSprite.setX(
-                        gameViewModel.right(characterSprite.getX(), screenWidth, spriteWidth));
+                        gameViewModel.right(characterSprite.getX(),
+                                screenWidth, spriteWidth, doorWidth));
+                if (characterSprite.getX() == -8888) {
+                    Intent inte = new Intent(GameRoom3.this, EndScreen.class);
+                    Bundle playerinfo = new Bundle();
+                    playerinfo.putInt("score", gameViewModel.getPlayerScore());
+                    inte.putExtras(playerinfo);
+                    startActivity(inte);
+                }
                 break;
             case KeyEvent.KEYCODE_DPAD_UP:
                 float newUpY = gameViewModel.up(
@@ -106,7 +117,14 @@ public class GameRoom3 extends AppCompatActivity {
                 break;
             case KeyEvent.KEYCODE_DPAD_DOWN:
                 characterSprite.setY(gameViewModel.down(
-                        characterSprite.getY(), screenHeight, spriteHeight));
+                        characterSprite.getY(), screenHeight, spriteHeight, doorHeight));
+                if (characterSprite.getY() == -8888) {
+                    Intent inte = new Intent(GameRoom3.this, EndScreen.class);
+                    Bundle playerinfo = new Bundle();
+                    playerinfo.putInt("score", gameViewModel.getPlayerScore());
+                    inte.putExtras(playerinfo);
+                    startActivity(inte);
+                }
                 break;
             default:
                 break;
