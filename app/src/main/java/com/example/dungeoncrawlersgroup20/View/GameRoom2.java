@@ -102,7 +102,7 @@ public class GameRoom2 extends AppCompatActivity {
             case KeyEvent.KEYCODE_DPAD_RIGHT:
                 characterSprite.setX(
                         gameViewModel.right(characterSprite.getX(),
-                                screenWidth, spriteWidth, doorWidth));
+                                screenWidth, spriteWidth));
                 if (characterSprite.getX() == -8888) {
                     Intent inte = new Intent(GameRoom2.this, GameRoom3.class);
                     Bundle playerinfo = new Bundle();
@@ -120,7 +120,7 @@ public class GameRoom2 extends AppCompatActivity {
                 break;
             case KeyEvent.KEYCODE_DPAD_DOWN:
                 characterSprite.setY(gameViewModel.down(
-                        characterSprite.getY(), screenHeight, spriteHeight, doorHeight));
+                        characterSprite.getY(), screenHeight, spriteHeight));
                 if (characterSprite.getY() == -8888) {
                     Intent inte = new Intent(GameRoom2.this, GameRoom3.class);
                     Bundle playerinfo = new Bundle();
