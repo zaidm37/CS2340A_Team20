@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.graphics.Rect;
+import android.graphics.RectF;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -93,8 +94,12 @@ public class GameRoom2 extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         int spriteWidth = characterSprite.getWidth();
         int spriteHeight = characterSprite.getHeight();
+        int spriteRadiusX = spriteWidth / 2;
+        int spriteRadiusY = spriteHeight / 2;
         int doorWidth = door.getWidth();
         int doorHeight = door.getHeight();
+        int doorRadiusX = doorWidth / 2;
+        int doorRadiusY = doorHeight / 2;
         switch (keyCode) {
             case KeyEvent.KEYCODE_DPAD_LEFT:
                 characterSprite.setX(gameViewModel.left(characterSprite.getX()));
@@ -103,13 +108,6 @@ public class GameRoom2 extends AppCompatActivity {
                 characterSprite.setX(
                         gameViewModel.right(characterSprite.getX(),
                                 screenWidth, spriteWidth));
-                if (characterSprite.getX() == -8888) {
-                    Intent inte = new Intent(GameRoom2.this, GameRoom3.class);
-                    Bundle playerinfo = new Bundle();
-                    playerinfo.putInt("score", gameViewModel.getPlayerScore());
-                    inte.putExtras(playerinfo);
-                    startActivity(inte);
-                }
                 break;
             case KeyEvent.KEYCODE_DPAD_UP:
                 float newUpY = gameViewModel.up(
@@ -121,16 +119,24 @@ public class GameRoom2 extends AppCompatActivity {
             case KeyEvent.KEYCODE_DPAD_DOWN:
                 characterSprite.setY(gameViewModel.down(
                         characterSprite.getY(), screenHeight, spriteHeight));
-                if (characterSprite.getY() == -8888) {
-                    Intent inte = new Intent(GameRoom2.this, GameRoom3.class);
-                    Bundle playerinfo = new Bundle();
-                    playerinfo.putInt("score", gameViewModel.getPlayerScore());
-                    inte.putExtras(playerinfo);
-                    startActivity(inte);
-                }
                 break;
             default:
                 break;
+        }
+        RectF spriteRect = new RectF(characterSprite.getX() - spriteRadiusX,
+                characterSprite.getY() - spriteRadiusY,
+                characterSprite.getX() + spriteRadiusX,
+                characterSprite.getY() + spriteRadiusY);
+        RectF doorRect = new RectF(door.getX() - doorRadiusX,
+                door.getY() - doorRadiusY,
+                door.getX() + doorRadiusX,
+                door.getY() + doorRadiusY);
+        if (spriteRect.intersect(doorRect)) {
+            Intent inte = new Intent(GameRoom2.this, GameRoom3.class);
+            Bundle playerinfo = new Bundle();
+            playerinfo.putInt("score", gameViewModel.getPlayerScore());
+            inte.putExtras(playerinfo);
+            startActivity(inte);
         }
         return true;
     }
