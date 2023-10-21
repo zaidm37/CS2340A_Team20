@@ -96,12 +96,6 @@ public class GameScreen extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         int spriteWidth = characterSprite.getWidth();
         int spriteHeight = characterSprite.getHeight();
-        int spriteRadiusX = spriteWidth / 2;
-        int spriteRadiusY = spriteHeight / 2;
-        int doorWidth = door.getWidth();
-        int doorHeight = door.getHeight();
-        int doorRadiusX = doorWidth / 2;
-        int doorRadiusY = doorHeight / 2;
         switch (keyCode) {
             case KeyEvent.KEYCODE_DPAD_LEFT:
                 characterSprite.setX(gameViewModel.left(characterSprite.getX()));
@@ -125,15 +119,13 @@ public class GameScreen extends AppCompatActivity {
             default:
                 break;
         }
-        RectF spriteRect = new RectF(characterSprite.getX() - spriteRadiusX,
-                characterSprite.getY() - spriteRadiusY,
-                characterSprite.getX() + spriteRadiusX,
-                characterSprite.getY() + spriteRadiusY);
-        RectF doorRect = new RectF(door.getX() - doorRadiusX,
-                door.getY() - doorRadiusY,
-                door.getX() + doorRadiusX,
-                door.getY() + doorRadiusY);
-        if (spriteRect.intersect(doorRect)) {
+        Rect playerR = new Rect();
+        characterSprite.getHitRect(playerR);
+        Rect doorR = new Rect();
+        door.getHitRect(doorR);
+        if (Rect.intersects(playerR, doorR)) {
+            characterSprite.setX(-888);
+            characterSprite.setY(-888);
             Intent inte = new Intent(GameScreen.this, GameRoom2.class);
             Bundle playerinfo = new Bundle();
             playerinfo.putInt("score", gameViewModel.getPlayerScore());
