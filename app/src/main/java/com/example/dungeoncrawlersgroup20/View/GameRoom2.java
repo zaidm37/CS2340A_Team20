@@ -24,7 +24,6 @@ public class GameRoom2 extends AppCompatActivity {
     private TextView difficulty;
     private ImageView characterSprite;
     private TextView hP;
-//    private Button next;
     private Timer scoreTime;
     private TextView tvScore;
     private GameViewModel gameViewModel;
@@ -59,17 +58,6 @@ public class GameRoom2 extends AppCompatActivity {
             }
         }, 0, 5000);
 
-//        next = (Button) findViewById(R.id.room2next);
-//        next.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent inte = new Intent(GameRoom2.this, GameRoom3.class);
-//                Bundle playerinfo = new Bundle();
-//                playerinfo.putInt("score", gameViewModel.getPlayerScore());
-//                inte.putExtras(playerinfo);
-//                startActivity(inte);
-//            }
-//        });
         move = (Button) findViewById(R.id.buttonMove);
         move.setOnClickListener(new View.OnClickListener() {
             @Override
