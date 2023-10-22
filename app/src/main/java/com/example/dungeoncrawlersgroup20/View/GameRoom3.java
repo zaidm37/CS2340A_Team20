@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.graphics.Rect;
-import android.graphics.RectF;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -80,27 +79,27 @@ public class GameRoom3 extends AppCompatActivity {
         int spriteWidth = characterSprite.getWidth();
         int spriteHeight = characterSprite.getHeight();
         switch (keyCode) {
-            case KeyEvent.KEYCODE_DPAD_LEFT:
-                characterSprite.setX(gameViewModel.left(characterSprite.getX()));
-                break;
-            case KeyEvent.KEYCODE_DPAD_RIGHT:
-                characterSprite.setX(
+        case KeyEvent.KEYCODE_DPAD_LEFT:
+            characterSprite.setX(gameViewModel.left(characterSprite.getX()));
+            break;
+        case KeyEvent.KEYCODE_DPAD_RIGHT:
+            characterSprite.setX(
                         gameViewModel.right(characterSprite.getX(),
                                 screenWidth, spriteWidth));
-                break;
-            case KeyEvent.KEYCODE_DPAD_UP:
-                float newUpY = gameViewModel.up(
+            break;
+        case KeyEvent.KEYCODE_DPAD_UP:
+            float newUpY = gameViewModel.up(
                         characterSprite.getY(), (screenHeight / 6) + 100);
-                if (newUpY >= 0) {
-                    characterSprite.setY(newUpY);
-                }
-                break;
-            case KeyEvent.KEYCODE_DPAD_DOWN:
-                characterSprite.setY(gameViewModel.down(
+            if (newUpY >= 0) {
+                characterSprite.setY(newUpY);
+            }
+            break;
+        case KeyEvent.KEYCODE_DPAD_DOWN:
+            characterSprite.setY(gameViewModel.down(
                         characterSprite.getY(), screenHeight, spriteHeight));
-                break;
-            default:
-                break;
+            break;
+        default:
+            break;
         }
         Rect playerR = new Rect();
         characterSprite.getHitRect(playerR);
