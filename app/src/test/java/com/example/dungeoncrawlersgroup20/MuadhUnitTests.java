@@ -5,8 +5,10 @@ import static org.junit.Assert.*;
 
 import com.example.dungeoncrawlersgroup20.Model.Difficulty;
 import com.example.dungeoncrawlersgroup20.Model.Leaderboard;
+import com.example.dungeoncrawlersgroup20.ViewModel.GameViewModel;
 
 public class MuadhUnitTests {
+    //Sprint 2 Tests
     @Test
     public void testTopScoresCompare() {
         Leaderboard leaderboard = Leaderboard.getLeaderboard();
@@ -30,5 +32,23 @@ public class MuadhUnitTests {
         leaderboard.setString2(tmp);
         assertEquals("HI", leaderboard.getString1());
         assertEquals("YO", leaderboard.getString2());
+    }
+
+    //Sprint 3 Tests
+    @Test
+    public void testLeftWallCollision() {
+        GameViewModel gameViewModel = new GameViewModel();
+        float startX = 1;
+        startX = gameViewModel.left(startX);
+        assertEquals(0, startX, 0.001);
+    }
+    @Test
+    public void testRightWallCollision() {
+        GameViewModel gameViewModel = new GameViewModel();
+        float startX = 100;
+        int limitX = 150;
+        int spriteWidth = 44;
+        startX = gameViewModel.right(startX, limitX, spriteWidth);
+        assertEquals(limitX - spriteWidth, startX, 0.001);
     }
 }

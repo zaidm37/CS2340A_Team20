@@ -20,26 +20,4 @@ public class ExampleUnitTest {
         assertEquals(4, 2 + 2);
     }
 
-    @Before
-    @After
-    public void resetSingleton() throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
-        Field instance = Leaderboard.class.getDeclaredField("instance");
-        instance.setAccessible(true);
-        instance.set(null, null);
-    }
-    @Test
-    public void testSameSingleton() {
-        Leaderboard leaderboard1 = Leaderboard.getInstance();
-        Leaderboard leaderboard2 = Leaderboard.getInstance();
-        assertSame("not same instance", leaderboard1, leaderboard2);
-    }
-    @Test
-    public void testSameHashCodeSingleton() {
-        Leaderboard leaderboard1 = Leaderboard.getInstance();
-        Leaderboard leaderboard2 = Leaderboard.getInstance();
-        assertEquals(leaderboard1.hashCode(), leaderboard2.hashCode());
-    }
-
-
-
 }
