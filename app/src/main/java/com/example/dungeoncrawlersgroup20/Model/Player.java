@@ -3,13 +3,14 @@ package com.example.dungeoncrawlersgroup20.Model;
 import android.graphics.drawable.Drawable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Player implements Observable {
     private Movement movement;
     private String name;
     private int health;
     private Drawable sprite;
-    private ArrayList<Observer> observers;
+    private List<Observer> observers = new ArrayList<>();
     private static volatile Player player;
     private Player() {
         this.name = name;
@@ -30,21 +31,22 @@ public class Player implements Observable {
     }
     @Override
     public void addObserver(Observer observer) {
-//        observers.add(observer);
+        if (!observers.contains(observer)) {
+            observers.add(observer);
+        }
     }
     @Override
     public void removeObserver(Observer observer) {
-//        int i = observers.indexOf(observer);
-//        if (i >= 0) {
-//            observers.remove(i);
-//        }
+        observers.remove(observer);
     }
     @Override
     public void notifyObservers() {
         for (Observer observer : observers) {
-//            observer.update(this.movement);
+            observer.update(this.movement);
         }
     }
+
+
     public String getName() {
         return name;
     }
@@ -57,7 +59,7 @@ public class Player implements Observable {
     }
     public void setMovement(Movement movement) {
         this.movement = movement;
-//        notifyObservers();
+        notifyObservers();
     }
     public float playerMoveUp(float y, int textHeight) {
         return movement.moveUp(y, textHeight);

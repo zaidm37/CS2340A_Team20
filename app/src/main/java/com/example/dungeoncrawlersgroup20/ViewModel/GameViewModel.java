@@ -29,16 +29,16 @@ public class GameViewModel extends ViewModel implements Observer {
         run = new Run();
         moveCheck = true;
         player.setMovement(walk);
-//        this.observable = observable;
-//        this.observable.addObserver(this);
+        player.addObserver(this);
+
     }
     @Override
     public void update(Movement movement) {
-//        if (movement.equals(walk)) {
-//            moveCheck = true;
-//        } else if (movement.equals(run)) {
-//            moveCheck = false;
-//        }
+        if (movement instanceof Walk) {
+            moveCheck = true;
+        } else if (movement instanceof Run) {
+            moveCheck = false;
+        }
     }
     public String getPlayerName() {
         return player.getName();
