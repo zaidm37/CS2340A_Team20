@@ -25,7 +25,6 @@ public class GameScreen extends AppCompatActivity {
     private TextView difficulty;
     private ImageView characterSprite;
     private TextView hP;
-//    private Button next;
     private Button move;
     private Timer scoreTime;
     private TextView tvScore;
@@ -62,17 +61,6 @@ public class GameScreen extends AppCompatActivity {
             }
         }, 0, 5000);
 
-//        next = (Button) findViewById(R.id.buttonNext);
-//        next.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent inte = new Intent(GameScreen.this, GameRoom2.class);
-//                Bundle playerinfo = new Bundle();
-//                playerinfo.putInt("score", gameViewModel.getPlayerScore());
-//                inte.putExtras(playerinfo);
-//                startActivity(inte);
-//            }
-//        });
         move = (Button) findViewById(R.id.buttonMove);
         move.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -20,7 +20,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class GameRoom3 extends AppCompatActivity {
-//    private Button next;
     private TextView userName;
     private TextView difficulty;
     private ImageView characterSprite;
@@ -58,17 +57,6 @@ public class GameRoom3 extends AppCompatActivity {
 
             }
         }, 0, 5000);
-//        next = (Button) findViewById(R.id.room3next);
-//        next.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent inte = new Intent(GameRoom3.this, EndScreen.class);
-//                Bundle playerinfo = new Bundle();
-//                playerinfo.putInt("score", gameViewModel.getPlayerScore());
-//                inte.putExtras(playerinfo);
-//                startActivity(inte);
-//            }
-//        });
         move = (Button) findViewById(R.id.buttonMove);
         move.setOnClickListener(new View.OnClickListener() {
             @Override
