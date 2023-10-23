@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.dungeoncrawlersgroup20.Model.Difficulty;
 import com.example.dungeoncrawlersgroup20.Model.Movement;
-import com.example.dungeoncrawlersgroup20.Model.Observable;
 import com.example.dungeoncrawlersgroup20.Model.Observer;
 import com.example.dungeoncrawlersgroup20.Model.Player;
 import com.example.dungeoncrawlersgroup20.Model.Run;
@@ -20,7 +19,6 @@ public class GameViewModel extends ViewModel implements Observer {
     private Movement walk;
     private Movement run;
     private boolean moveCheck;
-    private Observable observable;
     public GameViewModel() {
         player = Player.getPlayer();
         difficulty = new Difficulty();
@@ -29,16 +27,18 @@ public class GameViewModel extends ViewModel implements Observer {
         run = new Run();
         moveCheck = true;
         player.setMovement(walk);
-//        this.observable = observable;
-//        this.observable.addObserver(this);
+        player.addObserver(this);
     }
     @Override
     public void update(Movement movement) {
-//        if (movement.equals(walk)) {
-//            moveCheck = true;
-//        } else if (movement.equals(run)) {
-//            moveCheck = false;
-//        }
+        if (movement instanceof Walk) {
+            moveCheck = true;
+        } else if (movement instanceof Run) {
+            moveCheck = false;
+        }
+    }
+    public boolean getMoveCheck() {
+        return moveCheck;
     }
     public String getPlayerName() {
         return player.getName();

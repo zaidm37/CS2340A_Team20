@@ -9,14 +9,13 @@ public class Player implements Observable {
     private String name;
     private int health;
     private Drawable sprite;
-    private ArrayList<Observer> observers;
+    private ArrayList<Observer> observers = new ArrayList<Observer>();
     private static volatile Player player;
     private Player() {
         this.name = name;
         this.health = health;
         this.sprite = sprite;
         this.movement = movement;
-//        this.observers = new ArrayList<Observer>();
     }
     public static Player getPlayer() {
         if (player == null) {
@@ -30,19 +29,21 @@ public class Player implements Observable {
     }
     @Override
     public void addObserver(Observer observer) {
-//        observers.add(observer);
+        if (!observers.contains(observer)) {
+            observers.add(observer);
+        }
     }
     @Override
     public void removeObserver(Observer observer) {
-//        int i = observers.indexOf(observer);
-//        if (i >= 0) {
-//            observers.remove(i);
-//        }
+        int i = observers.indexOf(observer);
+        if (i >= 0) {
+            observers.remove(i);
+        }
     }
     @Override
     public void notifyObservers() {
         for (Observer observer : observers) {
-//            observer.update(this.movement);
+            observer.update(this.movement);
         }
     }
     public String getName() {
@@ -57,7 +58,7 @@ public class Player implements Observable {
     }
     public void setMovement(Movement movement) {
         this.movement = movement;
-//        notifyObservers();
+        notifyObservers();
     }
     public float playerMoveUp(float y, int textHeight) {
         return movement.moveUp(y, textHeight);
