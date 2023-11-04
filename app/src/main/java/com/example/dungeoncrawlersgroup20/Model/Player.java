@@ -9,6 +9,8 @@ public class Player implements Observable {
     private String name;
     private int health;
     private Drawable sprite;
+    private float playerX;
+    private float playerY;
     private ArrayList<Observer> observers = new ArrayList<Observer>();
     private static volatile Player player;
     private Player() {
@@ -43,7 +45,7 @@ public class Player implements Observable {
     @Override
     public void notifyObservers() {
         for (Observer observer : observers) {
-            observer.update(this.movement);
+            observer.update(this.movement, this.playerX, this.playerY);
         }
     }
     public String getName() {
@@ -61,16 +63,24 @@ public class Player implements Observable {
         notifyObservers();
     }
     public float playerMoveUp(float y, int textHeight) {
-        return movement.moveUp(y, textHeight);
+        playerY = movement.moveUp(y, textHeight);
+        notifyObservers();
+        return playerY;
     }
     public float playerMoveDown(float y, int screenHeight, int spriteHeight) {
-        return movement.moveDown(y, screenHeight - spriteHeight, spriteHeight);
+        playerY = movement.moveDown(y, screenHeight - spriteHeight, spriteHeight);
+        notifyObservers();
+        return playerY;
     }
     public float playerMoveLeft(float x) {
-        return movement.moveLeft(x);
+        playerX = movement.moveLeft(x);
+        notifyObservers();
+        return playerX;
     }
     public float playerMoveRight(float x, int border, int spriteWidth) {
-        return movement.moveRight(x, border, spriteWidth);
+        playerX = movement.moveRight(x, border, spriteWidth);
+        notifyObservers();
+        return playerX;
     }
     public void setName(String name) {
         this.name = name;
