@@ -8,7 +8,7 @@ public class MediumEnemy extends Enemy {
         player = Player.getPlayer();
         player.addObserver(this);
         this.sprite = R.drawable.enemy2;
-        this.movement = movement;
+        this.speed = 2;
         this.damage = 100;
     }
     @Override

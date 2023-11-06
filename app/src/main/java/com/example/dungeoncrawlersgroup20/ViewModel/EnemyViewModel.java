@@ -10,4 +10,16 @@ public class EnemyViewModel extends ViewModel {
     public EnemyViewModel() {
         enemyMaker = new GameEnemy();
     }
+    public void createEasyEnemy() {
+        enemyMaker.orderEnemy("easy");
+    }
+    public void createMediumEnemy() {
+        enemyMaker.orderEnemy("medium");
+    }
+    public void createHardEnemy() {
+        enemyMaker.orderEnemy("hard");
+    }
+    public void createUltimateEnemy() {
+        enemyMaker.orderEnemy("ultimate");
+    }
 }

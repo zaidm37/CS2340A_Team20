@@ -8,7 +8,7 @@ public class UltimateEnemy extends Enemy {
         player = Player.getPlayer();
         player.addObserver(this);
         this.sprite = R.drawable.enemy4;
-        this.movement = movement;
+        this.speed = 5;
         this.damage = 200;
     }
     @Override
