@@ -4,24 +4,21 @@ import android.graphics.drawable.Drawable;
 
 public abstract class Enemy implements Observer {
     Movement movement;
-    Drawable sprite;
+    int sprite;
     int damage;
-    public Drawable getSprite() {
+    public int getSprite() {
         return sprite;
     }
-    public float playerMoveUp(float y, int textHeight) {
+    public float enemyMoveUp(float y, int textHeight) {
         return movement.moveUp(y, textHeight);
     }
-    public float playerMoveDown(float y, int screenHeight, int spriteHeight) {
+    public float enemyMoveDown(float y, int screenHeight, int spriteHeight) {
         return movement.moveDown(y, screenHeight - spriteHeight, spriteHeight);
     }
-    public float playerMoveLeft(float x) {
+    public float enemyMoveLeft(float x) {
         return movement.moveLeft(x);
     }
-    public float playerMoveRight(float x, int border, int spriteWidth) {
+    public float enemyMoveRight(float x, int border, int spriteWidth) {
         return movement.moveRight(x, border, spriteWidth);
-    }
-    public void setSprite(Drawable sprite) {
-        this.sprite = sprite;
     }
 }

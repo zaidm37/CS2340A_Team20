@@ -1,13 +1,15 @@
 package com.example.dungeoncrawlersgroup20.Model;
 
+import com.example.dungeoncrawlersgroup20.R;
+
 public class HardEnemy extends Enemy {
     private Player player;
-    private HardEnemy() {
+    public HardEnemy() {
         player = Player.getPlayer();
         player.addObserver(this);
-        this.sprite = sprite;
+        this.sprite = R.drawable.enemy3;
         this.movement = movement;
-        this.damage = damage;
+        this.damage = 150;
     }
     @Override
     public void update(Movement movement, float playerX, float playerY) {
