@@ -82,6 +82,14 @@ public class Player implements Observable {
         notifyObservers();
         return playerX;
     }
+    public float getPlayerX() {
+        notifyObservers();
+        return playerX;
+    }
+    public float getPlayerY() {
+        notifyObservers();
+        return playerY;
+    }
     public void setName(String name) {
         this.name = name;
     }

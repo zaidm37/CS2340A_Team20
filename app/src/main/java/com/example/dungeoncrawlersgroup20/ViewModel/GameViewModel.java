@@ -95,4 +95,10 @@ public class GameViewModel extends ViewModel implements Observer {
     public float right(float x, int border, int spriteWidth) {
         return player.playerMoveRight(x, border, spriteWidth);
     }
+    public float playerX() {
+        return player.getPlayerX();
+    }
+    public float playerY() {
+        return player.getPlayerY();
+    }
 }

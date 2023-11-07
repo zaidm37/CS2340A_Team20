@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.dungeoncrawlersgroup20.R;
+import com.example.dungeoncrawlersgroup20.ViewModel.EnemyViewModel;
 import com.example.dungeoncrawlersgroup20.ViewModel.GameViewModel;
 
 import java.util.Timer;
@@ -22,12 +23,15 @@ public class GameScreen extends AppCompatActivity {
     private TextView userName;
     private TextView difficulty;
     private ImageView characterSprite;
+    private ImageView enemyOne;
+    private ImageView enemyTwo;
     private TextView hP;
     private Button move;
     private Timer scoreTime;
     private TextView tvScore;
     private ImageView door;
     private GameViewModel gameViewModel;
+    private EnemyViewModel enemyViewModel;
     private int screenHeight;
     private int screenWidth;
 
@@ -36,6 +40,7 @@ public class GameScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_screen);
         gameViewModel = new ViewModelProvider(this).get(GameViewModel.class);
+        enemyViewModel = new ViewModelProvider(this).get(EnemyViewModel.class);
         Bundle bundle = getIntent().getExtras();
         door = (ImageView) findViewById(R.id.door);
         gameViewModel.setPLayerDifficulty(bundle.getString("diff"));
@@ -66,6 +71,11 @@ public class GameScreen extends AppCompatActivity {
                 gameViewModel.changeMovement();
             }
         });
+
+        enemyOne = (ImageView) findViewById(R.id.enemy1);
+        enemyOne.setImageResource(enemyViewModel.spriteEasyEnemy());
+        enemyTwo = (ImageView) findViewById(R.id.enemy2);
+        enemyTwo.setImageResource(enemyViewModel.spriteMediumEnemy());
 
     }
     @Override
@@ -103,6 +113,8 @@ public class GameScreen extends AppCompatActivity {
                         characterSprite.getY(), screenHeight, spriteHeight));
             break;
         default:
+            gameViewModel.playerX();
+            gameViewModel.playerY();
             break;
         }
         Rect playerR = new Rect();
