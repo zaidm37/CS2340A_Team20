@@ -31,4 +31,16 @@ public class EnemyViewModel extends ViewModel {
     public int spriteUltimateEnemy() {
         return ultimateEnemy.getSprite();
     }
+    public void attackEasyEnemy() {
+        easyEnemy.attackPlayer();
+    }
+    public void attackMediumEnemy() {
+        mediumEnemy.attackPlayer();
+    }
+    public void attackHardEnemy() {
+        hardEnemy.attackPlayer();
+    }
+    public void attackUltimateEnemy() {
+        ultimateEnemy.attackPlayer();
+    }
 }
