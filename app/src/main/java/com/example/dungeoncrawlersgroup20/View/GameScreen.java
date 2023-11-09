@@ -77,6 +77,10 @@ public class GameScreen extends AppCompatActivity {
         enemyTwo = (ImageView) findViewById(R.id.enemy2);
         enemyTwo.setImageResource(enemyViewModel.spriteMediumEnemy());
 
+        while (gameViewModel.getPlayerHealth() > 0) {
+            //
+        }
+
     }
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
