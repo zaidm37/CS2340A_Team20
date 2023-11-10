@@ -46,6 +46,19 @@ public abstract class Enemy implements Observer {
     }
     @Override
     public void update(Movement movement, float playerX, float playerY) {
-        // control enemy placement
+        if (this.enemyX > playerX) {
+            this.enemyX -= this.speed;
+        } else if (this.enemyX < playerX) {
+            this.enemyX += this.speed;
+        } else if (this.enemyX == playerX) {
+            this.enemyX = playerX;
+        }
+        if (this.enemyY > playerY) {
+            this.enemyY -= this.speed;
+        } else if (this.enemyY < playerY) {
+            this.enemyY += this.speed;
+        } else if (this.enemyY == playerY) {
+            this.enemyY = playerY;
+        }
     }
 }
