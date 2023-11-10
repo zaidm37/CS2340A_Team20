@@ -41,8 +41,54 @@ public class EnemyViewModel extends ViewModel {
             hardEnemy.attackPlayer();
         } else if (type.equals("ultimate")) {
             ultimateEnemy.attackPlayer();
+        }
+    }
+    public void setEnemyX(String type, float x) {
+        if (type.equals("easy")) {
+            easyEnemy.setX(x);
+        } else if (type.equals("medium")) {
+            mediumEnemy.setX(x);
+        } else if (type.equals("hard")) {
+            hardEnemy.setX(x);
+        } else if (type.equals("ultimate")) {
+            ultimateEnemy.setX(x);
+        }
+    }
+    public void setEnemyY(String type, float y) {
+        if (type.equals("easy")) {
+            easyEnemy.setY(y);
+        } else if (type.equals("medium")) {
+            mediumEnemy.setY(y);
+        } else if (type.equals("hard")) {
+            hardEnemy.setY(y);
+        } else if (type.equals("ultimate")) {
+            ultimateEnemy.setY(y);
+        }
+    }
+    public float getEnemyX(String type) {
+        if (type.equals("easy")) {
+            return easyEnemy.getX();
+        } else if (type.equals("medium")) {
+            return mediumEnemy.getX();
+        } else if (type.equals("hard")) {
+            return hardEnemy.getX();
+        } else if (type.equals("ultimate")) {
+            return ultimateEnemy.getX();
         } else {
-            return;
+            return -1;
+        }
+    }
+    public float getEnemyY(String type) {
+        if (type.equals("easy")) {
+            return easyEnemy.getY();
+        } else if (type.equals("medium")) {
+            return mediumEnemy.getY();
+        } else if (type.equals("hard")) {
+            return hardEnemy.getY();
+        } else if (type.equals("ultimate")) {
+            return ultimateEnemy.getY();
+        } else {
+            return -1;
         }
     }
 }
