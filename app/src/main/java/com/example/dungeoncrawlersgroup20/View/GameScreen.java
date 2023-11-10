@@ -73,9 +73,9 @@ public class GameScreen extends AppCompatActivity {
         });
 
         enemyOne = (ImageView) findViewById(R.id.enemy1);
-        enemyOne.setImageResource(enemyViewModel.spriteEasyEnemy());
+        enemyOne.setImageResource(enemyViewModel.enemySprite("easy"));
         enemyTwo = (ImageView) findViewById(R.id.enemy2);
-        enemyTwo.setImageResource(enemyViewModel.spriteMediumEnemy());
+        enemyTwo.setImageResource(enemyViewModel.enemySprite("hard"));
 
         while (gameViewModel.getPlayerHealth() > 0) {
             //
