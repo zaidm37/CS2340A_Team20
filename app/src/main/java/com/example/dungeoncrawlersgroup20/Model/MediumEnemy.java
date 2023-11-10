@@ -6,8 +6,8 @@ public class MediumEnemy extends Enemy {
     public MediumEnemy() {
         this.player.addObserver(this);
         this.sprite = R.drawable.enemy2;
-        this.speed = 5;
-        this.damage = 100;
+        this.speed = 2;
+        this.damage = 15;
         this.enemyX = enemyX;
         this.enemyY = enemyY;
         this.enemyHeight = enemyHeight;

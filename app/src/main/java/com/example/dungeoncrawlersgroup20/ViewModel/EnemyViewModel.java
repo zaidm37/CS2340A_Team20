@@ -91,4 +91,74 @@ public class EnemyViewModel extends ViewModel {
             return -1;
         }
     }
+    public void setEnemyWidth(String type, float w) {
+        if (type.equals("easy")) {
+            easyEnemy.setWidth(w);
+        } else if (type.equals("medium")) {
+            mediumEnemy.setWidth(w);
+        } else if (type.equals("hard")) {
+            hardEnemy.setWidth(w);
+        } else if (type.equals("ultimate")) {
+            ultimateEnemy.setWidth(w);
+        }
+    }
+    public void setEnemyHeight(String type, float h) {
+        if (type.equals("easy")) {
+            easyEnemy.setHeight(h);
+        } else if (type.equals("medium")) {
+            mediumEnemy.setHeight(h);
+        } else if (type.equals("hard")) {
+            hardEnemy.setHeight(h);
+        } else if (type.equals("ultimate")) {
+            ultimateEnemy.setHeight(h);
+        }
+    }
+    public float getEnemyWidth(String type) {
+        if (type.equals("easy")) {
+            return easyEnemy.getWidth();
+        } else if (type.equals("medium")) {
+            return mediumEnemy.getWidth();
+        } else if (type.equals("hard")) {
+            return hardEnemy.getWidth();
+        } else if (type.equals("ultimate")) {
+            return ultimateEnemy.getWidth();
+        } else {
+            return -1;
+        }
+    }
+    public float getEnemyHeight(String type) {
+        if (type.equals("easy")) {
+            return easyEnemy.getHeight();
+        } else if (type.equals("medium")) {
+            return mediumEnemy.getHeight();
+        } else if (type.equals("hard")) {
+            return hardEnemy.getHeight();
+        } else if (type.equals("ultimate")) {
+            return ultimateEnemy.getHeight();
+        } else {
+            return -1;
+        }
+    }
+    public void setEnemyBorderW(String type, float w) {
+        if (type.equals("easy")) {
+            easyEnemy.setBorderWidth(w);
+        } else if (type.equals("medium")) {
+            mediumEnemy.setBorderWidth(w);
+        } else if (type.equals("hard")) {
+            hardEnemy.setBorderWidth(w);
+        } else if (type.equals("ultimate")) {
+            ultimateEnemy.setBorderWidth(w);
+        }
+    }
+    public void setEnemyBorderH(String type, float h) {
+        if (type.equals("easy")) {
+            easyEnemy.setBorderHeight(h);
+        } else if (type.equals("medium")) {
+            mediumEnemy.setBorderHeight(h);
+        } else if (type.equals("hard")) {
+            hardEnemy.setBorderHeight(h);
+        } else if (type.equals("ultimate")) {
+            ultimateEnemy.setBorderHeight(h);
+        }
+    }
 }
