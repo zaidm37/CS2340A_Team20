@@ -1,7 +1,5 @@
 package com.example.dungeoncrawlersgroup20.Model;
 
-import android.graphics.drawable.Drawable;
-
 public abstract class Enemy implements Observer {
     int sprite;
     int damage;
@@ -45,5 +43,9 @@ public abstract class Enemy implements Observer {
     }
     public void setHeight(float h) {
         enemyHeight = h;
+    }
+    @Override
+    public void update(Movement movement, float playerX, float playerY) {
+        // control enemy placement
     }
 }
