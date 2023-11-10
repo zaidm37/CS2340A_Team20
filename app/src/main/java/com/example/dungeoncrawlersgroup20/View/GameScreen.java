@@ -29,12 +29,15 @@ public class GameScreen extends AppCompatActivity {
     private Button move;
     private Timer scoreTime;
     private Timer enemyTime;
+    private Timer playerMoveTimer;
     private TextView tvScore;
     private ImageView door;
     private GameViewModel gameViewModel;
     private EnemyViewModel enemyViewModel;
     private int screenHeight;
     private int screenWidth;
+    private int spriteWidth;
+    private int spriteHeight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +81,52 @@ public class GameScreen extends AppCompatActivity {
         enemyTwo = (ImageView) findViewById(R.id.enemy2);
         enemyTwo.setImageResource(enemyViewModel.enemySprite("medium"));
 
+//        enemyViewModel.setEnemyX("easy", enemyOne.getX());
+//        enemyViewModel.setEnemyY("easy", enemyOne.getY());
+//        enemyViewModel.setEnemyX("medium", enemyTwo.getX());
+//        enemyViewModel.setEnemyY("medium", enemyTwo.getY());
+//
+//        enemyViewModel.setEnemyWidth("easy", enemyOne.getWidth());
+//        enemyViewModel.setEnemyHeight("easy", enemyOne.getHeight());
+//        enemyViewModel.setEnemyWidth("medium", enemyTwo.getWidth());
+//        enemyViewModel.setEnemyHeight("medium", enemyTwo.getHeight());
+//
+//        enemyTime = new Timer();
+//        enemyTime.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                if (gameViewModel.getPlayerHealth() > 0) {
+//                    enemyOne.setX(enemyViewModel.getEnemyX("easy"));
+//                    enemyOne.setY(enemyViewModel.getEnemyY("easy"));
+//                    enemyTwo.setX(enemyViewModel.getEnemyX("medium"));
+//                    enemyTwo.setY(enemyViewModel.getEnemyY("medium"));
+//                }
+//            }
+//        }, 0, 1);
+
+    }
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            Rect visibleFrame = new Rect();
+            getWindow().getDecorView().getWindowVisibleDisplayFrame(visibleFrame);
+            screenHeight = visibleFrame.height();
+            screenWidth = visibleFrame.width();
+            enemyViewModel.setEnemyBorderW("easy", screenWidth);
+            enemyViewModel.setEnemyBorderH("easy", screenHeight);
+            enemyViewModel.setEnemyBorderW("medium", screenWidth);
+            enemyViewModel.setEnemyBorderH("medium", screenHeight);
+        }
+
+        gameViewModel.setPlayerX(characterSprite.getX());
+        gameViewModel.setPlayerY(characterSprite.getY());
+
+        spriteWidth = characterSprite.getWidth();
+        spriteHeight = characterSprite.getHeight();
+        gameViewModel.setPW(spriteWidth);
+        gameViewModel.setPH(spriteHeight);
+
         enemyViewModel.setEnemyX("easy", enemyOne.getX());
         enemyViewModel.setEnemyY("easy", enemyOne.getY());
         enemyViewModel.setEnemyX("medium", enemyTwo.getX());
@@ -100,61 +149,38 @@ public class GameScreen extends AppCompatActivity {
                 }
             }
         }, 0, 1);
-
-    }
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) {
-            Rect visibleFrame = new Rect();
-            getWindow().getDecorView().getWindowVisibleDisplayFrame(visibleFrame);
-            screenHeight = visibleFrame.height();
-            screenWidth = visibleFrame.width();
-            enemyViewModel.setEnemyBorderW("easy", screenWidth);
-            enemyViewModel.setEnemyBorderH("easy", screenHeight);
-            enemyViewModel.setEnemyBorderW("medium", screenWidth);
-            enemyViewModel.setEnemyBorderH("medium", screenHeight);
-        }
+        playerMoveTimer = new Timer();
+        playerMoveTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                gameViewModel.getPlayerX();
+                gameViewModel.getPlayerY();
+            }
+        }, 0, 50);
     }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        int spriteWidth = characterSprite.getWidth();
-        int spriteHeight = characterSprite.getHeight();
         switch (keyCode) {
         case KeyEvent.KEYCODE_DPAD_LEFT:
             characterSprite.setX(gameViewModel.left(characterSprite.getX()));
-//            enemyOne.setX(enemyViewModel.getEnemyX("easy"));
-//            enemyTwo.setX(enemyViewModel.getEnemyX("medium"));
             break;
         case KeyEvent.KEYCODE_DPAD_RIGHT:
             characterSprite.setX(
                         gameViewModel.right(characterSprite.getX(),
                                 screenWidth, spriteWidth));
-//            enemyOne.setX(enemyViewModel.getEnemyX("easy"));
-//            enemyTwo.setX(enemyViewModel.getEnemyX("medium"));
             break;
         case KeyEvent.KEYCODE_DPAD_UP:
             float newUpY = gameViewModel.up(
                         characterSprite.getY(), (screenHeight / 6) + 100);
             if (newUpY >= 0) {
                 characterSprite.setY(newUpY);
-//                enemyOne.setY(enemyViewModel.getEnemyY("easy"));
-//                enemyTwo.setY(enemyViewModel.getEnemyY("medium"));
             }
             break;
         case KeyEvent.KEYCODE_DPAD_DOWN:
             characterSprite.setY(gameViewModel.down(
                         characterSprite.getY(), screenHeight, spriteHeight));
-//            enemyOne.setY(enemyViewModel.getEnemyY("easy"));
-//            enemyTwo.setY(enemyViewModel.getEnemyY("medium"));
             break;
         default:
-//            gameViewModel.playerX();
-//            gameViewModel.playerY();
-//            enemyOne.setX(enemyViewModel.getEnemyX("easy"));
-//            enemyOne.setY(enemyViewModel.getEnemyY("easy"));
-//            enemyTwo.setX(enemyViewModel.getEnemyX("medium"));
-//            enemyTwo.setY(enemyViewModel.getEnemyY("medium"));
             break;
         }
         Rect playerR = new Rect();

@@ -11,6 +11,8 @@ public class Player implements Observable {
     private Drawable sprite;
     private float playerX;
     private float playerY;
+    private int playerWidth;
+    private int playerHeight;
     private ArrayList<Observer> observers = new ArrayList<Observer>();
     private static volatile Player player;
     private Player() {
@@ -90,6 +92,12 @@ public class Player implements Observable {
         notifyObservers();
         return playerY;
     }
+    public void setPlayerX(float x) {
+        playerX = x;
+    }
+    public void setPlayerY(float y) {
+        playerY = y;
+    }
     public void setName(String name) {
         this.name = name;
     }
@@ -99,5 +107,17 @@ public class Player implements Observable {
     }
     public void setSprite(Drawable sprite) {
         this.sprite = sprite;
+    }
+    public int getPlayerHeight() {
+        return playerHeight;
+    }
+    public int getPlayerWidth() {
+        return playerWidth;
+    }
+    public void setPlayerHeight(int h) {
+        playerHeight = h;
+    }
+    public void setPlayerWidth(int w) {
+        playerWidth = w;
     }
 }
