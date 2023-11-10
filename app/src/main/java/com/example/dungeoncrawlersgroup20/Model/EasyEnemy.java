@@ -7,7 +7,7 @@ public class EasyEnemy extends Enemy {
         this.player.addObserver(this);
         this.sprite = R.drawable.enemy1;
         this.speed = 2;
-        this.damage = 50;
+        this.damage = 5;
         this.enemyX = enemyX;
         this.enemyY = enemyY;
         this.enemyHeight = enemyHeight;

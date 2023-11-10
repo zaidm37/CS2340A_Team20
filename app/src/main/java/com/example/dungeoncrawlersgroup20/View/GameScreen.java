@@ -83,10 +83,10 @@ public class GameScreen extends AppCompatActivity {
         enemyViewModel.setEnemyX("medium", enemyTwo.getX());
         enemyViewModel.setEnemyY("medium", enemyTwo.getY());
 
-        enemyOne.setX(enemyViewModel.getEnemyX("easy"));
-        enemyOne.setY(enemyViewModel.getEnemyY("easy"));
-        enemyTwo.setX(enemyViewModel.getEnemyX("medium"));
-        enemyTwo.setY(enemyViewModel.getEnemyY("medium"));
+        enemyViewModel.setEnemyWidth("easy", enemyOne.getWidth());
+        enemyViewModel.setEnemyHeight("easy", enemyOne.getHeight());
+        enemyViewModel.setEnemyWidth("medium", enemyTwo.getWidth());
+        enemyViewModel.setEnemyHeight("medium", enemyTwo.getHeight());
 
         enemyTime = new Timer();
         enemyTime.schedule(new TimerTask() {
@@ -110,6 +110,10 @@ public class GameScreen extends AppCompatActivity {
             getWindow().getDecorView().getWindowVisibleDisplayFrame(visibleFrame);
             screenHeight = visibleFrame.height();
             screenWidth = visibleFrame.width();
+            enemyViewModel.setEnemyBorderW("easy", screenWidth);
+            enemyViewModel.setEnemyBorderH("easy", screenHeight);
+            enemyViewModel.setEnemyBorderW("medium", screenWidth);
+            enemyViewModel.setEnemyBorderH("medium", screenHeight);
         }
     }
     @Override
