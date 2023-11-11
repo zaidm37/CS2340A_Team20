@@ -33,7 +33,6 @@ public class GameScreen extends AppCompatActivity {
     private Timer playerMoveTimer;
     private Handler handler;
     private Timer gameOver;
-    private Timer gameTime;
     private TextView tvScore;
     private ImageView door;
     private GameViewModel gameViewModel;
@@ -96,20 +95,51 @@ public class GameScreen extends AppCompatActivity {
 
             }
         }, 0, 1);
+    }
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            Rect visibleFrame = new Rect();
+            getWindow().getDecorView().getWindowVisibleDisplayFrame(visibleFrame);
+            screenHeight = visibleFrame.height();
+            screenWidth = visibleFrame.width();
+            enemyViewModel.setEnemyBorderW("easy", screenWidth);
+            enemyViewModel.setEnemyBorderH("easy", screenHeight);
+            enemyViewModel.setEnemyBorderW("medium", screenWidth);
+            enemyViewModel.setEnemyBorderH("medium", screenHeight);
 
-        playerMoveTimer = new Timer();
-        playerMoveTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                if (gameViewModel.getPlayerHealth() > 0) {
-                    gameViewModel.getPlayerX();
-                    gameViewModel.getPlayerY();
+            gameViewModel.setPlayerX(characterSprite.getX());
+            gameViewModel.setPlayerY(characterSprite.getY());
 
-                    Rect playerR = new Rect();
-                    characterSprite.getHitRect(playerR);
-                    Rect enemyR = new Rect();
-                    enemyOne.getHitRect(enemyR);
-                    gameViewModel.checkCollide(playerR, enemyR);
+            spriteWidth = characterSprite.getWidth();
+            spriteHeight = characterSprite.getHeight();
+            gameViewModel.setPW(spriteWidth);
+            gameViewModel.setPH(spriteHeight);
+
+            enemyViewModel.setEnemyX("easy", enemyOne.getX());
+            enemyViewModel.setEnemyY("easy", enemyOne.getY());
+            enemyViewModel.setEnemyX("medium", enemyTwo.getX());
+            enemyViewModel.setEnemyY("medium", enemyTwo.getY());
+
+            enemyViewModel.setEnemyWidth("easy", enemyOne.getWidth());
+            enemyViewModel.setEnemyHeight("easy", enemyOne.getHeight());
+            enemyViewModel.setEnemyWidth("medium", enemyTwo.getWidth());
+            enemyViewModel.setEnemyHeight("medium", enemyTwo.getHeight());
+
+            playerMoveTimer = new Timer();
+            playerMoveTimer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    if (gameViewModel.getPlayerHealth() > 0) {
+                        gameViewModel.getPlayerX();
+                        gameViewModel.getPlayerY();
+
+                        Rect playerR = new Rect();
+                        characterSprite.getHitRect(playerR);
+                        Rect enemyR = new Rect();
+                        enemyOne.getHitRect(enemyR);
+                        gameViewModel.checkCollide(playerR, enemyR);
 
 //                if (gameViewModel.getC()) {
 //                    hP.setText(String.valueOf(gameViewModel.getPlayerHealth()));
@@ -124,8 +154,8 @@ public class GameScreen extends AppCompatActivity {
 //                if (Rect.intersects(playerR, enemyR)) {
 //                    enemyViewModel.enemyAttack("easy");
 //                }
-                    enemyTwo.getHitRect(enemyR);
-                    gameViewModel.checkCollide(playerR, enemyR);
+                        enemyTwo.getHitRect(enemyR);
+                        gameViewModel.checkCollide(playerR, enemyR);
 
 //                if (gameViewModel.getC()) {
 //                    hP.setText(String.valueOf(gameViewModel.getPlayerHealth()));
@@ -140,15 +170,15 @@ public class GameScreen extends AppCompatActivity {
 //                if (Rect.intersects(playerR, enemyR)) {
 //                    enemyViewModel.enemyAttack("medium");
 //                }
+                    }
                 }
-            }
-        }, 0, 50);
+            }, 0, 50);
 
-        enemyTime = new Timer();
-        enemyTime.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                if (gameViewModel.getPlayerHealth() > 0) {
+            enemyTime = new Timer();
+            enemyTime.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    if (gameViewModel.getPlayerHealth() > 0) {
 
 //                    if (gameViewModel.getPlayerHealth() == 0) {
 //                        characterSprite.setX(-888);
@@ -160,10 +190,10 @@ public class GameScreen extends AppCompatActivity {
 //                        startActivity(inte);
 //                    }
 
-                    enemyOne.setX(enemyViewModel.getEnemyX("easy"));
-                    enemyOne.setY(enemyViewModel.getEnemyY("easy"));
-                    enemyTwo.setX(enemyViewModel.getEnemyX("medium"));
-                    enemyTwo.setY(enemyViewModel.getEnemyY("medium"));
+                        enemyOne.setX(enemyViewModel.getEnemyX("easy"));
+                        enemyOne.setY(enemyViewModel.getEnemyY("easy"));
+                        enemyTwo.setX(enemyViewModel.getEnemyX("medium"));
+                        enemyTwo.setY(enemyViewModel.getEnemyY("medium"));
 
 //                    Rect playerR = new Rect();
 //                    characterSprite.getHitRect(playerR);
@@ -186,53 +216,39 @@ public class GameScreen extends AppCompatActivity {
 //                    if (Rect.intersects(playerR, enemyR)) {
 //                        enemyViewModel.enemyAttack("medium");
 //                    }
+                    }
                 }
-            }
-        }, 0, 1);
+            }, 0, 1);
 
-        handler = new Handler();
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                if (gameViewModel.getPlayerHealth() > 0) {
-                    hP.setText(String.valueOf(gameViewModel.getPlayerHealth()));
-                    handler.postDelayed(this, 0); // set time here to refresh textView
+            handler = new Handler();
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    if (gameViewModel.getPlayerHealth() > 0) {
+                        hP.setText(String.valueOf(gameViewModel.getPlayerHealth()));
+                        handler.postDelayed(this, 0); // set time here to refresh textView
+                    }
                 }
-            }
-        });
-
-    }
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) {
-            Rect visibleFrame = new Rect();
-            getWindow().getDecorView().getWindowVisibleDisplayFrame(visibleFrame);
-            screenHeight = visibleFrame.height();
-            screenWidth = visibleFrame.width();
-            enemyViewModel.setEnemyBorderW("easy", screenWidth);
-            enemyViewModel.setEnemyBorderH("easy", screenHeight);
-            enemyViewModel.setEnemyBorderW("medium", screenWidth);
-            enemyViewModel.setEnemyBorderH("medium", screenHeight);
+            });
         }
 
-        gameViewModel.setPlayerX(characterSprite.getX());
-        gameViewModel.setPlayerY(characterSprite.getY());
-
-        spriteWidth = characterSprite.getWidth();
-        spriteHeight = characterSprite.getHeight();
-        gameViewModel.setPW(spriteWidth);
-        gameViewModel.setPH(spriteHeight);
-
-        enemyViewModel.setEnemyX("easy", enemyOne.getX());
-        enemyViewModel.setEnemyY("easy", enemyOne.getY());
-        enemyViewModel.setEnemyX("medium", enemyTwo.getX());
-        enemyViewModel.setEnemyY("medium", enemyTwo.getY());
-
-        enemyViewModel.setEnemyWidth("easy", enemyOne.getWidth());
-        enemyViewModel.setEnemyHeight("easy", enemyOne.getHeight());
-        enemyViewModel.setEnemyWidth("medium", enemyTwo.getWidth());
-        enemyViewModel.setEnemyHeight("medium", enemyTwo.getHeight());
+//        gameViewModel.setPlayerX(characterSprite.getX());
+//        gameViewModel.setPlayerY(characterSprite.getY());
+//
+//        spriteWidth = characterSprite.getWidth();
+//        spriteHeight = characterSprite.getHeight();
+//        gameViewModel.setPW(spriteWidth);
+//        gameViewModel.setPH(spriteHeight);
+//
+//        enemyViewModel.setEnemyX("easy", enemyOne.getX());
+//        enemyViewModel.setEnemyY("easy", enemyOne.getY());
+//        enemyViewModel.setEnemyX("medium", enemyTwo.getX());
+//        enemyViewModel.setEnemyY("medium", enemyTwo.getY());
+//
+//        enemyViewModel.setEnemyWidth("easy", enemyOne.getWidth());
+//        enemyViewModel.setEnemyHeight("easy", enemyOne.getHeight());
+//        enemyViewModel.setEnemyWidth("medium", enemyTwo.getWidth());
+//        enemyViewModel.setEnemyHeight("medium", enemyTwo.getHeight());
 
 //        playerMoveTimer = new Timer();
 //        playerMoveTimer.schedule(new TimerTask() {
