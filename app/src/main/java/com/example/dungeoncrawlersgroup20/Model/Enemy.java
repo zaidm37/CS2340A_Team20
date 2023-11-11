@@ -1,5 +1,6 @@
 package com.example.dungeoncrawlersgroup20.Model;
 
+import android.graphics.Rect;
 public abstract class Enemy implements Observer {
     int sprite;
     int damage;
@@ -26,7 +27,7 @@ public abstract class Enemy implements Observer {
         } else {
             player.setHealth(0);
         }
-        return;
+//        player.setPlayerCollide(false);
     }
     public float getX() {
         return enemyX;
@@ -53,43 +54,31 @@ public abstract class Enemy implements Observer {
         enemyHeight = h;
     }
     @Override
-    public void update(Movement movement, float playerX, float playerY) {
+    public void update(Movement movement, float playerX, float playerY, boolean c) {
         if ((this.enemyX > playerX)) { //left
             enemyX = Math.max(enemyX - speed, 0);
         }
         if ((this.enemyX < playerX)) { //right
             enemyX = Math.min(enemyX + speed, borderWidth - enemyWidth);
         }
-        if ((this.enemyX == playerX)) { //equal
-            this.enemyX = playerX;
-        }
+//        if ((this.enemyX == playerX)) { //equal
+//            this.enemyX = playerX;
+//        }
         if ((this.enemyY > playerY)) { //up
             enemyY = Math.max(enemyY - speed, ((borderHeight / 6) + 100));
         }
         if ((this.enemyY < playerY)) { //down
             enemyY = Math.min(enemyY + speed, (borderHeight - enemyHeight) - enemyHeight);
         }
-        if ((this.enemyY == playerY)) { //equal
-            this.enemyY = playerY;
+        if (c) {
+            attackPlayer();
+            player.setPlayerCollide(false);
         }
-
-//        if ((this.enemyX > player.getPlayerX())) { //left
-//            enemyX = Math.max(enemyX - speed, 0);
-//        }
-//        if ((this.enemyX < player.getPlayerX())) { //right
-//            enemyX = Math.min(enemyX + speed, borderWidth - enemyWidth);
-//        }
-//        if ((this.enemyX == player.getPlayerX())) { //equal
-//            this.enemyX = playerX;
-//        }
-//        if ((this.enemyX > player.getPlayerY())) { //up
-//            enemyY = Math.max(enemyY - speed, ((borderHeight / 6) + 100));
-//        }
-//        if ((this.enemyX < player.getPlayerY())) { //down
-//            enemyY = Math.min(enemyY + speed, (borderHeight - enemyHeight) - enemyHeight);
-//        }
-//        if ((this.enemyX == player.getPlayerY())) { //equal
-//            this.enemyY = playerY;
-//        }
     }
+//    public boolean enemyCollision(Rect p, Rect e) {
+//        if (Rect.intersects(p, e)) {
+//            return true;
+//        }
+//        return false;
+//    }
 }
