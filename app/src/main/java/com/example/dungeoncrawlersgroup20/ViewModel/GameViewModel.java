@@ -1,5 +1,6 @@
 package com.example.dungeoncrawlersgroup20.ViewModel;
 
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 
 import androidx.lifecycle.ViewModel;
@@ -30,7 +31,7 @@ public class GameViewModel extends ViewModel implements Observer {
         player.addObserver(this);
     }
     @Override
-    public void update(Movement movement) {
+    public void update(Movement movement, float playerX, float playerY, boolean c) {
         if (movement instanceof Walk) {
             moveCheck = true;
         } else if (movement instanceof Run) {
@@ -94,5 +95,35 @@ public class GameViewModel extends ViewModel implements Observer {
     }
     public float right(float x, int border, int spriteWidth) {
         return player.playerMoveRight(x, border, spriteWidth);
+    }
+    public void setPlayerX(float x) {
+        player.setPlayerX(x);
+    }
+    public void setPlayerY(float y) {
+        player.setPlayerY(y);
+    }
+    public float getPlayerX() {
+        return player.getPlayerX();
+    }
+    public float getPlayerY() {
+        return player.getPlayerY();
+    }
+    public void setPW(int w) {
+        player.setPlayerWidth(w);
+    }
+    public void setPH(int h) {
+        player.setPlayerHeight(h);
+    }
+    public void checkCollide(Rect p, Rect e) {
+        player.checkPlayerCollide(p, e);
+    }
+    public boolean getC() {
+        return player.getPlayerC();
+    }
+    public void setC(boolean c) {
+        player.setPlayerCollide(c);
+    }
+    public void reduceScoreLose() {
+        scoreTrack.setScore(0);
     }
 }

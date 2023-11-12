@@ -4,7 +4,14 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import com.example.dungeoncrawlersgroup20.Model.Difficulty;
+import com.example.dungeoncrawlersgroup20.Model.EasyEnemy;
+import com.example.dungeoncrawlersgroup20.Model.Enemy;
+import com.example.dungeoncrawlersgroup20.Model.EnemyFactory;
+import com.example.dungeoncrawlersgroup20.Model.GameEnemy;
+import com.example.dungeoncrawlersgroup20.Model.HardEnemy;
 import com.example.dungeoncrawlersgroup20.Model.Leaderboard;
+import com.example.dungeoncrawlersgroup20.Model.MediumEnemy;
+import com.example.dungeoncrawlersgroup20.Model.UltimateEnemy;
 import com.example.dungeoncrawlersgroup20.ViewModel.GameViewModel;
 
 public class MuadhUnitTests {
@@ -50,5 +57,21 @@ public class MuadhUnitTests {
         int spriteWidth = 44;
         startX = gameViewModel.right(startX, limitX, spriteWidth);
         assertEquals(limitX - spriteWidth, startX, 0.001);
+    }
+
+    //Sprint 4 Tests
+
+    @Test
+    public void testFactoryHard() {
+        EnemyFactory ef = new GameEnemy();
+        Enemy hard = ef.orderEnemy("hard");
+        assertTrue(hard instanceof HardEnemy);
+    }
+
+    @Test
+    public void testFactoryUlt() {
+        EnemyFactory ef = new GameEnemy();
+        Enemy ult = ef.orderEnemy("ultimate");
+        assertTrue(ult instanceof UltimateEnemy);
     }
 }
