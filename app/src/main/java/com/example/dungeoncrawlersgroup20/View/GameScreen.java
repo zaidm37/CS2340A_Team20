@@ -29,10 +29,14 @@ public class GameScreen extends AppCompatActivity {
     private TextView hP;
     private Button move;
     private Timer scoreTime;
+    private Handler scoreHandler;
     private Timer enemyTime;
+    private Handler enemyHandler;
     private Timer playerMoveTimer;
+    private Handler playerHandler;
     private Handler handler;
     private Timer gameOver;
+    private Handler gameHandler;
     private TextView tvScore;
     private ImageView door;
     private GameViewModel gameViewModel;
@@ -61,16 +65,28 @@ public class GameScreen extends AppCompatActivity {
         difficulty.setText(gameViewModel.getPlayerDifficulty());
         gameViewModel.setPlayerScore(1000);
         tvScore = (TextView) findViewById(R.id.tv_score);
-        scoreTime = new Timer();
-        scoreTime.schedule(new TimerTask() {
+//        scoreTime = new Timer();
+//        scoreTime.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                if (gameViewModel.getPlayerHealth() > 0) {
+//                    gameViewModel.reduceScore();
+//                    tvScore.setText("Score: " + gameViewModel.getPlayerScore());
+//                }
+//            }
+//        }, 0, 5000);
+
+        scoreHandler = new Handler();
+        scoreHandler.post(new Runnable() {
             @Override
             public void run() {
                 if (gameViewModel.getPlayerHealth() > 0) {
                     gameViewModel.reduceScore();
                     tvScore.setText("Score: " + gameViewModel.getPlayerScore());
+                    scoreHandler.postDelayed(this, 5000);
                 }
             }
-        }, 0, 5000);
+        });
 
         move = (Button) findViewById(R.id.buttonMove);
         move.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +111,17 @@ public class GameScreen extends AppCompatActivity {
 
             }
         }, 0, 1);
+
+//        gameHandler = new Handler();
+//        gameHandler.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                if (gameViewModel.getPlayerHealth() == 0) {
+//                    playerLose();
+//                    gameHandler.postDelayed(this, 1);
+//                }
+//            }
+//        });
     }
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -127,11 +154,22 @@ public class GameScreen extends AppCompatActivity {
             enemyViewModel.setEnemyWidth("medium", enemyTwo.getWidth());
             enemyViewModel.setEnemyHeight("medium", enemyTwo.getHeight());
 
-            playerMoveTimer = new Timer();
-            playerMoveTimer.schedule(new TimerTask() {
+//            gameHandler = new Handler();
+//            gameHandler.post(new Runnable() {
+//                @Override
+//                public void run() {
+//                    if (gameViewModel.getPlayerHealth() == 0) {
+//                        playerLose();
+//                        gameHandler.postDelayed(this, 1);
+//                    }
+//                }
+//            });
+
+            playerHandler = new Handler();
+            playerHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    if (gameViewModel.getPlayerHealth() > 0) {
+//                    if (gameViewModel.getPlayerHealth() > 0) {
                         gameViewModel.getPlayerX();
                         gameViewModel.getPlayerY();
 
@@ -141,93 +179,128 @@ public class GameScreen extends AppCompatActivity {
                         enemyOne.getHitRect(enemyR);
                         gameViewModel.checkCollide(playerR, enemyR);
 
-//                if (gameViewModel.getC()) {
-//                    hP.setText(String.valueOf(gameViewModel.getPlayerHealth()));
-//                    gameViewModel.setC(false);
-//                }
-
-//                if (gameViewModel.setCollide(enemyViewModel.checkCollision(
-//                        "easy", playerR, enemyR))) {
-//                    gameViewModel.reduceScoreAttack();
-//                }
-
-//                if (Rect.intersects(playerR, enemyR)) {
-//                    enemyViewModel.enemyAttack("easy");
-//                }
                         enemyTwo.getHitRect(enemyR);
                         gameViewModel.checkCollide(playerR, enemyR);
-
-//                if (gameViewModel.getC()) {
-//                    hP.setText(String.valueOf(gameViewModel.getPlayerHealth()));
-//                    gameViewModel.setC(false);
-//                }
-
-//                if (gameViewModel.setCollide(enemyViewModel.checkCollision(
-//                        "medium", playerR, enemyR))) {
-//                    gameViewModel.reduceScoreAttack();
-//                }
-
-//                if (Rect.intersects(playerR, enemyR)) {
-//                    enemyViewModel.enemyAttack("medium");
-//                }
-                    }
+//                    }
+                    playerHandler.postDelayed(this, 50);
                 }
-            }, 0, 50);
+            });
 
-            enemyTime = new Timer();
-            enemyTime.schedule(new TimerTask() {
+//            playerMoveTimer = new Timer();
+//            playerMoveTimer.schedule(new TimerTask() {
+//                @Override
+//                public void run() {
+//                    if (gameViewModel.getPlayerHealth() > 0) {
+//                        gameViewModel.getPlayerX();
+//                        gameViewModel.getPlayerY();
+//
+//                        Rect playerR = new Rect();
+//                        characterSprite.getHitRect(playerR);
+//                        Rect enemyR = new Rect();
+//                        enemyOne.getHitRect(enemyR);
+//                        gameViewModel.checkCollide(playerR, enemyR);
+//
+////                if (gameViewModel.getC()) {
+////                    hP.setText(String.valueOf(gameViewModel.getPlayerHealth()));
+////                    gameViewModel.setC(false);
+////                }
+//
+////                if (gameViewModel.setCollide(enemyViewModel.checkCollision(
+////                        "easy", playerR, enemyR))) {
+////                    gameViewModel.reduceScoreAttack();
+////                }
+//
+////                if (Rect.intersects(playerR, enemyR)) {
+////                    enemyViewModel.enemyAttack("easy");
+////                }
+//                        enemyTwo.getHitRect(enemyR);
+//                        gameViewModel.checkCollide(playerR, enemyR);
+//
+////                if (gameViewModel.getC()) {
+////                    hP.setText(String.valueOf(gameViewModel.getPlayerHealth()));
+////                    gameViewModel.setC(false);
+////                }
+//
+////                if (gameViewModel.setCollide(enemyViewModel.checkCollision(
+////                        "medium", playerR, enemyR))) {
+////                    gameViewModel.reduceScoreAttack();
+////                }
+//
+////                if (Rect.intersects(playerR, enemyR)) {
+////                    enemyViewModel.enemyAttack("medium");
+////                }
+//                    }
+//                }
+//            }, 0, 50);
+
+            enemyHandler = new Handler();
+            enemyHandler.post(new Runnable() {
                 @Override
                 public void run() {
                     if (gameViewModel.getPlayerHealth() > 0) {
-
-//                    if (gameViewModel.getPlayerHealth() == 0) {
-//                        characterSprite.setX(-888);
-//                        characterSprite.setY(-888);
-//                        Intent inte = new Intent(GameScreen.this, EndScreen.class);
-//                        Bundle playerinfo = new Bundle();
-//                        playerinfo.putInt("score", gameViewModel.getPlayerScore());
-//                        inte.putExtras(playerinfo);
-//                        startActivity(inte);
-//                    }
-
                         enemyOne.setX(enemyViewModel.getEnemyX("easy"));
                         enemyOne.setY(enemyViewModel.getEnemyY("easy"));
                         enemyTwo.setX(enemyViewModel.getEnemyX("medium"));
                         enemyTwo.setY(enemyViewModel.getEnemyY("medium"));
-
-//                    Rect playerR = new Rect();
-//                    characterSprite.getHitRect(playerR);
-//                    Rect enemyR = new Rect();
-//                    enemyOne.getHitRect(enemyR);
-//                    if (gameViewModel.setCollide(enemyViewModel.checkCollision(
-//                            "easy", playerR, enemyR))) {
-//                        gameViewModel.reduceScoreAttack();
-//                    }
-//
-//                    if (Rect.intersects(playerR, enemyR)) {
-//                        enemyViewModel.enemyAttack("easy");
-//                    }
-//                    enemyTwo.getHitRect(enemyR);
-//                    if (gameViewModel.setCollide(enemyViewModel.checkCollision(
-//                            "medium", playerR, enemyR))) {
-//                        gameViewModel.reduceScoreAttack();
-//                    }
-//
-//                    if (Rect.intersects(playerR, enemyR)) {
-//                        enemyViewModel.enemyAttack("medium");
-//                    }
+                        enemyHandler.postDelayed(this, 1);
                     }
                 }
-            }, 0, 1);
+            });
+
+//            enemyTime = new Timer();
+//            enemyTime.schedule(new TimerTask() {
+//                @Override
+//                public void run() {
+//                    if (gameViewModel.getPlayerHealth() > 0) {
+//
+////                    if (gameViewModel.getPlayerHealth() == 0) {
+////                        characterSprite.setX(-888);
+////                        characterSprite.setY(-888);
+////                        Intent inte = new Intent(GameScreen.this, EndScreen.class);
+////                        Bundle playerinfo = new Bundle();
+////                        playerinfo.putInt("score", gameViewModel.getPlayerScore());
+////                        inte.putExtras(playerinfo);
+////                        startActivity(inte);
+////                    }
+//
+//                        enemyOne.setX(enemyViewModel.getEnemyX("easy"));
+//                        enemyOne.setY(enemyViewModel.getEnemyY("easy"));
+//                        enemyTwo.setX(enemyViewModel.getEnemyX("medium"));
+//                        enemyTwo.setY(enemyViewModel.getEnemyY("medium"));
+//
+////                    Rect playerR = new Rect();
+////                    characterSprite.getHitRect(playerR);
+////                    Rect enemyR = new Rect();
+////                    enemyOne.getHitRect(enemyR);
+////                    if (gameViewModel.setCollide(enemyViewModel.checkCollision(
+////                            "easy", playerR, enemyR))) {
+////                        gameViewModel.reduceScoreAttack();
+////                    }
+////
+////                    if (Rect.intersects(playerR, enemyR)) {
+////                        enemyViewModel.enemyAttack("easy");
+////                    }
+////                    enemyTwo.getHitRect(enemyR);
+////                    if (gameViewModel.setCollide(enemyViewModel.checkCollision(
+////                            "medium", playerR, enemyR))) {
+////                        gameViewModel.reduceScoreAttack();
+////                    }
+////
+////                    if (Rect.intersects(playerR, enemyR)) {
+////                        enemyViewModel.enemyAttack("medium");
+////                    }
+//                    }
+//                }
+//            }, 0, 1);
 
             handler = new Handler();
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    if (gameViewModel.getPlayerHealth() > 0) {
+//                    if (gameViewModel.getPlayerHealth() > 0) {
                         hP.setText(String.valueOf(gameViewModel.getPlayerHealth()));
-                        handler.postDelayed(this, 0); // set time here to refresh textView
-                    }
+                        handler.postDelayed(this, 0);
+//                    }
                 }
             });
         }
