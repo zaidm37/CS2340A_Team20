@@ -1,6 +1,5 @@
 package com.example.dungeoncrawlersgroup20.Model;
 
-import android.graphics.Rect;
 public abstract class Enemy implements Observer {
     int sprite;
     int damage;
@@ -27,7 +26,6 @@ public abstract class Enemy implements Observer {
         } else {
             player.setHealth(0);
         }
-//        player.setPlayerCollide(false);
     }
     public float getX() {
         return enemyX;
@@ -61,9 +59,6 @@ public abstract class Enemy implements Observer {
         if ((this.enemyX < playerX)) { //right
             enemyX = Math.min(enemyX + speed, borderWidth - enemyWidth);
         }
-//        if ((this.enemyX == playerX)) { //equal
-//            this.enemyX = playerX;
-//        }
         if ((this.enemyY > playerY)) { //up
             enemyY = Math.max(enemyY - speed, ((borderHeight / 6) + 100));
         }
@@ -75,10 +70,4 @@ public abstract class Enemy implements Observer {
             player.setPlayerCollide(false);
         }
     }
-//    public boolean enemyCollision(Rect p, Rect e) {
-//        if (Rect.intersects(p, e)) {
-//            return true;
-//        }
-//        return false;
-//    }
 }

@@ -65,16 +65,6 @@ public class GameScreen extends AppCompatActivity {
         difficulty.setText(gameViewModel.getPlayerDifficulty());
         gameViewModel.setPlayerScore(1000);
         tvScore = (TextView) findViewById(R.id.tv_score);
-//        scoreTime = new Timer();
-//        scoreTime.schedule(new TimerTask() {
-//            @Override
-//            public void run() {
-//                if (gameViewModel.getPlayerHealth() > 0) {
-//                    gameViewModel.reduceScore();
-//                    tvScore.setText("Score: " + gameViewModel.getPlayerScore());
-//                }
-//            }
-//        }, 0, 5000);
 
         scoreHandler = new Handler();
         scoreHandler.post(new Runnable() {
@@ -111,19 +101,6 @@ public class GameScreen extends AppCompatActivity {
 
             }
         }, 0, 1);
-
-//        gameHandler = new Handler();
-//        gameHandler.post(new Runnable() {
-//            @Override
-//            public void run() {
-//                if (gameViewModel.getPlayerHealth() == 0) {
-//                    playerLose();
-//                    gameHandler.postDelayed(this, 1);
-//                }
-//            }
-//        });
-
-//        gameHandler.postDelayed(playerLose, 1);
     }
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -160,7 +137,6 @@ public class GameScreen extends AppCompatActivity {
             playerHandler.post(new Runnable() {
                 @Override
                 public void run() {
-//                    if (gameViewModel.getPlayerHealth() > 0) {
                         gameViewModel.getPlayerX();
                         gameViewModel.getPlayerY();
 
@@ -172,57 +148,9 @@ public class GameScreen extends AppCompatActivity {
 
                         enemyTwo.getHitRect(enemyR);
                         gameViewModel.checkCollide(playerR, enemyR);
-//                    }
                     playerHandler.postDelayed(this, 50);
                 }
             });
-
-//            playerMoveTimer = new Timer();
-//            playerMoveTimer.schedule(new TimerTask() {
-//                @Override
-//                public void run() {
-//                    if (gameViewModel.getPlayerHealth() > 0) {
-//                        gameViewModel.getPlayerX();
-//                        gameViewModel.getPlayerY();
-//
-//                        Rect playerR = new Rect();
-//                        characterSprite.getHitRect(playerR);
-//                        Rect enemyR = new Rect();
-//                        enemyOne.getHitRect(enemyR);
-//                        gameViewModel.checkCollide(playerR, enemyR);
-//
-////                if (gameViewModel.getC()) {
-////                    hP.setText(String.valueOf(gameViewModel.getPlayerHealth()));
-////                    gameViewModel.setC(false);
-////                }
-//
-////                if (gameViewModel.setCollide(enemyViewModel.checkCollision(
-////                        "easy", playerR, enemyR))) {
-////                    gameViewModel.reduceScoreAttack();
-////                }
-//
-////                if (Rect.intersects(playerR, enemyR)) {
-////                    enemyViewModel.enemyAttack("easy");
-////                }
-//                        enemyTwo.getHitRect(enemyR);
-//                        gameViewModel.checkCollide(playerR, enemyR);
-//
-////                if (gameViewModel.getC()) {
-////                    hP.setText(String.valueOf(gameViewModel.getPlayerHealth()));
-////                    gameViewModel.setC(false);
-////                }
-//
-////                if (gameViewModel.setCollide(enemyViewModel.checkCollision(
-////                        "medium", playerR, enemyR))) {
-////                    gameViewModel.reduceScoreAttack();
-////                }
-//
-////                if (Rect.intersects(playerR, enemyR)) {
-////                    enemyViewModel.enemyAttack("medium");
-////                }
-//                    }
-//                }
-//            }, 0, 50);
 
             enemyHandler = new Handler();
             enemyHandler.post(new Runnable() {
@@ -238,209 +166,25 @@ public class GameScreen extends AppCompatActivity {
                 }
             });
 
-//            enemyTime = new Timer();
-//            enemyTime.schedule(new TimerTask() {
-//                @Override
-//                public void run() {
-//                    if (gameViewModel.getPlayerHealth() > 0) {
-//
-////                    if (gameViewModel.getPlayerHealth() == 0) {
-////                        characterSprite.setX(-888);
-////                        characterSprite.setY(-888);
-////                        Intent inte = new Intent(GameScreen.this, EndScreen.class);
-////                        Bundle playerinfo = new Bundle();
-////                        playerinfo.putInt("score", gameViewModel.getPlayerScore());
-////                        inte.putExtras(playerinfo);
-////                        startActivity(inte);
-////                    }
-//
-//                        enemyOne.setX(enemyViewModel.getEnemyX("easy"));
-//                        enemyOne.setY(enemyViewModel.getEnemyY("easy"));
-//                        enemyTwo.setX(enemyViewModel.getEnemyX("medium"));
-//                        enemyTwo.setY(enemyViewModel.getEnemyY("medium"));
-//
-////                    Rect playerR = new Rect();
-////                    characterSprite.getHitRect(playerR);
-////                    Rect enemyR = new Rect();
-////                    enemyOne.getHitRect(enemyR);
-////                    if (gameViewModel.setCollide(enemyViewModel.checkCollision(
-////                            "easy", playerR, enemyR))) {
-////                        gameViewModel.reduceScoreAttack();
-////                    }
-////
-////                    if (Rect.intersects(playerR, enemyR)) {
-////                        enemyViewModel.enemyAttack("easy");
-////                    }
-////                    enemyTwo.getHitRect(enemyR);
-////                    if (gameViewModel.setCollide(enemyViewModel.checkCollision(
-////                            "medium", playerR, enemyR))) {
-////                        gameViewModel.reduceScoreAttack();
-////                    }
-////
-////                    if (Rect.intersects(playerR, enemyR)) {
-////                        enemyViewModel.enemyAttack("medium");
-////                    }
-//                    }
-//                }
-//            }, 0, 1);
-
             handler = new Handler();
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-//                    if (gameViewModel.getPlayerHealth() > 0) {
+
                         hP.setText(String.valueOf(gameViewModel.getPlayerHealth()));
                         handler.postDelayed(this, 0);
-//                    }
+
                 }
             });
         }
 
-//        gameViewModel.setPlayerX(characterSprite.getX());
-//        gameViewModel.setPlayerY(characterSprite.getY());
-//
-//        spriteWidth = characterSprite.getWidth();
-//        spriteHeight = characterSprite.getHeight();
-//        gameViewModel.setPW(spriteWidth);
-//        gameViewModel.setPH(spriteHeight);
-//
-//        enemyViewModel.setEnemyX("easy", enemyOne.getX());
-//        enemyViewModel.setEnemyY("easy", enemyOne.getY());
-//        enemyViewModel.setEnemyX("medium", enemyTwo.getX());
-//        enemyViewModel.setEnemyY("medium", enemyTwo.getY());
-//
-//        enemyViewModel.setEnemyWidth("easy", enemyOne.getWidth());
-//        enemyViewModel.setEnemyHeight("easy", enemyOne.getHeight());
-//        enemyViewModel.setEnemyWidth("medium", enemyTwo.getWidth());
-//        enemyViewModel.setEnemyHeight("medium", enemyTwo.getHeight());
-
-//        playerMoveTimer = new Timer();
-//        playerMoveTimer.schedule(new TimerTask() {
-//            @Override
-//            public void run() {
-//                if (gameViewModel.getPlayerHealth() > 0) {
-//                    gameViewModel.getPlayerX();
-//                    gameViewModel.getPlayerY();
-//
-//                    Rect playerR = new Rect();
-//                    characterSprite.getHitRect(playerR);
-//                    Rect enemyR = new Rect();
-//                    enemyOne.getHitRect(enemyR);
-//                    gameViewModel.checkCollide(playerR, enemyR);
-//
-////                if (gameViewModel.getC()) {
-////                    hP.setText(String.valueOf(gameViewModel.getPlayerHealth()));
-////                    gameViewModel.setC(false);
-////                }
-//
-////                if (gameViewModel.setCollide(enemyViewModel.checkCollision(
-////                        "easy", playerR, enemyR))) {
-////                    gameViewModel.reduceScoreAttack();
-////                }
-//
-////                if (Rect.intersects(playerR, enemyR)) {
-////                    enemyViewModel.enemyAttack("easy");
-////                }
-//                    enemyTwo.getHitRect(enemyR);
-//                    gameViewModel.checkCollide(playerR, enemyR);
-//
-////                if (gameViewModel.getC()) {
-////                    hP.setText(String.valueOf(gameViewModel.getPlayerHealth()));
-////                    gameViewModel.setC(false);
-////                }
-//
-////                if (gameViewModel.setCollide(enemyViewModel.checkCollision(
-////                        "medium", playerR, enemyR))) {
-////                    gameViewModel.reduceScoreAttack();
-////                }
-//
-////                if (Rect.intersects(playerR, enemyR)) {
-////                    enemyViewModel.enemyAttack("medium");
-////                }
-//                }
-//            }
-//        }, 0, 50);
-//
-//        enemyTime = new Timer();
-//        enemyTime.schedule(new TimerTask() {
-//            @Override
-//            public void run() {
-//                if (gameViewModel.getPlayerHealth() > 0) {
-//
-////                    if (gameViewModel.getPlayerHealth() == 0) {
-////                        characterSprite.setX(-888);
-////                        characterSprite.setY(-888);
-////                        Intent inte = new Intent(GameScreen.this, EndScreen.class);
-////                        Bundle playerinfo = new Bundle();
-////                        playerinfo.putInt("score", gameViewModel.getPlayerScore());
-////                        inte.putExtras(playerinfo);
-////                        startActivity(inte);
-////                    }
-//
-//                    enemyOne.setX(enemyViewModel.getEnemyX("easy"));
-//                    enemyOne.setY(enemyViewModel.getEnemyY("easy"));
-//                    enemyTwo.setX(enemyViewModel.getEnemyX("medium"));
-//                    enemyTwo.setY(enemyViewModel.getEnemyY("medium"));
-//
-////                    Rect playerR = new Rect();
-////                    characterSprite.getHitRect(playerR);
-////                    Rect enemyR = new Rect();
-////                    enemyOne.getHitRect(enemyR);
-////                    if (gameViewModel.setCollide(enemyViewModel.checkCollision(
-////                            "easy", playerR, enemyR))) {
-////                        gameViewModel.reduceScoreAttack();
-////                    }
-////
-////                    if (Rect.intersects(playerR, enemyR)) {
-////                        enemyViewModel.enemyAttack("easy");
-////                    }
-////                    enemyTwo.getHitRect(enemyR);
-////                    if (gameViewModel.setCollide(enemyViewModel.checkCollision(
-////                            "medium", playerR, enemyR))) {
-////                        gameViewModel.reduceScoreAttack();
-////                    }
-////
-////                    if (Rect.intersects(playerR, enemyR)) {
-////                        enemyViewModel.enemyAttack("medium");
-////                    }
-//                }
-//            }
-//        }, 0, 1);
-////        playerMoveTimer = new Timer();
-////        playerMoveTimer.schedule(new TimerTask() {
-////            @Override
-////            public void run() {
-////                gameViewModel.getPlayerX();
-////                gameViewModel.getPlayerY();
-////            }
-////        }, 0, 50);
-////
-////        Rect playerR = new Rect();
-////        characterSprite.getHitRect(playerR);
-////        Rect enemyR = new Rect();
-////        enemyOne.getHitRect(enemyR);
-////        enemyTwo.getHitRect(enemyR);
-////        if (Rect.intersects(playerR, enemyR)) {
-////            enemyViewModel.enemyAttack("easy");
-////        }
-////        if (Rect.intersects(playerR, enemyR)) {
-////            enemyViewModel.enemyAttack("medium");
-////        }
-//
-//        handler = new Handler();
-//        handler.post(new Runnable() {
-//            @Override
-//            public void run() {
-//                if (gameViewModel.getPlayerHealth() > 0) {
-//                    hP.setText(String.valueOf(gameViewModel.getPlayerHealth()));
-//                    handler.postDelayed(this, 0); // set time here to refresh textView
-//                }
-//            }
-//        });
     }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         switch (keyCode) {
+        case KeyEvent.KEYCODE_SHIFT_LEFT:
+            gameViewModel.changeMovement();
+            break;
         case KeyEvent.KEYCODE_DPAD_LEFT:
             characterSprite.setX(gameViewModel.left(characterSprite.getX()));
             break;
@@ -469,13 +213,6 @@ public class GameScreen extends AppCompatActivity {
         door.getHitRect(doorR);
         if (Rect.intersects(playerR, doorR)) {
             playerSucceed();
-//            characterSprite.setX(-888);
-//            characterSprite.setY(-888);
-//            Intent inte = new Intent(GameScreen.this, GameRoom2.class);
-//            Bundle playerinfo = new Bundle();
-//            playerinfo.putInt("score", gameViewModel.getPlayerScore());
-//            inte.putExtras(playerinfo);
-//            startActivity(inte);
         }
         return true;
     }
@@ -490,26 +227,12 @@ public class GameScreen extends AppCompatActivity {
         }
     }
     public void playerSucceed() {
-//        characterSprite.setX(-888);
-//        characterSprite.setY(-888);
+        characterSprite.setX(-888);
+        characterSprite.setY(-888);
         Intent inte = new Intent(GameScreen.this, GameRoom2.class);
         Bundle playerinfo = new Bundle();
         playerinfo.putInt("score", gameViewModel.getPlayerScore());
         inte.putExtras(playerinfo);
         startActivity(inte);
     }
-//    private Runnable playerLose = new Runnable() {
-//        @Override
-//        public void run() {
-//            if (gameViewModel.getPlayerHealth() == 0) {
-//                gameViewModel.reduceScoreLose();
-//                Intent inte = new Intent(GameScreen.this, GameOver.class);
-//                Bundle playerinfo = new Bundle();
-//                playerinfo.putInt("score", gameViewModel.getPlayerScore());
-//                inte.putExtras(playerinfo);
-//                startActivity(inte);
-//            }
-//            gameHandler.postDelayed(this, 1);
-//        }
-//    };
 }

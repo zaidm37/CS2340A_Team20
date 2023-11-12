@@ -1,7 +1,5 @@
 package com.example.dungeoncrawlersgroup20.ViewModel;
 
-import android.graphics.Rect;
-
 import androidx.lifecycle.ViewModel;
 
 import com.example.dungeoncrawlersgroup20.Model.Enemy;
@@ -163,17 +161,4 @@ public class EnemyViewModel extends ViewModel {
             ultimateEnemy.setBorderHeight(h);
         }
     }
-//    public boolean checkCollision(String type, Rect p, Rect e) {
-//        if (type.equals("easy")) {
-//            return easyEnemy.enemyCollision(p, e);
-//        } else if (type.equals("medium")) {
-//            return mediumEnemy.enemyCollision(p, e);
-//        } else if (type.equals("hard")) {
-//            return hardEnemy.enemyCollision(p, e);
-//        } else if (type.equals("ultimate")) {
-//            return ultimateEnemy.enemyCollision(p, e);
-//        } else {
-//            return false;
-//        }
-//    }
 }

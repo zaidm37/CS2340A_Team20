@@ -7,7 +7,7 @@ public class UltimateEnemy extends Enemy {
         this.player.addObserver(this);
         this.sprite = R.drawable.enemy4;
         this.speed = 5;
-        this.damage = 100;
+        this.damage = 100; // make all enemies deal 10?
         this.enemyX = enemyX;
         this.enemyY = enemyY;
         this.enemyHeight = enemyHeight;
