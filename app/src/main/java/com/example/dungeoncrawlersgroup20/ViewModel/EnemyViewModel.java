@@ -32,17 +32,6 @@ public class EnemyViewModel extends ViewModel {
             return -1;
         }
     }
-    public void enemyAttack(String type) {
-        if (type.equals("easy")) {
-            easyEnemy.attackPlayer();
-        } else if (type.equals("medium")) {
-            mediumEnemy.attackPlayer();
-        } else if (type.equals("hard")) {
-            hardEnemy.attackPlayer();
-        } else if (type.equals("ultimate")) {
-            ultimateEnemy.attackPlayer();
-        }
-    }
     public void setEnemyX(String type, float x) {
         if (type.equals("easy")) {
             easyEnemy.setX(x);

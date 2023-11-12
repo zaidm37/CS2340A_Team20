@@ -56,6 +56,7 @@ public class GameRoom2 extends AppCompatActivity {
         hP = (TextView) findViewById(R.id.health);
         hP.setText(String.valueOf(gameViewModel.getPlayerHealth()));
         difficulty = (TextView) findViewById(R.id.difficulty);
+        gameViewModel.setPLayerDifficulty(bundle.getString("diff"));
         difficulty.setText(gameViewModel.getPlayerDifficulty());
         gameViewModel.setPlayerScore(bundle.getInt("score"));
         tvScore = (TextView) findViewById(R.id.tv_score);
@@ -72,9 +73,18 @@ public class GameRoom2 extends AppCompatActivity {
         });
 
         enemyOne = (ImageView) findViewById(R.id.enemy1);
-        enemyOne.setImageResource(enemyViewModel.enemySprite("medium"));
         enemyTwo = (ImageView) findViewById(R.id.enemy2);
-        enemyTwo.setImageResource(enemyViewModel.enemySprite("hard"));
+
+        if (gameViewModel.getPlayerDifficulty().equals("Easy")) {
+            enemyOne.setImageResource(enemyViewModel.enemySprite("easy"));
+            enemyTwo.setImageResource(enemyViewModel.enemySprite("medium"));
+        } else if (gameViewModel.getPlayerDifficulty().equals("Medium")) {
+            enemyOne.setImageResource(enemyViewModel.enemySprite("medium"));
+            enemyTwo.setImageResource(enemyViewModel.enemySprite("hard"));
+        } else if (gameViewModel.getPlayerDifficulty().equals("Hard")) {
+            enemyOne.setImageResource(enemyViewModel.enemySprite("hard"));
+            enemyTwo.setImageResource(enemyViewModel.enemySprite("ultimate"));
+        }
 
         gameOver = new Timer();
         gameOver.schedule(new TimerTask() {
@@ -106,10 +116,22 @@ public class GameRoom2 extends AppCompatActivity {
             screenHeight = visibleFrame.height();
             screenWidth = visibleFrame.width();
 
-            enemyViewModel.setEnemyBorderW("medium", screenWidth);
-            enemyViewModel.setEnemyBorderH("medium", screenHeight);
-            enemyViewModel.setEnemyBorderW("hard", screenWidth);
-            enemyViewModel.setEnemyBorderH("hard", screenHeight);
+            if (gameViewModel.getPlayerDifficulty().equals("Easy")) {
+                enemyViewModel.setEnemyBorderW("easy", screenWidth);
+                enemyViewModel.setEnemyBorderH("easy", screenHeight);
+                enemyViewModel.setEnemyBorderW("medium", screenWidth);
+                enemyViewModel.setEnemyBorderH("medium", screenHeight);
+            } else if (gameViewModel.getPlayerDifficulty().equals("Medium")) {
+                enemyViewModel.setEnemyBorderW("medium", screenWidth);
+                enemyViewModel.setEnemyBorderH("medium", screenHeight);
+                enemyViewModel.setEnemyBorderW("hard", screenWidth);
+                enemyViewModel.setEnemyBorderH("hard", screenHeight);
+            } else if (gameViewModel.getPlayerDifficulty().equals("Hard")) {
+                enemyViewModel.setEnemyBorderW("hard", screenWidth);
+                enemyViewModel.setEnemyBorderH("hard", screenHeight);
+                enemyViewModel.setEnemyBorderW("ultimate", screenWidth);
+                enemyViewModel.setEnemyBorderH("ultimate", screenHeight);
+            }
 
             gameViewModel.setPlayerX(characterSprite.getX());
             gameViewModel.setPlayerY(characterSprite.getY());
@@ -119,15 +141,39 @@ public class GameRoom2 extends AppCompatActivity {
             gameViewModel.setPW(spriteWidth);
             gameViewModel.setPH(spriteHeight);
 
-            enemyViewModel.setEnemyX("medium", enemyOne.getX());
-            enemyViewModel.setEnemyY("medium", enemyOne.getY());
-            enemyViewModel.setEnemyX("hard", enemyTwo.getX());
-            enemyViewModel.setEnemyY("hard", enemyTwo.getY());
+            if (gameViewModel.getPlayerDifficulty().equals("Easy")) {
+                enemyViewModel.setEnemyX("easy", enemyOne.getX());
+                enemyViewModel.setEnemyY("easy", enemyOne.getY());
+                enemyViewModel.setEnemyX("medium", enemyTwo.getX());
+                enemyViewModel.setEnemyY("medium", enemyTwo.getY());
+            } else if (gameViewModel.getPlayerDifficulty().equals("Medium")) {
+                enemyViewModel.setEnemyX("medium", enemyOne.getX());
+                enemyViewModel.setEnemyY("medium", enemyOne.getY());
+                enemyViewModel.setEnemyX("hard", enemyTwo.getX());
+                enemyViewModel.setEnemyY("hard", enemyTwo.getY());
+            } else if (gameViewModel.getPlayerDifficulty().equals("Hard")) {
+                enemyViewModel.setEnemyX("hard", enemyOne.getX());
+                enemyViewModel.setEnemyY("hard", enemyOne.getY());
+                enemyViewModel.setEnemyX("ultimate", enemyTwo.getX());
+                enemyViewModel.setEnemyY("ultimate", enemyTwo.getY());
+            }
 
-            enemyViewModel.setEnemyWidth("medium", enemyOne.getWidth());
-            enemyViewModel.setEnemyHeight("medium", enemyOne.getHeight());
-            enemyViewModel.setEnemyWidth("hard", enemyTwo.getWidth());
-            enemyViewModel.setEnemyHeight("hard", enemyTwo.getHeight());
+            if (gameViewModel.getPlayerDifficulty().equals("Easy")) {
+                enemyViewModel.setEnemyWidth("easy", enemyOne.getWidth());
+                enemyViewModel.setEnemyHeight("easy", enemyOne.getHeight());
+                enemyViewModel.setEnemyWidth("medium", enemyTwo.getWidth());
+                enemyViewModel.setEnemyHeight("medium", enemyTwo.getHeight());
+            } else if (gameViewModel.getPlayerDifficulty().equals("Medium")) {
+                enemyViewModel.setEnemyWidth("medium", enemyOne.getWidth());
+                enemyViewModel.setEnemyHeight("medium", enemyOne.getHeight());
+                enemyViewModel.setEnemyWidth("hard", enemyTwo.getWidth());
+                enemyViewModel.setEnemyHeight("hard", enemyTwo.getHeight());
+            } else if (gameViewModel.getPlayerDifficulty().equals("Hard")) {
+                enemyViewModel.setEnemyWidth("hard", enemyOne.getWidth());
+                enemyViewModel.setEnemyHeight("hard", enemyOne.getHeight());
+                enemyViewModel.setEnemyWidth("ultimate", enemyTwo.getWidth());
+                enemyViewModel.setEnemyHeight("ultimate", enemyTwo.getHeight());
+            }
 
             playerHandler = new Handler();
             playerHandler.post(new Runnable() {
@@ -156,10 +202,22 @@ public class GameRoom2 extends AppCompatActivity {
                 @Override
                 public void run() {
                     if (gameViewModel.getPlayerHealth() > 0) {
-                        enemyOne.setX(enemyViewModel.getEnemyX("medium"));
-                        enemyOne.setY(enemyViewModel.getEnemyY("medium"));
-                        enemyTwo.setX(enemyViewModel.getEnemyX("hard"));
-                        enemyTwo.setY(enemyViewModel.getEnemyY("hard"));
+                        if (gameViewModel.getPlayerDifficulty().equals("Easy")) {
+                            enemyOne.setX(enemyViewModel.getEnemyX("easy"));
+                            enemyOne.setY(enemyViewModel.getEnemyY("easy"));
+                            enemyTwo.setX(enemyViewModel.getEnemyX("medium"));
+                            enemyTwo.setY(enemyViewModel.getEnemyY("medium"));
+                        } else if (gameViewModel.getPlayerDifficulty().equals("Medium")) {
+                            enemyOne.setX(enemyViewModel.getEnemyX("medium"));
+                            enemyOne.setY(enemyViewModel.getEnemyY("medium"));
+                            enemyTwo.setX(enemyViewModel.getEnemyX("hard"));
+                            enemyTwo.setY(enemyViewModel.getEnemyY("hard"));
+                        } else if (gameViewModel.getPlayerDifficulty().equals("Hard")) {
+                            enemyOne.setX(enemyViewModel.getEnemyX("hard"));
+                            enemyOne.setY(enemyViewModel.getEnemyY("hard"));
+                            enemyTwo.setX(enemyViewModel.getEnemyX("ultimate"));
+                            enemyTwo.setY(enemyViewModel.getEnemyY("ultimate"));
+                        }
                         enemyHandler.postDelayed(this, 1);
                     }
                 }
@@ -234,6 +292,7 @@ public class GameRoom2 extends AppCompatActivity {
         Intent inte = new Intent(GameRoom2.this, GameRoom3.class);
         Bundle playerinfo = new Bundle();
         playerinfo.putInt("score", gameViewModel.getPlayerScore());
+        playerinfo.putString("diff", gameViewModel.getPlayerDifficulty());
         inte.putExtras(playerinfo);
         startActivity(inte);
     }

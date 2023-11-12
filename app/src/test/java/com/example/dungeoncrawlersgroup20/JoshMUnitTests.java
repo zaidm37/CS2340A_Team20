@@ -5,9 +5,16 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+import com.example.dungeoncrawlersgroup20.Model.EasyEnemy;
+import com.example.dungeoncrawlersgroup20.Model.Enemy;
+import com.example.dungeoncrawlersgroup20.Model.EnemyFactory;
+import com.example.dungeoncrawlersgroup20.Model.GameEnemy;
+import com.example.dungeoncrawlersgroup20.Model.HardEnemy;
 import com.example.dungeoncrawlersgroup20.Model.Leaderboard;
+import com.example.dungeoncrawlersgroup20.Model.MediumEnemy;
 import com.example.dungeoncrawlersgroup20.Model.Player;
 import com.example.dungeoncrawlersgroup20.Model.Run;
+import com.example.dungeoncrawlersgroup20.Model.UltimateEnemy;
 import com.example.dungeoncrawlersgroup20.ViewModel.GameViewModel;
 
 import java.lang.reflect.Field;
@@ -52,5 +59,20 @@ public class JoshMUnitTests {
         int spriteWidth = 44;
         startX = gameViewModel.right(startX, limitX, spriteWidth);
         assertEquals(40, startX, 0.001);
+    }
+
+    //Sprint 4 Tests
+
+    @Test
+    public void testFactoryEasy() {
+        EnemyFactory ef = new GameEnemy();
+        Enemy easy = ef.orderEnemy("easy");
+        assertTrue(easy instanceof EasyEnemy);
+    }
+    @Test
+    public void testFactoryMid() {
+        EnemyFactory ef = new GameEnemy();
+        Enemy mid = ef.orderEnemy("medium");
+        assertTrue(mid instanceof MediumEnemy);
     }
 }

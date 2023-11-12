@@ -1,16 +1,16 @@
 package com.example.dungeoncrawlersgroup20.Model;
 
 public abstract class Enemy implements Observer {
-    int sprite;
-    int damage;
-    int speed;
-    float enemyX;
-    float enemyY;
-    float enemyHeight;
-    float enemyWidth;
-    float borderHeight;
-    float borderWidth;
-    Player player = Player.getPlayer();
+    protected int sprite;
+    protected int damage;
+    protected int speed;
+    protected float enemyX;
+    protected float enemyY;
+    protected float enemyHeight;
+    protected float enemyWidth;
+    protected float borderHeight;
+    protected float borderWidth;
+    protected Player player = Player.getPlayer();
     public int getSprite() {
         return sprite;
     }
@@ -50,6 +50,12 @@ public abstract class Enemy implements Observer {
     }
     public void setHeight(float h) {
         enemyHeight = h;
+    }
+    public int getSpeed() {
+        return speed;
+    }
+    public int getDamage() {
+        return damage;
     }
     @Override
     public void update(Movement movement, float playerX, float playerY, boolean c) {
