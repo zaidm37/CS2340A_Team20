@@ -122,6 +122,8 @@ public class GameScreen extends AppCompatActivity {
 //                }
 //            }
 //        });
+
+//        gameHandler.postDelayed(playerLose, 1);
     }
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -153,17 +155,6 @@ public class GameScreen extends AppCompatActivity {
             enemyViewModel.setEnemyHeight("easy", enemyOne.getHeight());
             enemyViewModel.setEnemyWidth("medium", enemyTwo.getWidth());
             enemyViewModel.setEnemyHeight("medium", enemyTwo.getHeight());
-
-//            gameHandler = new Handler();
-//            gameHandler.post(new Runnable() {
-//                @Override
-//                public void run() {
-//                    if (gameViewModel.getPlayerHealth() == 0) {
-//                        playerLose();
-//                        gameHandler.postDelayed(this, 1);
-//                    }
-//                }
-//            });
 
             playerHandler = new Handler();
             playerHandler.post(new Runnable() {
@@ -489,14 +480,14 @@ public class GameScreen extends AppCompatActivity {
         return true;
     }
     public void playerLose() {
-//        characterSprite.setX(-888);
-//        characterSprite.setY(-888);
-        gameViewModel.reduceScoreLose();
-        Intent inte = new Intent(GameScreen.this, GameOver.class);
-        Bundle playerinfo = new Bundle();
-        playerinfo.putInt("score", gameViewModel.getPlayerScore());
-        inte.putExtras(playerinfo);
-        startActivity(inte);
+        if (gameViewModel.getPlayerHealth() == 0) {
+            gameViewModel.reduceScoreLose();
+            Intent inte = new Intent(GameScreen.this, GameOver.class);
+            Bundle playerinfo = new Bundle();
+            playerinfo.putInt("score", gameViewModel.getPlayerScore());
+            inte.putExtras(playerinfo);
+            startActivity(inte);
+        }
     }
     public void playerSucceed() {
 //        characterSprite.setX(-888);
@@ -507,4 +498,18 @@ public class GameScreen extends AppCompatActivity {
         inte.putExtras(playerinfo);
         startActivity(inte);
     }
+//    private Runnable playerLose = new Runnable() {
+//        @Override
+//        public void run() {
+//            if (gameViewModel.getPlayerHealth() == 0) {
+//                gameViewModel.reduceScoreLose();
+//                Intent inte = new Intent(GameScreen.this, GameOver.class);
+//                Bundle playerinfo = new Bundle();
+//                playerinfo.putInt("score", gameViewModel.getPlayerScore());
+//                inte.putExtras(playerinfo);
+//                startActivity(inte);
+//            }
+//            gameHandler.postDelayed(this, 1);
+//        }
+//    };
 }
