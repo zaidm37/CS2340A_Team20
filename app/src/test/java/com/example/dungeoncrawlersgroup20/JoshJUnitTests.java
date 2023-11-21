@@ -10,8 +10,12 @@ import android.graphics.drawable.Drawable;
 import androidx.core.content.ContextCompat;
 
 import com.example.dungeoncrawlersgroup20.Model.Difficulty;
+import com.example.dungeoncrawlersgroup20.Model.HardEnemy;
 import com.example.dungeoncrawlersgroup20.Model.Leaderboard;
 import com.example.dungeoncrawlersgroup20.Model.Player;
+import com.example.dungeoncrawlersgroup20.Model.Run;
+import com.example.dungeoncrawlersgroup20.Model.UltimateEnemy;
+import com.example.dungeoncrawlersgroup20.Model.Walk;
 import com.example.dungeoncrawlersgroup20.ViewModel.ConfigViewModel;
 import com.example.dungeoncrawlersgroup20.ViewModel.GameViewModel;
 
@@ -60,5 +64,37 @@ public class JoshJUnitTests {
         int spriteHeight = 52;
         startY = gameViewModel.down(startY, limitY, spriteHeight);
         assertEquals(10, startY, 0.001);
+    }
+    @Test
+    public void observerTest() {
+        GameViewModel gameViewModel = new GameViewModel();
+        Player player = Player.getPlayer();
+        assertTrue(gameViewModel.getMoveCheck());
+        player.setMovement(new Run());
+        assertFalse(gameViewModel.getMoveCheck());
+        player.setMovement(new Walk());
+        assertTrue(gameViewModel.getMoveCheck());
+    }
+
+    // Sprint 4 Tests
+
+    @Test
+    public void testHardValues() {
+        HardEnemy hardEnemy = new HardEnemy();
+        int speed = 3;
+        int damage = 30;
+        assertEquals(R.drawable.enemy3, hardEnemy.getSprite());
+        assertEquals(hardEnemy.getSpeed(), speed);
+        assertEquals(hardEnemy.getDamage(), damage);
+    }
+
+    @Test
+    public void testUltimateValues() {
+        UltimateEnemy ultimateEnemy = new UltimateEnemy();
+        int speed = 5;
+        int damage = 100;
+        assertEquals(R.drawable.enemy4, ultimateEnemy.getSprite());
+        assertEquals(ultimateEnemy.getSpeed(), speed);
+        assertEquals(ultimateEnemy.getDamage(), damage);
     }
 }

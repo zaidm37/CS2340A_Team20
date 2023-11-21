@@ -1,12 +1,12 @@
 package com.example.dungeoncrawlersgroup20.ViewModel;
 
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 
 import androidx.lifecycle.ViewModel;
 
 import com.example.dungeoncrawlersgroup20.Model.Difficulty;
 import com.example.dungeoncrawlersgroup20.Model.Movement;
-import com.example.dungeoncrawlersgroup20.Model.Observable;
 import com.example.dungeoncrawlersgroup20.Model.Observer;
 import com.example.dungeoncrawlersgroup20.Model.Player;
 import com.example.dungeoncrawlersgroup20.Model.Run;
@@ -20,7 +20,6 @@ public class GameViewModel extends ViewModel implements Observer {
     private Movement walk;
     private Movement run;
     private boolean moveCheck;
-    private Observable observable;
     public GameViewModel() {
         player = Player.getPlayer();
         difficulty = new Difficulty();
@@ -30,15 +29,17 @@ public class GameViewModel extends ViewModel implements Observer {
         moveCheck = true;
         player.setMovement(walk);
         player.addObserver(this);
-
     }
     @Override
-    public void update(Movement movement) {
+    public void update(Movement movement, float playerX, float playerY, boolean c) {
         if (movement instanceof Walk) {
             moveCheck = true;
         } else if (movement instanceof Run) {
             moveCheck = false;
         }
+    }
+    public boolean getMoveCheck() {
+        return moveCheck;
     }
     public String getPlayerName() {
         return player.getName();
@@ -94,5 +95,35 @@ public class GameViewModel extends ViewModel implements Observer {
     }
     public float right(float x, int border, int spriteWidth) {
         return player.playerMoveRight(x, border, spriteWidth);
+    }
+    public void setPlayerX(float x) {
+        player.setPlayerX(x);
+    }
+    public void setPlayerY(float y) {
+        player.setPlayerY(y);
+    }
+    public float getPlayerX() {
+        return player.getPlayerX();
+    }
+    public float getPlayerY() {
+        return player.getPlayerY();
+    }
+    public void setPW(int w) {
+        player.setPlayerWidth(w);
+    }
+    public void setPH(int h) {
+        player.setPlayerHeight(h);
+    }
+    public void checkCollide(Rect p, Rect e) {
+        player.checkPlayerCollide(p, e);
+    }
+    public boolean getC() {
+        return player.getPlayerC();
+    }
+    public void setC(boolean c) {
+        player.setPlayerCollide(c);
+    }
+    public void reduceScoreLose() {
+        scoreTrack.setScore(0);
     }
 }
