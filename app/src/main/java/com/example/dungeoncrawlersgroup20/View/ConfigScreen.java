@@ -28,7 +28,16 @@ public class ConfigScreen extends AppCompatActivity {
     private ConfigViewModel configViewModel;
 
 
+    private void setUpDifficultyButtons() {
+        easy.setOnClickListener(view -> setDifficulty("Easy", 3000));
+        medium.setOnClickListener(view -> setDifficulty("Medium", 2000));
+        hard.setOnClickListener(view -> setDifficulty("Hard", 1000));
+    }
 
+    private void setDifficulty(String difficulty, int health) {
+        configViewModel.setPLayerDifficulty(difficulty);
+        configViewModel.setPlayerHealth(health);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,29 +47,12 @@ public class ConfigScreen extends AppCompatActivity {
         configViewModel.setPLayerDifficulty("");
         name = (EditText) findViewById(R.id.Name);
         easy = (RadioButton) findViewById(R.id.radioButton);
-        easy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                configViewModel.setPLayerDifficulty("Easy");
-                configViewModel.setPlayerHealth(3000);
-            }
-        });
         medium = (RadioButton) findViewById(R.id.radioButton2);
-        medium.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                configViewModel.setPLayerDifficulty("Medium");
-                configViewModel.setPlayerHealth(2000);
-            }
-        });
         hard = (RadioButton) findViewById(R.id.radioButton3);
-        hard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                configViewModel.setPLayerDifficulty("Hard");
-                configViewModel.setPlayerHealth(1000);
-            }
-        });
+        setUpDifficultyButtons();
+
+
+
         sprite1 = (ImageButton) findViewById(R.id.imageButton);
         sprite1.setOnClickListener(new View.OnClickListener() {
             @Override
