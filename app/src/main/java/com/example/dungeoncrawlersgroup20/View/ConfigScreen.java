@@ -46,29 +46,25 @@ public class ConfigScreen extends AppCompatActivity {
         setupSpriteButtons();
 
 
-
-
-
         continueButton = (Button) findViewById(R.id.continueButton);
-        continueButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                configViewModel.setPlayerName(name.getText().toString());
-                if (configViewModel.isValidInput()) {
-                    Intent i = new Intent(ConfigScreen.this, GameScreen.class);
-                    Bundle playerinfo = new Bundle();
-                    playerinfo.putString("diff", configViewModel.getPlayerDifficulty());
-                    i.putExtras(playerinfo);
-                    startActivity(i);
-                } else {
-                    Toast.makeText(ConfigScreen.this,
-                            "You need to select an image, difficulty, "
-                                    + "and/or enter a name before continuing",
-                            Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+
+        continueButton.setOnClickListener(view -> processContinue());
+
+
     }
+    private void processContinue() {
+        configViewModel.setPlayerName(name.getText().toString());
+        if (configViewModel.isValidInput()) {
+            Intent i = new Intent(ConfigScreen.this, GameScreen.class);
+            i.putExtra("diff", configViewModel.getPlayerDifficulty());
+            startActivity(i);
+        } else {
+            Toast.makeText(ConfigScreen.this,
+                    "You need to select an image, difficulty, and/or enter a name before continuing",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private void setUpDifficultyButtons() {
         easy.setOnClickListener(view -> setDifficulty("Easy", 3000));
         medium.setOnClickListener(view -> setDifficulty("Medium", 2000));
