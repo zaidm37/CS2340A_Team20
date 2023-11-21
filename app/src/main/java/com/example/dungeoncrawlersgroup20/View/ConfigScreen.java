@@ -27,17 +27,6 @@ public class ConfigScreen extends AppCompatActivity {
     private RadioButton hard;
     private ConfigViewModel configViewModel;
 
-
-    private void setUpDifficultyButtons() {
-        easy.setOnClickListener(view -> setDifficulty("Easy", 3000));
-        medium.setOnClickListener(view -> setDifficulty("Medium", 2000));
-        hard.setOnClickListener(view -> setDifficulty("Hard", 1000));
-    }
-
-    private void setDifficulty(String difficulty, int health) {
-        configViewModel.setPLayerDifficulty(difficulty);
-        configViewModel.setPlayerHealth(health);
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,40 +38,17 @@ public class ConfigScreen extends AppCompatActivity {
         easy = (RadioButton) findViewById(R.id.radioButton);
         medium = (RadioButton) findViewById(R.id.radioButton2);
         hard = (RadioButton) findViewById(R.id.radioButton3);
-        setUpDifficultyButtons();
-
-
-
         sprite1 = (ImageButton) findViewById(R.id.imageButton);
-        sprite1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(ConfigScreen.this,
-                        "You Selected the First Character", Toast.LENGTH_SHORT).show();
-                configViewModel.setPlayerSprite(ContextCompat.getDrawable(
-                        ConfigScreen.this, R.drawable.sprite1));
-            }
-        });
         sprite2 = (ImageButton) findViewById(R.id.imageButton2);
-        sprite2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(ConfigScreen.this,
-                        "You Selected the Second Character", Toast.LENGTH_SHORT).show();
-                configViewModel.setPlayerSprite(ContextCompat.getDrawable(
-                        ConfigScreen.this, R.drawable.sprite2));
-            }
-        });
         sprite3 = (ImageButton) findViewById(R.id.imageButton3);
-        sprite3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(ConfigScreen.this,
-                        "You Selected the Third Character", Toast.LENGTH_SHORT).show();
-                configViewModel.setPlayerSprite(ContextCompat.getDrawable(
-                        ConfigScreen.this, R.drawable.sprite3));
-            }
-        });
+
+        setUpDifficultyButtons();
+        setupSpriteButtons();
+
+
+
+
+
         continueButton = (Button) findViewById(R.id.continueButton);
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,5 +68,27 @@ public class ConfigScreen extends AppCompatActivity {
                 }
             }
         });
+    }
+    private void setUpDifficultyButtons() {
+        easy.setOnClickListener(view -> setDifficulty("Easy", 3000));
+        medium.setOnClickListener(view -> setDifficulty("Medium", 2000));
+        hard.setOnClickListener(view -> setDifficulty("Hard", 1000));
+    }
+
+    private void setDifficulty(String difficulty, int health) {
+        configViewModel.setPLayerDifficulty(difficulty);
+        configViewModel.setPlayerHealth(health);
+    }
+
+    private void setupSpriteButtons() {
+        sprite1.setOnClickListener(view -> selectSprite(R.drawable.sprite1, "First"));
+        sprite2.setOnClickListener(view -> selectSprite(R.drawable.sprite2, "Second"));
+        sprite3.setOnClickListener(view -> selectSprite(R.drawable.sprite3, "Third"));
+    }
+
+    private void selectSprite(int drawableId, String spriteNumber) {
+        Toast.makeText(ConfigScreen.this,
+                "You Selected the " + spriteNumber + " Character", Toast.LENGTH_SHORT).show();
+        configViewModel.setPlayerSprite(ContextCompat.getDrawable(ConfigScreen.this, drawableId));
     }
 }
