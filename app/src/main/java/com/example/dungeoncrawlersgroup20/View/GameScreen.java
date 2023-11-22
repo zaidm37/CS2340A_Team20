@@ -36,7 +36,6 @@ public class GameScreen extends AppCompatActivity {
     private Handler playerHandler;
     private Handler handler;
     private Timer gameOver;
-    private Handler gameOvertest;
     private TextView tvScore;
     private ImageView door;
     private GameViewModel gameViewModel;
