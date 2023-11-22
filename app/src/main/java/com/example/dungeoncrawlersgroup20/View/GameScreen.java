@@ -36,6 +36,7 @@ public class GameScreen extends AppCompatActivity {
     private Handler playerHandler;
     private Handler handler;
     private Timer gameOver;
+    private Handler gameHandler;
     private TextView tvScore;
     private ImageView door;
     private GameViewModel gameViewModel;
@@ -153,13 +154,15 @@ public class GameScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_screen);
-        Bundle bundle = getIntent().getExtras();
-
-        setupViews();
         setupViewModels();
+        Bundle bundle = getIntent().getExtras();
+        setupViews();
+
+
+
         setupScoreUpdater();
-        setupPlayerMovementHandler();
-        setupDifficulty();
+
+
 
 
 
@@ -186,11 +189,10 @@ public class GameScreen extends AppCompatActivity {
             }
         });
 
+        setupDifficulty();
 
 
-
-
-        gameOvertest = new Handler();
+        gameOver = new Timer();
         gameOver.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -235,7 +237,6 @@ public class GameScreen extends AppCompatActivity {
             gameViewModel.setPW(spriteWidth);
             gameViewModel.setPH(spriteHeight);
 
-
             if (gameViewModel.getPlayerDifficulty().equals("Easy")) {
                 enemyViewModel.setEnemyX("easy", enemyOne.getX());
                 enemyViewModel.setEnemyY("easy", enemyOne.getY());
@@ -252,7 +253,6 @@ public class GameScreen extends AppCompatActivity {
                 enemyViewModel.setEnemyX("ultimate", enemyTwo.getX());
                 enemyViewModel.setEnemyY("ultimate", enemyTwo.getY());
             }
-
 
             if (gameViewModel.getPlayerDifficulty().equals("Easy")) {
                 enemyViewModel.setEnemyWidth("easy", enemyOne.getWidth());
