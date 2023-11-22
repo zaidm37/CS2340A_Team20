@@ -28,15 +28,11 @@ public class GameScreen extends AppCompatActivity {
     private ImageView enemyTwo;
     private TextView hP;
     private Button move;
-    private Timer scoreTime;
     private Handler scoreHandler;
-    private Timer enemyTime;
     private Handler enemyHandler;
-    private Timer playerMoveTimer;
     private Handler playerHandler;
     private Handler handler;
     private Timer gameOver;
-    private Handler gameHandler;
     private TextView tvScore;
     private ImageView door;
     private GameViewModel gameViewModel;
