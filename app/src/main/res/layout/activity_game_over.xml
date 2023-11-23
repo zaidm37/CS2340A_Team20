@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E91E63"
-    tools:context=".View.EndScreen">
+    android:background="#292323"
+    tools:context=".View.GameOver">
 
     <Button
         android:id="@+id/restart"
@@ -23,6 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TESTST"
+        android:textColor="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,8 +36,8 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="YOU WIN!!!"
-        android:textColor="#4CAF50"
+        android:text="YOU LOSE!"
+        android:textColor="#F44336"
         android:textSize="60sp"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"

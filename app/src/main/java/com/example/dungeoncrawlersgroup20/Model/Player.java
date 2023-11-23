@@ -1,5 +1,6 @@
 package com.example.dungeoncrawlersgroup20.Model;
 
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 
 import java.util.ArrayList;
@@ -10,6 +11,12 @@ public class Player implements Observable {
     private String name;
     private int health;
     private Drawable sprite;
+    private float playerX;
+    private float playerY;
+    private int playerWidth;
+    private int playerHeight;
+    private boolean c;
+    private ArrayList<Observer> observers = new ArrayList<Observer>();
     private List<Observer> observers = new ArrayList<>();
     private static volatile Player player;
     private Player() {
@@ -17,7 +24,7 @@ public class Player implements Observable {
         this.health = health;
         this.sprite = sprite;
         this.movement = movement;
-//        this.observers = new ArrayList<Observer>();
+        this.c = false;
     }
     public static Player getPlayer() {
         if (player == null) {
@@ -37,11 +44,16 @@ public class Player implements Observable {
     }
     @Override
     public void removeObserver(Observer observer) {
+        int i = observers.indexOf(observer);
+        if (i >= 0) {
+            observers.remove(i);
+        }
         observers.remove(observer);
     }
     @Override
     public void notifyObservers() {
         for (Observer observer : observers) {
+            observer.update(this.movement, this.playerX, this.playerY, this.c);
             observer.update(this.movement);
         }
     }
@@ -62,16 +74,49 @@ public class Player implements Observable {
         notifyObservers();
     }
     public float playerMoveUp(float y, int textHeight) {
-        return movement.moveUp(y, textHeight);
+        playerY = movement.moveUp(y, textHeight);
+        notifyObservers();
+        return playerY;
     }
     public float playerMoveDown(float y, int screenHeight, int spriteHeight) {
-        return movement.moveDown(y, screenHeight - spriteHeight, spriteHeight);
+        playerY = movement.moveDown(y, screenHeight - spriteHeight, spriteHeight);
+        notifyObservers();
+        return playerY;
     }
     public float playerMoveLeft(float x) {
-        return movement.moveLeft(x);
+        playerX = movement.moveLeft(x);
+        notifyObservers();
+        return playerX;
     }
     public float playerMoveRight(float x, int border, int spriteWidth) {
-        return movement.moveRight(x, border, spriteWidth);
+        playerX = movement.moveRight(x, border, spriteWidth);
+        notifyObservers();
+        return playerX;
+    }
+    public float getPlayerX() {
+        notifyObservers();
+        return playerX;
+    }
+    public float getPlayerY() {
+        notifyObservers();
+        return playerY;
+    }
+    public void setPlayerX(float x) {
+        playerX = x;
+    }
+    public void setPlayerY(float y) {
+        playerY = y;
+    }
+    public void checkPlayerCollide(Rect p, Rect e) {
+        if (Rect.intersects(p, e)) {
+            c = true;
+        }
+    }
+    public void setPlayerCollide(boolean c) {
+        this.c = c;
+    }
+    public boolean getPlayerC() {
+        return c;
     }
     public void setName(String name) {
         this.name = name;
@@ -82,5 +127,17 @@ public class Player implements Observable {
     }
     public void setSprite(Drawable sprite) {
         this.sprite = sprite;
+    }
+    public int getPlayerHeight() {
+        return playerHeight;
+    }
+    public int getPlayerWidth() {
+        return playerWidth;
+    }
+    public void setPlayerHeight(int h) {
+        playerHeight = h;
+    }
+    public void setPlayerWidth(int w) {
+        playerWidth = w;
     }
 }

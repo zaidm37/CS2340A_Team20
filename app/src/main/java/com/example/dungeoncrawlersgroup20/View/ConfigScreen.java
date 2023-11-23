@@ -42,7 +42,7 @@ public class ConfigScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 configViewModel.setPLayerDifficulty("Easy");
-                configViewModel.setPlayerHealth(300);
+                configViewModel.setPlayerHealth(3000);
             }
         });
         medium = (RadioButton) findViewById(R.id.radioButton2);
@@ -50,7 +50,7 @@ public class ConfigScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 configViewModel.setPLayerDifficulty("Medium");
-                configViewModel.setPlayerHealth(200);
+                configViewModel.setPlayerHealth(2000);
             }
         });
         hard = (RadioButton) findViewById(R.id.radioButton3);
@@ -58,7 +58,7 @@ public class ConfigScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 configViewModel.setPLayerDifficulty("Hard");
-                configViewModel.setPlayerHealth(100);
+                configViewModel.setPlayerHealth(1000);
             }
         });
         sprite1 = (ImageButton) findViewById(R.id.imageButton);
