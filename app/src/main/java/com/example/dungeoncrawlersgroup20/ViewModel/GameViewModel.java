@@ -86,6 +86,8 @@ public class GameViewModel extends ViewModel implements Observer {
             moveCheck = true;
         }
     }
+
+    /*
     public float up(float y) {
         return player.playerMoveUp(y);
 
@@ -95,6 +97,8 @@ public class GameViewModel extends ViewModel implements Observer {
         moveCheck = !moveCheck;
 
     }
+
+     */
     public float up(float y, int textHeight) {
         return player.playerMoveUp(y, textHeight);
     }
