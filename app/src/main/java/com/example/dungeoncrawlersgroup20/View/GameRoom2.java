@@ -27,9 +27,11 @@ public class GameRoom2 extends AppCompatActivity {
     private TextView tvScore;
     private GameViewModel gameViewModel;
     private Button move;
+
     private ImageView door;
     private int screenHeight;
     private int screenWidth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +59,13 @@ public class GameRoom2 extends AppCompatActivity {
             }
         }, 0, 5000);
 
+        move = (Button) findViewById(R.id.buttonMove);
+        move.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gameViewModel.changeMovement();
+            }
+        });
         move = (Button) findViewById(R.id.buttonMove);
         move.setOnClickListener(new View.OnClickListener() {
             @Override
