@@ -1,6 +1,7 @@
 package com.example.dungeoncrawlersgroup20.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
@@ -380,6 +381,5 @@ public class GameScreen extends AppCompatActivity {
             enemyTwoAttacked = false;
             enemyTwoStop = true;
         }
-        // logic to change character sprite to swinging weapon later
     }
 }
