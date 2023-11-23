@@ -27,6 +27,9 @@ public class GameScreen extends AppCompatActivity {
     private ImageView enemyOne;
     private ImageView enemyTwo;
     private TextView hP;
+
+    private Button next;
+
     private Button move;
     private Timer scoreTime;
     private Timer enemyTime;
@@ -72,6 +75,13 @@ public class GameScreen extends AppCompatActivity {
             }
         }, 0, 5000);
 
+        move = (Button) findViewById(R.id.buttonMove);
+        move.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gameViewModel.changeMovement();
+            }
+        });
         move = (Button) findViewById(R.id.buttonMove);
         move.setOnClickListener(new View.OnClickListener() {
             @Override
