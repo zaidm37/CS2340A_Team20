@@ -114,8 +114,8 @@ public class GameViewModel extends ViewModel implements Observer {
     public void setPH(int h) {
         player.setPlayerHeight(h);
     }
-    public void checkCollide(Rect p, Rect e) {
-        player.checkPlayerCollide(p, e);
+    public boolean checkCollide(Rect p, Rect e) {
+        return player.checkPlayerCollide(p, e);
     }
     public boolean getC() {
         return player.getPlayerC();
