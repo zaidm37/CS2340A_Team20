@@ -2,7 +2,6 @@ package com.example.dungeoncrawlersgroup20.View;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -60,7 +59,8 @@ public class ConfigScreen extends AppCompatActivity {
             startActivity(i);
         } else {
             Toast.makeText(ConfigScreen.this,
-                    "You need to select an image, difficulty, and/or enter a name before continuing",
+                    "You need to select an image, difficulty, "
+                            + "and/or enter a name before continuing",
                     Toast.LENGTH_SHORT).show();
         }
     }
@@ -85,6 +85,7 @@ public class ConfigScreen extends AppCompatActivity {
     private void selectSprite(int drawableId, String spriteNumber) {
         Toast.makeText(ConfigScreen.this,
                 "You Selected the " + spriteNumber + " Character", Toast.LENGTH_SHORT).show();
-        configViewModel.setPlayerSprite(ContextCompat.getDrawable(ConfigScreen.this, drawableId));
+        configViewModel.setPlayerSprite(ContextCompat.getDrawable(
+                ConfigScreen.this, drawableId));
     }
 }
