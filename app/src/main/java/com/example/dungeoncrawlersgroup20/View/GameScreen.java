@@ -1,7 +1,6 @@
 package com.example.dungeoncrawlersgroup20.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
@@ -33,6 +32,7 @@ public class GameScreen extends AppCompatActivity {
     private Handler enemyHandler;
     private Handler playerHandler;
     private Handler handler;
+    private Handler scoreReduce;
     private Timer gameOver;
     private TextView tvScore;
     private ImageView door;
@@ -44,7 +44,8 @@ public class GameScreen extends AppCompatActivity {
     private int spriteHeight;
     private static final int PLAYER_MOVE_DELAY = 50;
     private static final int ENEMY_MOVE_DELAY = 1;
-    private static final int SCORE_UPDATE_DELAY = 5000;
+    private static final int SCORE_UPDATE_DELAY = 1;
+    private static final int SCORE_REDUCE_DELAY = 5000;
     private boolean enemyOneAttacked = false;
     private boolean enemyTwoAttacked = false;
     private boolean enemyOneStop = false;
@@ -75,11 +76,8 @@ public class GameScreen extends AppCompatActivity {
         scoreHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (gameViewModel.getPlayerHealth() > 0) {
-                    gameViewModel.reduceScore();
-                    tvScore.setText("Score: " + gameViewModel.getPlayerScore());
-                    scoreHandler.postDelayed(this, SCORE_UPDATE_DELAY);
-                }
+                tvScore.setText("Score: " + gameViewModel.getPlayerScore());
+                scoreHandler.postDelayed(this, SCORE_UPDATE_DELAY);
             }
         }, SCORE_UPDATE_DELAY);
     }
@@ -105,6 +103,7 @@ public class GameScreen extends AppCompatActivity {
         enemyOne.getHitRect(enemyR);
         if (!enemyOneStop) {
             if (gameViewModel.checkCollide(playerR, enemyR)) {
+                gameViewModel.reduceScoreAttack();
                 enemyOneAttacked = true;
             }
         }
@@ -112,6 +111,7 @@ public class GameScreen extends AppCompatActivity {
         enemyTwo.getHitRect(enemyR);
         if (!enemyTwoStop) {
             if (gameViewModel.checkCollide(playerR, enemyR)) {
+                gameViewModel.reduceScoreAttack();
                 enemyTwoAttacked = true;
             }
         }
@@ -179,15 +179,6 @@ public class GameScreen extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         setupViews();
 
-
-
-        setupScoreUpdater();
-
-
-
-
-
-
         gameViewModel.setPLayerDifficulty(bundle.getString("diff"));
 
         userName.setText(gameViewModel.getPlayerName());
@@ -198,6 +189,9 @@ public class GameScreen extends AppCompatActivity {
 
         difficulty.setText(gameViewModel.getPlayerDifficulty());
         gameViewModel.setPlayerScore(1000);
+
+        setupScoreUpdater();
+        reduceTheScore();
 
 
 
@@ -375,11 +369,25 @@ public class GameScreen extends AppCompatActivity {
             enemyOne.animate().alpha(0f).setDuration(1000);
             enemyOneAttacked = false;
             enemyOneStop = true;
+            gameViewModel.increaseScoreAttack();
         }
         if (enemyTwoAttacked) {
             enemyTwo.animate().alpha(0f).setDuration(1000);
             enemyTwoAttacked = false;
             enemyTwoStop = true;
+            gameViewModel.increaseScoreAttack();
         }
+    }
+    public void reduceTheScore() {
+        scoreReduce = new Handler();
+        scoreReduce.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (gameViewModel.getPlayerHealth() > 0) {
+                    gameViewModel.reduceScore();
+                    scoreReduce.postDelayed(this, SCORE_REDUCE_DELAY);
+                }
+            }
+        }, SCORE_REDUCE_DELAY);
     }
 }

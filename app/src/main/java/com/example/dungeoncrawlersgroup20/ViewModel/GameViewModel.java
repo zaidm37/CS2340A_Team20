@@ -126,4 +126,12 @@ public class GameViewModel extends ViewModel implements Observer {
     public void reduceScoreLose() {
         scoreTrack.setScore(0);
     }
+    public void increaseScoreAttack() {
+        scoreTrack.setScore(scoreTrack.getScore() + 100);
+    }
+    public void reduceScoreAttack() {
+        if ((scoreTrack.getScore() - 1) >= 0) {
+            scoreTrack.setScore(scoreTrack.getScore() - 1);
+        }
+    }
 }

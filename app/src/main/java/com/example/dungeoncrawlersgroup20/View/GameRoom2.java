@@ -29,6 +29,7 @@ public class GameRoom2 extends AppCompatActivity {
     private Handler enemyHandler;
     private Handler playerHandler;
     private Handler handler;
+    private Handler scoreReduce;
     private Timer gameOver;
     private EnemyViewModel enemyViewModel;
     private int spriteWidth;
@@ -43,7 +44,8 @@ public class GameRoom2 extends AppCompatActivity {
     private int screenWidth;
     private static final int PLAYER_MOVE_DELAY = 50;
     private static final int ENEMY_MOVE_DELAY = 1;
-    private static final int SCORE_UPDATE_DELAY = 5000;
+    private static final int SCORE_UPDATE_DELAY = 1;
+    private static final int SCORE_REDUCE_DELAY = 5000;
     private boolean enemyOneAttacked = false;
     private boolean enemyTwoAttacked = false;
     private boolean enemyOneStop = false;
@@ -71,11 +73,8 @@ public class GameRoom2 extends AppCompatActivity {
         scoreHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (gameViewModel.getPlayerHealth() > 0) {
-                    gameViewModel.reduceScore();
-                    tvScore.setText("Score: " + gameViewModel.getPlayerScore());
-                    scoreHandler.postDelayed(this, SCORE_UPDATE_DELAY);
-                }
+                tvScore.setText("Score: " + gameViewModel.getPlayerScore());
+                scoreHandler.postDelayed(this, SCORE_UPDATE_DELAY);
             }
         }, SCORE_UPDATE_DELAY);
     }
@@ -125,6 +124,7 @@ public class GameRoom2 extends AppCompatActivity {
         enemyOne.getHitRect(enemyR);
         if (!enemyOneStop) {
             if (gameViewModel.checkCollide(playerR, enemyR)) {
+                gameViewModel.reduceScoreAttack();
                 enemyOneAttacked = true;
             }
         }
@@ -132,6 +132,7 @@ public class GameRoom2 extends AppCompatActivity {
         enemyTwo.getHitRect(enemyR);
         if (!enemyTwoStop) {
             if (gameViewModel.checkCollide(playerR, enemyR)) {
+                gameViewModel.reduceScoreAttack();
                 enemyTwoAttacked = true;
             }
         }
@@ -173,7 +174,6 @@ public class GameRoom2 extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         setupViews();
         setupViewModels();
-        setupScoreUpdater();
 
         userName.setText(gameViewModel.getPlayerName());
 
@@ -184,6 +184,9 @@ public class GameRoom2 extends AppCompatActivity {
         gameViewModel.setPLayerDifficulty(bundle.getString("diff"));
         difficulty.setText(gameViewModel.getPlayerDifficulty());
         gameViewModel.setPlayerScore(bundle.getInt("score"));
+
+        setupScoreUpdater();
+        reduceTheScore();
 
         setupDifficulty();
 
@@ -361,11 +364,25 @@ public class GameRoom2 extends AppCompatActivity {
             enemyOne.animate().alpha(0f).setDuration(1000);
             enemyOneAttacked = false;
             enemyOneStop = true;
+            gameViewModel.increaseScoreAttack();
         }
         if (enemyTwoAttacked) {
             enemyTwo.animate().alpha(0f).setDuration(1000);
             enemyTwoAttacked = false;
             enemyTwoStop = true;
+            gameViewModel.increaseScoreAttack();
         }
+    }
+    public void reduceTheScore() {
+        scoreReduce = new Handler();
+        scoreReduce.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (gameViewModel.getPlayerHealth() > 0) {
+                    gameViewModel.reduceScore();
+                    scoreReduce.postDelayed(this, SCORE_REDUCE_DELAY);
+                }
+            }
+        }, SCORE_REDUCE_DELAY);
     }
 }
