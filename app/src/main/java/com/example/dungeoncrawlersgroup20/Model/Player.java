@@ -63,6 +63,11 @@ public class Player implements Observable {
     public Drawable getSprite() {
         return sprite;
     }
+
+
+    //public void attackEnemy() {
+    //    checkCollision
+    // }
     public void setMovement(Movement movement) {
         this.movement = movement;
         notifyObservers();
