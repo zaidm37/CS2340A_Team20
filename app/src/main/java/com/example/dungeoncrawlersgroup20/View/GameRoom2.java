@@ -30,6 +30,7 @@ public class GameRoom2 extends AppCompatActivity {
     private Handler playerHandler;
     private Handler handler;
     private Handler scoreReduce;
+    private Handler animation;
     private Timer gameOver;
     private EnemyViewModel enemyViewModel;
     private int spriteWidth;
@@ -360,6 +361,31 @@ public class GameRoom2 extends AppCompatActivity {
         startActivity(inte);
     }
     public void playerAttacks() {
+        if (gameViewModel.getSpriteNum() == 1) {
+            characterSprite.setImageResource(R.drawable.sprite1attack);
+            animation = new Handler();
+            animation.postDelayed(new Runnable() {
+                public void run() {
+                    characterSprite.setImageResource(R.drawable.sprite1);
+                }
+            }, 500);
+        } else if (gameViewModel.getSpriteNum() == 2) {
+            characterSprite.setImageResource(R.drawable.sprite2attack);
+            animation = new Handler();
+            animation.postDelayed(new Runnable() {
+                public void run() {
+                    characterSprite.setImageResource(R.drawable.sprite2);
+                }
+            }, 500);
+        } else if (gameViewModel.getSpriteNum() == 3) {
+            characterSprite.setImageResource(R.drawable.sprite3attack);
+            animation = new Handler();
+            animation.postDelayed(new Runnable() {
+                public void run() {
+                    characterSprite.setImageResource(R.drawable.sprite3);
+                }
+            }, 500);
+        }
         if (enemyOneAttacked) {
             enemyOne.animate().alpha(0f).setDuration(1000);
             enemyOneAttacked = false;

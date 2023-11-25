@@ -134,4 +134,7 @@ public class GameViewModel extends ViewModel implements Observer {
             scoreTrack.setScore(scoreTrack.getScore() - 1);
         }
     }
+    public int getSpriteNum() {
+        return player.getSpriteNum();
+    }
 }
