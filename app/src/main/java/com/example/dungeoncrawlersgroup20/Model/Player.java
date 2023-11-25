@@ -101,10 +101,11 @@ public class Player implements Observable {
     public void setPlayerY(float y) {
         playerY = y;
     }
-    public void checkPlayerCollide(Rect p, Rect e) {
+    public boolean checkPlayerCollide(Rect p, Rect e) {
         if (Rect.intersects(p, e)) {
             c = true;
         }
+        return c;
     }
     public void setPlayerCollide(boolean c) {
         this.c = c;

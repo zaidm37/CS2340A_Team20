@@ -44,6 +44,10 @@ public class GameRoom2 extends AppCompatActivity {
     private static final int PLAYER_MOVE_DELAY = 50;
     private static final int ENEMY_MOVE_DELAY = 1;
     private static final int SCORE_UPDATE_DELAY = 5000;
+    private boolean enemyOneAttacked = false;
+    private boolean enemyTwoAttacked = false;
+    private boolean enemyOneStop = false;
+    private boolean enemyTwoStop = false;
 
 
     private void setupViews() {
@@ -119,27 +123,47 @@ public class GameRoom2 extends AppCompatActivity {
         characterSprite.getHitRect(playerR);
         Rect enemyR = new Rect();
         enemyOne.getHitRect(enemyR);
-        gameViewModel.checkCollide(playerR, enemyR);
+        if (!enemyOneStop) {
+            if (gameViewModel.checkCollide(playerR, enemyR)) {
+                enemyOneAttacked = true;
+            }
+        }
 
         enemyTwo.getHitRect(enemyR);
-        gameViewModel.checkCollide(playerR, enemyR);
+        if (!enemyTwoStop) {
+            if (gameViewModel.checkCollide(playerR, enemyR)) {
+                enemyTwoAttacked = true;
+            }
+        }
     }
     private void updateEnemyPositions() {
         if (gameViewModel.getPlayerDifficulty().equals("Easy")) {
-            enemyOne.setX(enemyViewModel.getEnemyX("easy"));
-            enemyOne.setY(enemyViewModel.getEnemyY("easy"));
-            enemyTwo.setX(enemyViewModel.getEnemyX("medium"));
-            enemyTwo.setY(enemyViewModel.getEnemyY("medium"));
+            if (!enemyOneStop) {
+                enemyOne.setX(enemyViewModel.getEnemyX("easy"));
+                enemyOne.setY(enemyViewModel.getEnemyY("easy"));
+            }
+            if (!enemyTwoStop) {
+                enemyTwo.setX(enemyViewModel.getEnemyX("medium"));
+                enemyTwo.setY(enemyViewModel.getEnemyY("medium"));
+            }
         } else if (gameViewModel.getPlayerDifficulty().equals("Medium")) {
-            enemyOne.setX(enemyViewModel.getEnemyX("medium"));
-            enemyOne.setY(enemyViewModel.getEnemyY("medium"));
-            enemyTwo.setX(enemyViewModel.getEnemyX("hard"));
-            enemyTwo.setY(enemyViewModel.getEnemyY("hard"));
+            if (!enemyOneStop) {
+                enemyOne.setX(enemyViewModel.getEnemyX("medium"));
+                enemyOne.setY(enemyViewModel.getEnemyY("medium"));
+            }
+            if (!enemyTwoStop) {
+                enemyTwo.setX(enemyViewModel.getEnemyX("hard"));
+                enemyTwo.setY(enemyViewModel.getEnemyY("hard"));
+            }
         } else if (gameViewModel.getPlayerDifficulty().equals("Hard")) {
-            enemyOne.setX(enemyViewModel.getEnemyX("hard"));
-            enemyOne.setY(enemyViewModel.getEnemyY("hard"));
-            enemyTwo.setX(enemyViewModel.getEnemyX("ultimate"));
-            enemyTwo.setY(enemyViewModel.getEnemyY("ultimate"));
+            if (!enemyOneStop) {
+                enemyOne.setX(enemyViewModel.getEnemyX("hard"));
+                enemyOne.setY(enemyViewModel.getEnemyY("hard"));
+            }
+            if (!enemyTwoStop) {
+                enemyTwo.setX(enemyViewModel.getEnemyX("ultimate"));
+                enemyTwo.setY(enemyViewModel.getEnemyY("ultimate"));
+            }
         }
     }
     @Override
@@ -274,6 +298,9 @@ public class GameRoom2 extends AppCompatActivity {
         int spriteWidth = characterSprite.getWidth();
         int spriteHeight = characterSprite.getHeight();
         switch (keyCode) {
+        case KeyEvent.KEYCODE_Z:
+            playerAttacks();
+            break;
         case KeyEvent.KEYCODE_SHIFT_LEFT:
             gameViewModel.changeMovement();
             break;
@@ -328,5 +355,17 @@ public class GameRoom2 extends AppCompatActivity {
         playerinfo.putString("diff", gameViewModel.getPlayerDifficulty());
         inte.putExtras(playerinfo);
         startActivity(inte);
+    }
+    public void playerAttacks() {
+        if (enemyOneAttacked) {
+            enemyOne.animate().alpha(0f).setDuration(1000);
+            enemyOneAttacked = false;
+            enemyOneStop = true;
+        }
+        if (enemyTwoAttacked) {
+            enemyTwo.animate().alpha(0f).setDuration(1000);
+            enemyTwoAttacked = false;
+            enemyTwoStop = true;
+        }
     }
 }
