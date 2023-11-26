@@ -9,10 +9,13 @@ import android.graphics.drawable.Drawable;
 
 import androidx.core.content.ContextCompat;
 
+import com.example.dungeoncrawlersgroup20.Model.BasePower;
 import com.example.dungeoncrawlersgroup20.Model.Difficulty;
 import com.example.dungeoncrawlersgroup20.Model.HardEnemy;
+import com.example.dungeoncrawlersgroup20.Model.HealthPower;
 import com.example.dungeoncrawlersgroup20.Model.Leaderboard;
 import com.example.dungeoncrawlersgroup20.Model.Player;
+import com.example.dungeoncrawlersgroup20.Model.PowerUp;
 import com.example.dungeoncrawlersgroup20.Model.Run;
 import com.example.dungeoncrawlersgroup20.Model.UltimateEnemy;
 import com.example.dungeoncrawlersgroup20.Model.Walk;
@@ -96,5 +99,22 @@ public class JoshJUnitTests {
         assertEquals(R.drawable.enemy4, ultimateEnemy.getSprite());
         assertEquals(ultimateEnemy.getSpeed(), speed);
         assertEquals(ultimateEnemy.getDamage(), damage);
+    }
+
+    //Sprint 5
+    @Test
+    public void testCollectWipePower() {
+        GameViewModel gameViewModel = new GameViewModel();
+        boolean check = true;
+        assertEquals( gameViewModel.playerCollectWipe(), check);
+    }
+    @Test
+    public void testHealthDecorator() {
+        PowerUp pow = new BasePower();
+        assertEquals( pow.getHeath(), 0);
+        pow = new HealthPower(pow);
+        pow = pow.power();
+
+        assertEquals( pow.getHeath(), 1000);
     }
 }

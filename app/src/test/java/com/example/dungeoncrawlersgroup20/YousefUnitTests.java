@@ -65,4 +65,20 @@ public class YousefUnitTests {
         easy.attackPlayer();
         assertEquals(player.getHealth(), 90);
     }
+    //Sprint 5 Tests
+    @Test
+    public void testAttackScoreUp() {
+        GameViewModel gameViewModel = new GameViewModel();
+        gameViewModel.setPlayerScore(0);
+        gameViewModel.increaseScoreAttack();
+        assertEquals(gameViewModel.getPlayerScore(), 100);
+    }
+
+    @Test
+    public void testAttackScoreDown() {
+        GameViewModel gameViewModel = new GameViewModel();
+        gameViewModel.setPlayerScore(100);
+        gameViewModel.reduceScoreAttack();
+        assertEquals(gameViewModel.getPlayerScore(), 99);
+    }
 }

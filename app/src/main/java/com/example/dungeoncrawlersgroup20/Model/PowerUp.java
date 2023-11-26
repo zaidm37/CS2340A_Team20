@@ -1,9 +1,9 @@
 package com.example.dungeoncrawlersgroup20.Model;
 
 public abstract class PowerUp {
-    int health;
-    boolean wipe;
-    int score;
+    protected int health;
+    protected boolean wipe;
+    protected int score;
     public abstract PowerUp power();
     public void setHealth(int h) {
         health = h;
