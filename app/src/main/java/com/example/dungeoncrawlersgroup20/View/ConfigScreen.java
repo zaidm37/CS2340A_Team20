@@ -87,5 +87,12 @@ public class ConfigScreen extends AppCompatActivity {
                 "You Selected the " + spriteNumber + " Character", Toast.LENGTH_SHORT).show();
         configViewModel.setPlayerSprite(ContextCompat.getDrawable(
                 ConfigScreen.this, drawableId));
+        if (spriteNumber.equals("First")) {
+            configViewModel.setSpriteNum(1);
+        } else if (spriteNumber.equals("Second")) {
+            configViewModel.setSpriteNum(2);
+        } else if (spriteNumber.equals("Third")) {
+            configViewModel.setSpriteNum(3);
+        }
     }
 }

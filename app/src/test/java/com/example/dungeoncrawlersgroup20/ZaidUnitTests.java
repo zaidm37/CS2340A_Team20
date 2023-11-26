@@ -67,4 +67,25 @@ public class ZaidUnitTests {
         ult.attackPlayer();
         assertEquals(player.getHealth(), 10);
     }
+    //Sprint 5 Tests
+    @Test
+    public void testNonNegativeScoreReduceForAttack() {
+        GameViewModel gameViewModel = new GameViewModel();
+        gameViewModel.setPlayerScore(0);
+        gameViewModel.reduceScoreAttack();
+        assertEquals(gameViewModel.getPlayerScore(), 0);
+    }
+
+    @Test
+    public void testMultipleAttackScoreUps() {
+        GameViewModel gameViewModel = new GameViewModel();
+        gameViewModel.setPlayerScore(0);
+        gameViewModel.increaseScoreAttack();
+        assertEquals(gameViewModel.getPlayerScore(), 100);
+        gameViewModel.increaseScoreAttack();
+        gameViewModel.increaseScoreAttack();
+        gameViewModel.increaseScoreAttack();
+        gameViewModel.increaseScoreAttack();
+        assertEquals(gameViewModel.getPlayerScore(), 500);
+    }
 }

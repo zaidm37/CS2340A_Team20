@@ -15,6 +15,7 @@ public class Player implements Observable {
     private int playerWidth;
     private int playerHeight;
     private boolean c;
+    private int spriteNum;
     private ArrayList<Observer> observers = new ArrayList<Observer>();
     private static volatile Player player;
 
@@ -70,14 +71,6 @@ public class Player implements Observable {
     public Drawable getSprite() {
         return sprite;
     }
-
-
-    //public void attackEnemy() {
-    //    if (checkCollision) {
-    //      enemyHealth -= 10;
-    //    }
-    //    enemyHealth
-    // }
     public void setMovement(Movement movement) {
         this.movement = movement;
         notifyObservers();
@@ -149,5 +142,11 @@ public class Player implements Observable {
     }
     public void setPlayerWidth(int w) {
         playerWidth = w;
+    }
+    public int getSpriteNum() {
+        return this.spriteNum;
+    }
+    public void setSpriteNum(int num) {
+        this.spriteNum = num;
     }
 }
