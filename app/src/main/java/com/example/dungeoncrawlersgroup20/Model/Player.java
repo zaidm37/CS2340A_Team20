@@ -71,14 +71,6 @@ public class Player implements Observable {
     public Drawable getSprite() {
         return sprite;
     }
-
-
-    //public void attackEnemy() {
-    //    if (checkCollision) {
-    //      enemyHealth -= 10;
-    //    }
-    //    enemyHealth
-    // }
     public void setMovement(Movement movement) {
         this.movement = movement;
         notifyObservers();
