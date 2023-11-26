@@ -27,6 +27,9 @@ public class GameScreen extends AppCompatActivity {
     private ImageView enemyOne;
     private ImageView enemyTwo;
     private TextView hP;
+
+    private Button next;
+
     private Button move;
     private Handler scoreHandler;
     private Handler enemyHandler;
@@ -203,6 +206,13 @@ public class GameScreen extends AppCompatActivity {
 
 
 
+        move.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gameViewModel.changeMovement();
+            }
+        });
+        move = (Button) findViewById(R.id.buttonMove);
         move.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

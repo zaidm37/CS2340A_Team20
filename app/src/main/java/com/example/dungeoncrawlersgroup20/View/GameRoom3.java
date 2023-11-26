@@ -40,140 +40,10 @@ public class GameRoom3 extends AppCompatActivity {
     private TextView tvScore;
     private GameViewModel gameViewModel;
     private Button move;
+
     private ImageView door;
     private int screenHeight;
     private int screenWidth;
-    private static final int PLAYER_MOVE_DELAY = 50;
-    private static final int ENEMY_MOVE_DELAY = 1;
-    private static final int SCORE_UPDATE_DELAY = 1;
-    private static final int SCORE_REDUCE_DELAY = 5000;
-    private boolean enemyOneAttacked = false;
-    private boolean enemyTwoAttacked = false;
-    private boolean enemyOneStop = false;
-    private boolean enemyTwoStop = false;
-    private Handler powHandler;
-    private ImageView pow;
-    private boolean collect = true;
-
-    private void setupViews() {
-        door = (ImageView) findViewById(R.id.door);
-        userName = (TextView) findViewById(R.id.name);
-        hP = (TextView) findViewById(R.id.health);
-        difficulty = (TextView) findViewById(R.id.difficulty);
-        tvScore = (TextView) findViewById(R.id.tv_score);
-        enemyOne = (ImageView) findViewById(R.id.enemy1);
-        enemyTwo = (ImageView) findViewById(R.id.enemy2);
-        move = (Button) findViewById(R.id.buttonMove);
-        characterSprite = (ImageView) findViewById(R.id.character);
-        pow = findViewById(R.id.wipePow);
-        pow.setImageResource(R.drawable.wipepow);
-    }
-
-    private void setupViewModels() {
-        gameViewModel = new ViewModelProvider(this).get(GameViewModel.class);
-        enemyViewModel = new ViewModelProvider(this).get(EnemyViewModel.class);
-    }
-
-    private void setupScoreUpdater() {
-        scoreHandler = new Handler();
-        scoreHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                tvScore.setText("Score: " + gameViewModel.getPlayerScore());
-                scoreHandler.postDelayed(this, SCORE_UPDATE_DELAY);
-            }
-        }, SCORE_UPDATE_DELAY);
-    }
-
-    private void setupDifficulty() {
-        if (gameViewModel.getPlayerDifficulty().equals("Easy")) {
-            enemyOne.setImageResource(enemyViewModel.enemySprite("easy"));
-            enemyTwo.setImageResource(enemyViewModel.enemySprite("medium"));
-        } else if (gameViewModel.getPlayerDifficulty().equals("Medium")) {
-            enemyOne.setImageResource(enemyViewModel.enemySprite("medium"));
-            enemyTwo.setImageResource(enemyViewModel.enemySprite("hard"));
-        } else if (gameViewModel.getPlayerDifficulty().equals("Hard")) {
-            enemyOne.setImageResource(enemyViewModel.enemySprite("hard"));
-            enemyTwo.setImageResource(enemyViewModel.enemySprite("ultimate"));
-        }
-    }
-
-    private void setupEnemyMovementHandler() {
-        enemyHandler = new Handler();
-        enemyHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (gameViewModel.getPlayerHealth() > 0) {
-                    updateEnemyPositions();
-                    enemyHandler.postDelayed(this, ENEMY_MOVE_DELAY);
-                }
-            }
-        }, ENEMY_MOVE_DELAY);
-    }
-    private void setupPlayerMovementHandler() {
-        playerHandler = new Handler();
-        playerHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                updatePlayerPosition();
-                playerHandler.postDelayed(this, PLAYER_MOVE_DELAY);
-            }
-        }, PLAYER_MOVE_DELAY);
-    }
-
-    private void updatePlayerPosition() {
-        gameViewModel.getPlayerX();
-        gameViewModel.getPlayerY();
-
-        Rect playerR = new Rect();
-        characterSprite.getHitRect(playerR);
-        Rect enemyR = new Rect();
-        enemyOne.getHitRect(enemyR);
-        if (!enemyOneStop) {
-            if (gameViewModel.checkCollide(playerR, enemyR)) {
-                gameViewModel.reduceScoreAttack();
-                enemyOneAttacked = true;
-            }
-        }
-
-        enemyTwo.getHitRect(enemyR);
-        if (!enemyTwoStop) {
-            if (gameViewModel.checkCollide(playerR, enemyR)) {
-                gameViewModel.reduceScoreAttack();
-                enemyTwoAttacked = true;
-            }
-        }
-    }
-    private void updateEnemyPositions() {
-        if (gameViewModel.getPlayerDifficulty().equals("Easy")) {
-            if (!enemyOneStop) {
-                enemyOne.setX(enemyViewModel.getEnemyX("easy"));
-                enemyOne.setY(enemyViewModel.getEnemyY("easy"));
-            }
-            if (!enemyTwoStop) {
-                enemyTwo.setX(enemyViewModel.getEnemyX("medium"));
-                enemyTwo.setY(enemyViewModel.getEnemyY("medium"));
-            }
-        } else if (gameViewModel.getPlayerDifficulty().equals("Medium")) {
-            if (!enemyOneStop) {
-                enemyOne.setX(enemyViewModel.getEnemyX("medium"));
-                enemyOne.setY(enemyViewModel.getEnemyY("medium"));
-            }
-            if (!enemyTwoStop) {
-                enemyTwo.setX(enemyViewModel.getEnemyX("hard"));
-                enemyTwo.setY(enemyViewModel.getEnemyY("hard"));
-            }
-        } else if (gameViewModel.getPlayerDifficulty().equals("Hard")) {
-            if (!enemyOneStop) {
-                enemyOne.setX(enemyViewModel.getEnemyX("hard"));
-                enemyOne.setY(enemyViewModel.getEnemyY("hard"));
-            }
-            if (!enemyTwoStop) {
-                enemyTwo.setX(enemyViewModel.getEnemyX("ultimate"));
-                enemyTwo.setY(enemyViewModel.getEnemyY("ultimate"));
-            }
-        }
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -212,6 +82,13 @@ public class GameRoom3 extends AppCompatActivity {
         }, 0, 1);
 
 
+        move.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gameViewModel.changeMovement();
+            }
+        });
+        move = (Button) findViewById(R.id.buttonMove);
         move.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
