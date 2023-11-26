@@ -36,7 +36,7 @@ public class GameViewModel extends ViewModel implements Observer {
     @Override
     public void update(Movement movement) {
         if (movement instanceof Walk) {
-            moveCheck = true;
+            //moveCheck = true;
         } else if (movement instanceof Run) {
             moveCheck = false;
         }
