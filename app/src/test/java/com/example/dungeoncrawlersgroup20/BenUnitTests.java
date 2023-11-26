@@ -3,6 +3,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+import com.example.dungeoncrawlersgroup20.Model.EasyEnemy;
+import com.example.dungeoncrawlersgroup20.Model.Player;
+import com.example.dungeoncrawlersgroup20.Model.UltimateEnemy;
 import com.example.dungeoncrawlersgroup20.ViewModel.EndViewModel;
 import com.example.dungeoncrawlersgroup20.ViewModel.GameViewModel;
 
