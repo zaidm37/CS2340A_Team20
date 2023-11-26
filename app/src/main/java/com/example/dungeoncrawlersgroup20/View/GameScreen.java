@@ -1,7 +1,6 @@
 package com.example.dungeoncrawlersgroup20.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
@@ -33,6 +32,8 @@ public class GameScreen extends AppCompatActivity {
     private Handler enemyHandler;
     private Handler playerHandler;
     private Handler handler;
+    private Handler scoreReduce;
+    private Handler animation;
     private Timer gameOver;
     private TextView tvScore;
     private ImageView door;
@@ -44,11 +45,15 @@ public class GameScreen extends AppCompatActivity {
     private int spriteHeight;
     private static final int PLAYER_MOVE_DELAY = 50;
     private static final int ENEMY_MOVE_DELAY = 1;
-    private static final int SCORE_UPDATE_DELAY = 5000;
+    private static final int SCORE_UPDATE_DELAY = 1;
+    private static final int SCORE_REDUCE_DELAY = 5000;
     private boolean enemyOneAttacked = false;
     private boolean enemyTwoAttacked = false;
     private boolean enemyOneStop = false;
     private boolean enemyTwoStop = false;
+    private Handler powHandler;
+    private ImageView pow;
+    private boolean collect = true;
 
 
 
@@ -63,6 +68,8 @@ public class GameScreen extends AppCompatActivity {
         move = findViewById(R.id.buttonMove);
         enemyOne = findViewById(R.id.enemy1);
         enemyTwo = findViewById(R.id.enemy2);
+        pow = findViewById(R.id.healthPow);
+        pow.setImageResource(R.drawable.healthpow);
     }
 
     private void setupViewModels() {
@@ -75,11 +82,8 @@ public class GameScreen extends AppCompatActivity {
         scoreHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (gameViewModel.getPlayerHealth() > 0) {
-                    gameViewModel.reduceScore();
-                    tvScore.setText("Score: " + gameViewModel.getPlayerScore());
-                    scoreHandler.postDelayed(this, SCORE_UPDATE_DELAY);
-                }
+                tvScore.setText("Score: " + gameViewModel.getPlayerScore());
+                scoreHandler.postDelayed(this, SCORE_UPDATE_DELAY);
             }
         }, SCORE_UPDATE_DELAY);
     }
@@ -105,6 +109,7 @@ public class GameScreen extends AppCompatActivity {
         enemyOne.getHitRect(enemyR);
         if (!enemyOneStop) {
             if (gameViewModel.checkCollide(playerR, enemyR)) {
+                gameViewModel.reduceScoreAttack();
                 enemyOneAttacked = true;
             }
         }
@@ -112,6 +117,7 @@ public class GameScreen extends AppCompatActivity {
         enemyTwo.getHitRect(enemyR);
         if (!enemyTwoStop) {
             if (gameViewModel.checkCollide(playerR, enemyR)) {
+                gameViewModel.reduceScoreAttack();
                 enemyTwoAttacked = true;
             }
         }
@@ -179,15 +185,6 @@ public class GameScreen extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         setupViews();
 
-
-
-        setupScoreUpdater();
-
-
-
-
-
-
         gameViewModel.setPLayerDifficulty(bundle.getString("diff"));
 
         userName.setText(gameViewModel.getPlayerName());
@@ -198,6 +195,9 @@ public class GameScreen extends AppCompatActivity {
 
         difficulty.setText(gameViewModel.getPlayerDifficulty());
         gameViewModel.setPlayerScore(1000);
+
+        setupScoreUpdater();
+        reduceTheScore();
 
 
 
@@ -294,6 +294,7 @@ public class GameScreen extends AppCompatActivity {
 
             setupPlayerMovementHandler();
             setupEnemyMovementHandler();
+            setupPowerHandler();
 
 
 
@@ -371,15 +372,74 @@ public class GameScreen extends AppCompatActivity {
         startActivity(inte);
     }
     public void playerAttacks() {
+        if (gameViewModel.getSpriteNum() == 1) {
+            characterSprite.setImageResource(R.drawable.sprite1attack);
+            animation = new Handler();
+            animation.postDelayed(new Runnable() {
+                public void run() {
+                    characterSprite.setImageResource(R.drawable.sprite1);
+                }
+            }, 500);
+        } else if (gameViewModel.getSpriteNum() == 2) {
+            characterSprite.setImageResource(R.drawable.sprite2attack);
+            animation = new Handler();
+            animation.postDelayed(new Runnable() {
+                public void run() {
+                    characterSprite.setImageResource(R.drawable.sprite2);
+                }
+            }, 500);
+        } else if (gameViewModel.getSpriteNum() == 3) {
+            characterSprite.setImageResource(R.drawable.sprite3attack);
+            animation = new Handler();
+            animation.postDelayed(new Runnable() {
+                public void run() {
+                    characterSprite.setImageResource(R.drawable.sprite3);
+                }
+            }, 500);
+        }
         if (enemyOneAttacked) {
             enemyOne.animate().alpha(0f).setDuration(1000);
             enemyOneAttacked = false;
             enemyOneStop = true;
+            gameViewModel.increaseScoreAttack();
         }
         if (enemyTwoAttacked) {
             enemyTwo.animate().alpha(0f).setDuration(1000);
             enemyTwoAttacked = false;
             enemyTwoStop = true;
+            gameViewModel.increaseScoreAttack();
         }
+    }
+    public void reduceTheScore() {
+        scoreReduce = new Handler();
+        scoreReduce.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (gameViewModel.getPlayerHealth() > 0) {
+                    gameViewModel.reduceScore();
+                    scoreReduce.postDelayed(this, SCORE_REDUCE_DELAY);
+                }
+            }
+        }, SCORE_REDUCE_DELAY);
+    }
+    private void setupPowerHandler() {
+        powHandler = new Handler();
+        powHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (collect) {
+                    Rect playerR = new Rect();
+                    characterSprite.getHitRect(playerR);
+                    Rect powR = new Rect();
+                    pow.getHitRect(powR);
+                    if (Rect.intersects(playerR, powR)) {
+                        pow.animate().alpha(0f).setDuration(500);
+                        gameViewModel.playerCollectHealth();
+                        collect = false;
+                    }
+                }
+                powHandler.postDelayed(this, 1);
+            }
+        }, 1);
     }
 }

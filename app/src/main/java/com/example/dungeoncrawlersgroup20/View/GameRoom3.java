@@ -29,6 +29,8 @@ public class GameRoom3 extends AppCompatActivity {
     private Handler enemyHandler;
     private Handler playerHandler;
     private Handler handler;
+    private Handler scoreReduce;
+    private Handler animation;
     private Timer gameOver;
     private EnemyViewModel enemyViewModel;
     private int spriteWidth;
@@ -43,11 +45,15 @@ public class GameRoom3 extends AppCompatActivity {
     private int screenWidth;
     private static final int PLAYER_MOVE_DELAY = 50;
     private static final int ENEMY_MOVE_DELAY = 1;
-    private static final int SCORE_UPDATE_DELAY = 5000;
+    private static final int SCORE_UPDATE_DELAY = 1;
+    private static final int SCORE_REDUCE_DELAY = 5000;
     private boolean enemyOneAttacked = false;
     private boolean enemyTwoAttacked = false;
     private boolean enemyOneStop = false;
     private boolean enemyTwoStop = false;
+    private Handler powHandler;
+    private ImageView pow;
+    private boolean collect = true;
 
     private void setupViews() {
         door = (ImageView) findViewById(R.id.door);
@@ -59,6 +65,8 @@ public class GameRoom3 extends AppCompatActivity {
         enemyTwo = (ImageView) findViewById(R.id.enemy2);
         move = (Button) findViewById(R.id.buttonMove);
         characterSprite = (ImageView) findViewById(R.id.character);
+        pow = findViewById(R.id.wipePow);
+        pow.setImageResource(R.drawable.wipepow);
     }
 
     private void setupViewModels() {
@@ -71,11 +79,8 @@ public class GameRoom3 extends AppCompatActivity {
         scoreHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (gameViewModel.getPlayerHealth() > 0) {
-                    gameViewModel.reduceScore();
-                    tvScore.setText("Score: " + gameViewModel.getPlayerScore());
-                    scoreHandler.postDelayed(this, SCORE_UPDATE_DELAY);
-                }
+                tvScore.setText("Score: " + gameViewModel.getPlayerScore());
+                scoreHandler.postDelayed(this, SCORE_UPDATE_DELAY);
             }
         }, SCORE_UPDATE_DELAY);
     }
@@ -126,6 +131,7 @@ public class GameRoom3 extends AppCompatActivity {
         enemyOne.getHitRect(enemyR);
         if (!enemyOneStop) {
             if (gameViewModel.checkCollide(playerR, enemyR)) {
+                gameViewModel.reduceScoreAttack();
                 enemyOneAttacked = true;
             }
         }
@@ -133,6 +139,7 @@ public class GameRoom3 extends AppCompatActivity {
         enemyTwo.getHitRect(enemyR);
         if (!enemyTwoStop) {
             if (gameViewModel.checkCollide(playerR, enemyR)) {
+                gameViewModel.reduceScoreAttack();
                 enemyTwoAttacked = true;
             }
         }
@@ -187,6 +194,7 @@ public class GameRoom3 extends AppCompatActivity {
 
 
         setupScoreUpdater();
+        reduceTheScore();
 
 
         setupDifficulty();
@@ -281,6 +289,7 @@ public class GameRoom3 extends AppCompatActivity {
 
             setupPlayerMovementHandler();
             setupEnemyMovementHandler();
+            setupPowerHandler();
 
 
             handler = new Handler();
@@ -358,15 +367,78 @@ public class GameRoom3 extends AppCompatActivity {
         startActivity(inte);
     }
     public void playerAttacks() {
+        if (gameViewModel.getSpriteNum() == 1) {
+            characterSprite.setImageResource(R.drawable.sprite1attack);
+            animation = new Handler();
+            animation.postDelayed(new Runnable() {
+                public void run() {
+                    characterSprite.setImageResource(R.drawable.sprite1);
+                }
+            }, 500);
+        } else if (gameViewModel.getSpriteNum() == 2) {
+            characterSprite.setImageResource(R.drawable.sprite2attack);
+            animation = new Handler();
+            animation.postDelayed(new Runnable() {
+                public void run() {
+                    characterSprite.setImageResource(R.drawable.sprite2);
+                }
+            }, 500);
+        } else if (gameViewModel.getSpriteNum() == 3) {
+            characterSprite.setImageResource(R.drawable.sprite3attack);
+            animation = new Handler();
+            animation.postDelayed(new Runnable() {
+                public void run() {
+                    characterSprite.setImageResource(R.drawable.sprite3);
+                }
+            }, 500);
+        }
         if (enemyOneAttacked) {
             enemyOne.animate().alpha(0f).setDuration(1000);
             enemyOneAttacked = false;
             enemyOneStop = true;
+            gameViewModel.increaseScoreAttack();
         }
         if (enemyTwoAttacked) {
             enemyTwo.animate().alpha(0f).setDuration(1000);
             enemyTwoAttacked = false;
             enemyTwoStop = true;
+            gameViewModel.increaseScoreAttack();
         }
+    }
+    public void reduceTheScore() {
+        scoreReduce = new Handler();
+        scoreReduce.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (gameViewModel.getPlayerHealth() > 0) {
+                    gameViewModel.reduceScore();
+                    scoreReduce.postDelayed(this, SCORE_REDUCE_DELAY);
+                }
+            }
+        }, SCORE_REDUCE_DELAY);
+    }
+    private void setupPowerHandler() {
+        powHandler = new Handler();
+        powHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (collect) {
+                    Rect playerR = new Rect();
+                    characterSprite.getHitRect(playerR);
+                    Rect powR = new Rect();
+                    pow.getHitRect(powR);
+                    if (Rect.intersects(playerR, powR)) {
+                        if (gameViewModel.playerCollectWipe()) {
+                            pow.animate().alpha(0f).setDuration(500);
+                            enemyOneAttacked = true;
+                            enemyTwoAttacked = true;
+                            collect = false;
+                            playerAttacks();
+                        }
+                    }
+                }
+                powHandler.postDelayed(this, 1);
+            }
+        }, 1);
     }
 }
