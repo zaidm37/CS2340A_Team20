@@ -24,7 +24,7 @@ public class GameViewModel extends ViewModel implements Observer {
         player = Player.getPlayer();
         difficulty = new Difficulty();
         scoreTrack = new Score();
-        //walk = new Walk();
+        walk = new Walk();
         run = new Run();
         moveCheck = true;
         player.setMovement(walk);
