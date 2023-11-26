@@ -5,12 +5,17 @@ import android.graphics.drawable.Drawable;
 
 import androidx.lifecycle.ViewModel;
 
+import com.example.dungeoncrawlersgroup20.Model.BasePower;
 import com.example.dungeoncrawlersgroup20.Model.Difficulty;
+import com.example.dungeoncrawlersgroup20.Model.HealthPower;
+import com.example.dungeoncrawlersgroup20.Model.KillPower;
 import com.example.dungeoncrawlersgroup20.Model.Movement;
 import com.example.dungeoncrawlersgroup20.Model.Observer;
 import com.example.dungeoncrawlersgroup20.Model.Player;
+import com.example.dungeoncrawlersgroup20.Model.PowerUp;
 import com.example.dungeoncrawlersgroup20.Model.Run;
 import com.example.dungeoncrawlersgroup20.Model.Score;
+import com.example.dungeoncrawlersgroup20.Model.ScorePower;
 import com.example.dungeoncrawlersgroup20.Model.Walk;
 
 public class GameViewModel extends ViewModel implements Observer {
@@ -136,5 +141,23 @@ public class GameViewModel extends ViewModel implements Observer {
     }
     public int getSpriteNum() {
         return player.getSpriteNum();
+    }
+    public void playerCollectHealth() {
+        PowerUp pow = new BasePower();
+        pow = new HealthPower(pow);
+        pow = pow.power();
+        player.setHealth(player.getHealth() + pow.getHeath());
+    }
+    public boolean playerCollectWipe() {
+        PowerUp pow = new BasePower();
+        pow = new KillPower(pow);
+        pow = pow.power();
+        return pow.getWipe();
+    }
+    public void playerCollectScore() {
+        PowerUp pow = new BasePower();
+        pow = new ScorePower(pow);
+        pow = pow.power();
+        scoreTrack.setScore(scoreTrack.getScore() + pow.getScore());
     }
 }

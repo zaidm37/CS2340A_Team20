@@ -51,6 +51,9 @@ public class GameScreen extends AppCompatActivity {
     private boolean enemyTwoAttacked = false;
     private boolean enemyOneStop = false;
     private boolean enemyTwoStop = false;
+    private Handler powHandler;
+    private ImageView pow;
+    private boolean collect = true;
 
 
 
@@ -65,6 +68,8 @@ public class GameScreen extends AppCompatActivity {
         move = findViewById(R.id.buttonMove);
         enemyOne = findViewById(R.id.enemy1);
         enemyTwo = findViewById(R.id.enemy2);
+        pow = findViewById(R.id.healthPow);
+        pow.setImageResource(R.drawable.healthpow);
     }
 
     private void setupViewModels() {
@@ -289,6 +294,7 @@ public class GameScreen extends AppCompatActivity {
 
             setupPlayerMovementHandler();
             setupEnemyMovementHandler();
+            setupPowerHandler();
 
 
 
@@ -415,5 +421,25 @@ public class GameScreen extends AppCompatActivity {
                 }
             }
         }, SCORE_REDUCE_DELAY);
+    }
+    private void setupPowerHandler() {
+        powHandler = new Handler();
+        powHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (collect) {
+                    Rect playerR = new Rect();
+                    characterSprite.getHitRect(playerR);
+                    Rect powR = new Rect();
+                    pow.getHitRect(powR);
+                    if (Rect.intersects(playerR, powR)) {
+                        pow.animate().alpha(0f).setDuration(500);
+                        gameViewModel.playerCollectHealth();
+                        collect = false;
+                    }
+                }
+                powHandler.postDelayed(this, 1);
+            }
+        }, 1);
     }
 }

@@ -51,6 +51,9 @@ public class GameRoom3 extends AppCompatActivity {
     private boolean enemyTwoAttacked = false;
     private boolean enemyOneStop = false;
     private boolean enemyTwoStop = false;
+    private Handler powHandler;
+    private ImageView pow;
+    private boolean collect = true;
 
     private void setupViews() {
         door = (ImageView) findViewById(R.id.door);
@@ -62,6 +65,8 @@ public class GameRoom3 extends AppCompatActivity {
         enemyTwo = (ImageView) findViewById(R.id.enemy2);
         move = (Button) findViewById(R.id.buttonMove);
         characterSprite = (ImageView) findViewById(R.id.character);
+        pow = findViewById(R.id.wipePow);
+        pow.setImageResource(R.drawable.wipepow);
     }
 
     private void setupViewModels() {
@@ -284,6 +289,7 @@ public class GameRoom3 extends AppCompatActivity {
 
             setupPlayerMovementHandler();
             setupEnemyMovementHandler();
+            setupPowerHandler();
 
 
             handler = new Handler();
@@ -410,5 +416,29 @@ public class GameRoom3 extends AppCompatActivity {
                 }
             }
         }, SCORE_REDUCE_DELAY);
+    }
+    private void setupPowerHandler() {
+        powHandler = new Handler();
+        powHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (collect) {
+                    Rect playerR = new Rect();
+                    characterSprite.getHitRect(playerR);
+                    Rect powR = new Rect();
+                    pow.getHitRect(powR);
+                    if (Rect.intersects(playerR, powR)) {
+                        if (gameViewModel.playerCollectWipe()) {
+                            pow.animate().alpha(0f).setDuration(500);
+                            enemyOneAttacked = true;
+                            enemyTwoAttacked = true;
+                            collect = false;
+                            playerAttacks();
+                        }
+                    }
+                }
+                powHandler.postDelayed(this, 1);
+            }
+        }, 1);
     }
 }
