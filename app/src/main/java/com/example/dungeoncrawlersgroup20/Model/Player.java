@@ -16,6 +16,7 @@ public class Player implements Observable {
     private int playerWidth;
     private int playerHeight;
     private boolean c;
+    private int spriteNum;
     private ArrayList<Observer> observers = new ArrayList<Observer>();
     private List<Observer> observers = new ArrayList<>();
     private static volatile Player player;
@@ -107,10 +108,11 @@ public class Player implements Observable {
     public void setPlayerY(float y) {
         playerY = y;
     }
-    public void checkPlayerCollide(Rect p, Rect e) {
+    public boolean checkPlayerCollide(Rect p, Rect e) {
         if (Rect.intersects(p, e)) {
             c = true;
         }
+        return c;
     }
     public void setPlayerCollide(boolean c) {
         this.c = c;
@@ -139,5 +141,11 @@ public class Player implements Observable {
     }
     public void setPlayerWidth(int w) {
         playerWidth = w;
+    }
+    public int getSpriteNum() {
+        return this.spriteNum;
+    }
+    public void setSpriteNum(int num) {
+        this.spriteNum = num;
     }
 }
