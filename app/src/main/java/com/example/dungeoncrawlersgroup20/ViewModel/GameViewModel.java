@@ -5,12 +5,17 @@ import android.graphics.drawable.Drawable;
 
 import androidx.lifecycle.ViewModel;
 
+import com.example.dungeoncrawlersgroup20.Model.BasePower;
 import com.example.dungeoncrawlersgroup20.Model.Difficulty;
+import com.example.dungeoncrawlersgroup20.Model.HealthPower;
+import com.example.dungeoncrawlersgroup20.Model.KillPower;
 import com.example.dungeoncrawlersgroup20.Model.Movement;
 import com.example.dungeoncrawlersgroup20.Model.Observer;
 import com.example.dungeoncrawlersgroup20.Model.Player;
+import com.example.dungeoncrawlersgroup20.Model.PowerUp;
 import com.example.dungeoncrawlersgroup20.Model.Run;
 import com.example.dungeoncrawlersgroup20.Model.Score;
+import com.example.dungeoncrawlersgroup20.Model.ScorePower;
 import com.example.dungeoncrawlersgroup20.Model.Walk;
 
 public class GameViewModel extends ViewModel implements Observer {
@@ -32,6 +37,9 @@ public class GameViewModel extends ViewModel implements Observer {
     }
     @Override
     public void update(Movement movement, float playerX, float playerY, boolean c) {
+    }
+    @Override
+    public void update(Movement movement) {
         if (movement instanceof Walk) {
             moveCheck = true;
         } else if (movement instanceof Run) {
@@ -79,11 +87,26 @@ public class GameViewModel extends ViewModel implements Observer {
     public void changeMovement() {
         if (moveCheck) {
             player.setMovement(run);
+
+            moveCheck = false;
+        } else {
+            player.setMovement(walk);
+            moveCheck = true;
+        }
+    }
+
+    /*
+    public float up(float y) {
+        return player.playerMoveUp(y);
+
         } else {
             player.setMovement(walk);
         }
         moveCheck = !moveCheck;
+
     }
+
+     */
     public float up(float y, int textHeight) {
         return player.playerMoveUp(y, textHeight);
     }
@@ -114,8 +137,8 @@ public class GameViewModel extends ViewModel implements Observer {
     public void setPH(int h) {
         player.setPlayerHeight(h);
     }
-    public void checkCollide(Rect p, Rect e) {
-        player.checkPlayerCollide(p, e);
+    public boolean checkCollide(Rect p, Rect e) {
+        return player.checkPlayerCollide(p, e);
     }
     public boolean getC() {
         return player.getPlayerC();
@@ -125,5 +148,34 @@ public class GameViewModel extends ViewModel implements Observer {
     }
     public void reduceScoreLose() {
         scoreTrack.setScore(0);
+    }
+    public void increaseScoreAttack() {
+        scoreTrack.setScore(scoreTrack.getScore() + 100);
+    }
+    public void reduceScoreAttack() {
+        if ((scoreTrack.getScore() - 1) >= 0) {
+            scoreTrack.setScore(scoreTrack.getScore() - 1);
+        }
+    }
+    public int getSpriteNum() {
+        return player.getSpriteNum();
+    }
+    public void playerCollectHealth() {
+        PowerUp pow = new BasePower();
+        pow = new HealthPower(pow);
+        pow = pow.power();
+        player.setHealth(player.getHealth() + pow.getHeath());
+    }
+    public boolean playerCollectWipe() {
+        PowerUp pow = new BasePower();
+        pow = new KillPower(pow);
+        pow = pow.power();
+        return pow.getWipe();
+    }
+    public void playerCollectScore() {
+        PowerUp pow = new BasePower();
+        pow = new ScorePower(pow);
+        pow = pow.power();
+        scoreTrack.setScore(scoreTrack.getScore() + pow.getScore());
     }
 }
