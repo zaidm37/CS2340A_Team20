@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 import com.example.dungeoncrawlersgroup20.Model.EasyEnemy;
 import com.example.dungeoncrawlersgroup20.Model.HardEnemy;
 import com.example.dungeoncrawlersgroup20.Model.MediumEnemy;
+import com.example.dungeoncrawlersgroup20.Model.Player;
 import com.example.dungeoncrawlersgroup20.Model.UltimateEnemy;
 import com.example.dungeoncrawlersgroup20.ViewModel.EndViewModel;
 import com.example.dungeoncrawlersgroup20.ViewModel.GameViewModel;
@@ -69,5 +70,23 @@ public class BenUnitTests {
         assertEquals(R.drawable.enemy2, mediumEnemy.getSprite());
         assertEquals(mediumEnemy.getSpeed(), speed);
         assertEquals(mediumEnemy.getDamage(), damage);
+    }
+
+    //Sprint 5 Tests
+    @Test
+    public void testCollectHealthPower() {
+        GameViewModel gameViewModel = new GameViewModel();
+        Player player = Player.getPlayer();
+        player.setHealth(1000);
+        gameViewModel.playerCollectHealth();
+        assertEquals(player.getHealth(), 2000);
+    }
+
+    @Test
+    public void testCollectScorePower() {
+        GameViewModel gameViewModel = new GameViewModel();
+        gameViewModel.setPlayerScore(2);
+        gameViewModel.playerCollectScore();
+        assertEquals(gameViewModel.getPlayerScore(), 402);
     }
 }
