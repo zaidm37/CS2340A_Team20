@@ -14,6 +14,7 @@ import com.example.dungeoncrawlersgroup20.R;
 import com.example.dungeoncrawlersgroup20.ViewModel.EndViewModel;
 
 public class EndScreen extends AppCompatActivity {
+    private int scoreCounter;
     private Button restart;
     private TextView tvScore;
     private String userName;
