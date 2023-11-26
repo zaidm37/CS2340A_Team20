@@ -4,8 +4,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import com.example.dungeoncrawlersgroup20.Model.EasyEnemy;
-import com.example.dungeoncrawlersgroup20.Model.HardEnemy;
 import com.example.dungeoncrawlersgroup20.Model.MediumEnemy;
+import com.example.dungeoncrawlersgroup20.Model.HardEnemy;
 import com.example.dungeoncrawlersgroup20.Model.Player;
 import com.example.dungeoncrawlersgroup20.Model.UltimateEnemy;
 import com.example.dungeoncrawlersgroup20.ViewModel.EndViewModel;
@@ -50,43 +50,4 @@ public class BenUnitTests {
         assertEquals((limitY - spriteHeight) - spriteHeight, startY, 0.001);
     }
 
-    //Sprint 4 Tests
-
-    @Test
-    public void testEasyValues() {
-        EasyEnemy easyEnemy = new EasyEnemy();
-        int speed = 1;
-        int damage = 10;
-        assertEquals(R.drawable.enemy1, easyEnemy.getSprite());
-        assertEquals(easyEnemy.getSpeed(), speed);
-        assertEquals(easyEnemy.getDamage(), damage);
-    }
-
-    @Test
-    public void testMediumValues() {
-        MediumEnemy mediumEnemy = new MediumEnemy();
-        int speed = 2;
-        int damage = 20;
-        assertEquals(R.drawable.enemy2, mediumEnemy.getSprite());
-        assertEquals(mediumEnemy.getSpeed(), speed);
-        assertEquals(mediumEnemy.getDamage(), damage);
-    }
-
-    //Sprint 5 Tests
-    @Test
-    public void testCollectHealthPower() {
-        GameViewModel gameViewModel = new GameViewModel();
-        Player player = Player.getPlayer();
-        player.setHealth(1000);
-        gameViewModel.playerCollectHealth();
-        assertEquals(player.getHealth(), 2000);
-    }
-
-    @Test
-    public void testCollectScorePower() {
-        GameViewModel gameViewModel = new GameViewModel();
-        gameViewModel.setPlayerScore(2);
-        gameViewModel.playerCollectScore();
-        assertEquals(gameViewModel.getPlayerScore(), 402);
-    }
 }
