@@ -4,6 +4,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Player implements Observable {
     private Movement movement;
@@ -17,6 +18,7 @@ public class Player implements Observable {
     private boolean c;
     private int spriteNum;
     private ArrayList<Observer> observers = new ArrayList<Observer>();
+    private List<Observer> observers = new ArrayList<>();
     private static volatile Player player;
 
     private Player() {
@@ -51,14 +53,17 @@ public class Player implements Observable {
         if (i >= 0) {
             observers.remove(i);
         }
+        observers.remove(observer);
     }
 
     @Override
     public void notifyObservers() {
         for (Observer observer : observers) {
             observer.update(this.movement, this.playerX, this.playerY, this.c);
+            observer.update(this.movement);
         }
     }
+
 
     public String getName() {
         return name;

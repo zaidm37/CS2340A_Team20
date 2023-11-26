@@ -40,9 +40,11 @@ public class GameRoom3 extends AppCompatActivity {
     private TextView tvScore;
     private GameViewModel gameViewModel;
     private Button move;
+
     private ImageView door;
     private int screenHeight;
     private int screenWidth;
+
     private static final int PLAYER_MOVE_DELAY = 50;
     private static final int ENEMY_MOVE_DELAY = 1;
     private static final int SCORE_UPDATE_DELAY = 1;
@@ -212,6 +214,13 @@ public class GameRoom3 extends AppCompatActivity {
         }, 0, 1);
 
 
+        move.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gameViewModel.changeMovement();
+            }
+        });
+        move = (Button) findViewById(R.id.buttonMove);
         move.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
