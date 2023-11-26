@@ -1,16 +1,6 @@
 package com.example.dungeoncrawlersgroup20.Model;
 
 public abstract class Enemy implements Observer {
-    protected int sprite;
-    protected int damage;
-    protected int speed;
-    protected float enemyX;
-    protected float enemyY;
-    protected float enemyHeight;
-    protected float enemyWidth;
-    protected float borderHeight;
-    protected float borderWidth;
-    protected Player player = Player.getPlayer();
     public int getSprite() {
         return sprite;
     }
