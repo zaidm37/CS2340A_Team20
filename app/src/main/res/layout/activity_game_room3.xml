@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/back1"
-    tools:context=".View.GameScreen">
+    android:background="@drawable/back3"
+    tools:context=".View.GameRoom3">
 
     <Button
         android:id="@+id/buttonMove"
@@ -24,11 +24,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
+        android:textColor="#4CAF50"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.392"
+        app:layout_constraintHorizontal_bias="0.381"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.177" />
@@ -40,6 +41,7 @@
         android:layout_marginStart="37dp"
         android:layout_marginEnd="142dp"
         android:text="TextView"
+        android:textColor="#4CAF50"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,6 +55,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
+        android:textColor="#4CAF50"
+        android:textColorHighlight="#4CAF50"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -80,7 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="HP:"
-        android:textColor="#0E0E0E"
+        android:textColor="#4CAF50"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -89,18 +93,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.178" />
 
+
     <TextView
         android:id="@+id/tv_score"
         android:layout_width="111dp"
         android:layout_height="116dp"
         android:text="Score: 1000"
+        android:textColor="#4CAF50"
         android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.88"
+        app:layout_constraintHorizontal_bias="0.906"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.021" />
+        app:layout_constraintVertical_bias="0.026" />
 
     <ImageView
         android:id="@+id/door"
@@ -113,7 +119,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/door1" />
+        app:srcCompat="@drawable/door3" />
 
     <ImageView
         android:id="@+id/enemy1"
@@ -142,7 +148,7 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageView
-        android:id="@+id/healthPow"
+        android:id="@+id/wipePow"
         android:layout_width="81dp"
         android:layout_height="76dp"
         android:scaleType="fitCenter"
@@ -152,6 +158,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.886"
-        tools:srcCompat="@drawable/healthpow" />
-
+        tools:srcCompat="@drawable/wipepow" />
 </androidx.constraintlayout.widget.ConstraintLayout>
