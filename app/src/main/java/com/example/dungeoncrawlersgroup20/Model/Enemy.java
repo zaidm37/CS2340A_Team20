@@ -2,6 +2,8 @@ package com.example.dungeoncrawlersgroup20.Model;
 
 import android.graphics.Rect;
 public abstract class Enemy implements Observer {
+    int gum;
+    int hum;
     int sprite;
     int damage;
     int speed;
