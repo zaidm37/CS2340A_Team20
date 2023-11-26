@@ -18,6 +18,7 @@ public class Player implements Observable {
     private int spriteNum;
     private ArrayList<Observer> observers = new ArrayList<Observer>();
     private static volatile Player player;
+
     private Player() {
         this.name = name;
         this.health = health;
@@ -25,6 +26,7 @@ public class Player implements Observable {
         this.movement = movement;
         this.c = false;
     }
+
     public static Player getPlayer() {
         if (player == null) {
             synchronized (Player.class) {
@@ -35,12 +37,14 @@ public class Player implements Observable {
         }
         return player;
     }
+
     @Override
     public void addObserver(Observer observer) {
         if (!observers.contains(observer)) {
             observers.add(observer);
         }
     }
+
     @Override
     public void removeObserver(Observer observer) {
         int i = observers.indexOf(observer);
@@ -48,12 +52,14 @@ public class Player implements Observable {
             observers.remove(i);
         }
     }
+
     @Override
     public void notifyObservers() {
         for (Observer observer : observers) {
             observer.update(this.movement, this.playerX, this.playerY, this.c);
         }
     }
+
     public String getName() {
         return name;
     }
@@ -61,6 +67,7 @@ public class Player implements Observable {
     public int getHealth() {
         return health;
     }
+
     public Drawable getSprite() {
         return sprite;
     }
