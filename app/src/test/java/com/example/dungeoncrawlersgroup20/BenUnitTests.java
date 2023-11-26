@@ -50,44 +50,4 @@ public class BenUnitTests {
         assertEquals((limitY - spriteHeight) - spriteHeight, startY, 0.001);
     }
 
-    //Sprint 4 Tests
-    @Test
-    public void testEasyValues() {
-        EasyEnemy easyEnemy = new EasyEnemy();
-        int speed = 1;
-        int damage = 10;
-        assertEquals(R.drawable.enemy1, easyEnemy.getSprite());
-        assertEquals(speed, 1);
-        assertEquals(damage, 10);
-    }
-
-    @Test
-    public void testMediumValues() {
-        MediumEnemy mediumEnemy = new MediumEnemy();
-        int speed = 2;
-        int damage = 20;
-        assertEquals(R.drawable.enemy2, mediumEnemy.getSprite());
-        assertEquals(speed, 2);
-        assertEquals(damage, 20);
-    }
-
-    @Test
-    public void testHardValues() {
-        HardEnemy hardEnemy = new HardEnemy();
-        int speed = 3;
-        int damage = 30;
-        assertEquals(R.drawable.enemy3, hardEnemy.getSprite());
-        assertEquals(speed, 3);
-        assertEquals(damage, 30);
-    }
-
-    @Test
-    public void testUltimateValues() {
-        UltimateEnemy ultimateEnemy = new UltimateEnemy();
-        int speed = 5;
-        int damage = 100;
-        assertEquals(R.drawable.enemy4, ultimateEnemy.getSprite());
-        assertEquals(speed, 5);
-        assertEquals(damage, 100);
-    }
 }

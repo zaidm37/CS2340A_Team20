@@ -43,4 +43,7 @@ public class ConfigViewModel extends ViewModel {
                 && (difficulty.getDiff().trim().length() > 0)
                 && (player.getSprite() != null);
     }
+    public void setSpriteNum(int num) {
+        player.setSpriteNum(num);
+    }
 }
